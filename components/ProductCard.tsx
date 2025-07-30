@@ -40,8 +40,8 @@ export function ProductCard({ name, variations, image, whatsappMessage }: Produc
           </div>
         </div>
 
-        <div className="space-y-3 text-center">
-          <h3 className="font-bold text-base md:text-lg leading-tight line-clamp-2 group-hover:text-foreground transition-colors duration-300">
+        <div className="space-y-2 md:space-y-3 text-center">
+          <h3 className="font-bold text-sm md:text-base lg:text-lg leading-tight line-clamp-2 group-hover:text-foreground transition-colors duration-300 min-h-[2.5rem] md:min-h-[3rem] flex items-center justify-center">
             {name}
           </h3>
           {variations && (

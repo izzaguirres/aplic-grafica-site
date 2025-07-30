@@ -58,15 +58,15 @@ export default function ContatoPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {contactInfo.map((info, index) => (
               <Card key={index} className="rounded-2xl border-muted">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <info.icon className="h-6 w-6 text-primary" />
+                <CardContent className="p-4 md:p-6">
+                  <div className="flex items-start space-x-3 md:space-x-4">
+                    <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <info.icon className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="font-semibold">{info.title}</h3>
-                      <p className="text-lg font-medium">{info.info}</p>
-                      <p className="text-sm text-muted-foreground">{info.description}</p>
+                    <div className="min-w-0 flex-1 space-y-1">
+                      <h3 className="font-semibold text-sm md:text-base">{info.title}</h3>
+                      <p className="text-sm md:text-lg font-medium break-words">{info.info}</p>
+                      <p className="text-xs md:text-sm text-muted-foreground">{info.description}</p>
                     </div>
                   </div>
                 </CardContent>

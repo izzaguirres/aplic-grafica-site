@@ -28,9 +28,9 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="container">
         {/* Main Header - Altura reduzida */}
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-14 md:h-16 items-center justify-between">
           <Link href="/" className="flex items-center group">
-            <img src="/images/logo.png" alt="Aplic Gráfica" className="h-8 w-auto object-contain transition-all duration-300 group-hover:scale-105" />
+            <img src="/images/logo.png" alt="Aplic Gráfica" className="h-6 md:h-8 w-auto object-contain transition-all duration-300 group-hover:scale-105" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -72,10 +72,10 @@ export function Header() {
             {/* WhatsApp CTA */}
             <Button
               asChild
-              className="hidden md:inline-flex h-10 px-5 font-semibold text-sm bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 hover:shadow-xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 border-0"
+              className="hidden md:inline-flex h-9 md:h-10 px-4 md:px-5 font-semibold text-xs md:text-sm bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 hover:shadow-xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 border-0"
             >
               <Link href="https://wa.me/5548999128310?text=Olá,%20vim%20do%20site%20da%20Aplic%20Gráfica%20e%20quero%20um%20orçamento.">
-                <MessageCircle className="mr-2 h-4 w-4" />
+                <MessageCircle className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                 WhatsApp
               </Link>
             </Button>
@@ -84,7 +84,7 @@ export function Header() {
             <Button
               asChild
               size="icon"
-              className="md:hidden h-10 w-10 bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 border-0"
+              className="md:hidden h-9 w-9 bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 border-0"
             >
               <Link href="https://wa.me/5548999128310?text=Olá,%20vim%20do%20site%20da%20Aplic%20Gráfica%20e%20quero%20um%20orçamento.">
                 <MessageCircle className="h-4 w-4" />

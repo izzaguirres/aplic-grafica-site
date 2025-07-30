@@ -7,14 +7,14 @@ export function Footer() {
     <footer className="bg-foreground text-background relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-foreground to-foreground/90" />
 
-      <div className="container mx-auto px-4 py-16 md:py-20 relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12">
           {/* Logo e Descrição */}
-          <div className="space-y-6 lg:col-span-2">
+          <div className="space-y-4 md:space-y-6 lg:col-span-2">
             <div className="flex items-center">
-              <img src="/images/logo2.png" alt="Aplic Gráfica" className="h-10 w-auto object-contain" />
+              <img src="/images/logo2.png" alt="Aplic Gráfica" className="h-8 md:h-10 w-auto object-contain" />
             </div>
-            <p className="text-background/80 leading-relaxed max-w-md">
+            <p className="text-background/80 leading-relaxed max-w-md text-sm md:text-base">
               Gráfica em Florianópolis com mais de 14 anos de experiência. Qualidade, agilidade e entrega em toda a
               Grande Florianópolis.
             </p>
@@ -28,9 +28,9 @@ export function Footer() {
           </div>
 
           {/* Links Rápidos */}
-          <div className="space-y-6">
-            <h3 className="font-semibold text-lg">Links Rápidos</h3>
-            <ul className="space-y-3">
+          <div className="space-y-4 md:space-y-6">
+            <h3 className="font-semibold text-base md:text-lg">Links Rápidos</h3>
+            <ul className="space-y-2 md:space-y-3">
               <li>
                 <Link
                   href="/"
@@ -71,9 +71,9 @@ export function Footer() {
           </div>
 
           {/* Produtos */}
-          <div className="space-y-6">
-            <h3 className="font-semibold text-lg">Produtos</h3>
-            <ul className="space-y-3">
+          <div className="space-y-4 md:space-y-6">
+            <h3 className="font-semibold text-base md:text-lg">Produtos</h3>
+            <ul className="space-y-2 md:space-y-3">
               <li className="text-background/80">Cartões de Visita</li>
               <li className="text-background/80">Panfletos</li>
               <li className="text-background/80">Banners e Lonas</li>
@@ -83,24 +83,24 @@ export function Footer() {
           </div>
 
           {/* Contato */}
-          <div className="space-y-6">
-            <h3 className="font-semibold text-lg">Contato</h3>
-            <div className="space-y-4">
+          <div className="space-y-4 md:space-y-6">
+            <h3 className="font-semibold text-base md:text-lg">Contato</h3>
+            <div className="space-y-3 md:space-y-4">
               <div className="flex items-center space-x-3">
-                <MessageCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-background/80">(48) 99912-8310</span>
+                <MessageCircle className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
+                <span className="text-background/80 text-sm md:text-base">(48) 99912-8310</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-background/80 text-sm">comercialaplic@hotmail.com</span>
+                <Mail className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
+                <span className="text-background/80 text-xs md:text-sm break-words">comercialaplic@hotmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Clock className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-background/80 text-sm">Seg-Sex: 9h às 18h</span>
+                <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
+                <span className="text-background/80 text-xs md:text-sm">Seg-Sex: 9h às 18h</span>
               </div>
               <div className="flex items-center space-x-3">
-                <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-background/80 text-sm">Entrega em toda Grande Florianópolis</span>
+                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
+                <span className="text-background/80 text-xs md:text-sm">Entrega em toda Grande Florianópolis</span>
               </div>
             </div>
           </div>
