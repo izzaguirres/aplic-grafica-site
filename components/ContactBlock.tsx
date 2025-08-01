@@ -1,4 +1,5 @@
-import Link from "next/link"
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { MessageCircle, ArrowRight, Zap } from "lucide-react"
