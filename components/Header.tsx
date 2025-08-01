@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 
 const navigation = [
   { name: "Início", href: "/" },
@@ -19,6 +20,7 @@ export function Header() {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
+  const { handleWhatsAppClick } = useWhatsAppConversion()
 
   useEffect(() => {
     setMounted(true)
@@ -71,25 +73,21 @@ export function Header() {
 
             {/* WhatsApp CTA */}
             <Button
-              asChild
+              onClick={() => handleWhatsAppClick()}
               className="hidden md:inline-flex h-9 md:h-10 px-4 md:px-5 font-semibold text-xs md:text-sm bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 hover:shadow-xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 border-0"
             >
-              <Link href="https://wa.me/5548999128310?text=Olá,%20vim%20do%20site%20da%20Aplic%20Gráfica%20e%20quero%20um%20orçamento.">
-                <MessageCircle className="mr-2 h-3 w-3 md:h-4 md:w-4" />
-                WhatsApp
-              </Link>
+              <MessageCircle className="mr-2 h-3 w-3 md:h-4 md:w-4" />
+              WhatsApp
             </Button>
 
             {/* Mobile WhatsApp */}
             <Button
-              asChild
+              onClick={() => handleWhatsAppClick()}
               size="icon"
               className="md:hidden h-9 w-9 bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 border-0"
             >
-              <Link href="https://wa.me/5548999128310?text=Olá,%20vim%20do%20site%20da%20Aplic%20Gráfica%20e%20quero%20um%20orçamento.">
-                <MessageCircle className="h-4 w-4" />
-                <span className="sr-only">WhatsApp</span>
-              </Link>
+              <MessageCircle className="h-4 w-4" />
+              <span className="sr-only">WhatsApp</span>
             </Button>
           </div>
         </div>

@@ -1,8 +1,11 @@
 import Link from "next/link"
 import { MessageCircle, Mail, Clock, MapPin, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 
 export function Footer() {
+  const { handleWhatsAppClick } = useWhatsAppConversion()
+  
   return (
     <footer className="bg-foreground text-background relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-foreground to-foreground/90" />
@@ -18,12 +21,14 @@ export function Footer() {
               Gráfica em Florianópolis com mais de 14 anos de experiência. Qualidade, agilidade e entrega em toda a
               Grande Florianópolis.
             </p>
-            <Button asChild variant="secondary" className="font-medium">
-              <Link href="https://wa.me/5548999128310?text=Olá,%20vim%20do%20site%20da%20Aplic%20Gráfica%20e%20quero%20um%20orçamento.">
-                <MessageCircle className="mr-2 h-4 w-4" />
-                Falar no WhatsApp
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+            <Button 
+              onClick={() => handleWhatsAppClick()}
+              variant="secondary" 
+              className="font-medium"
+            >
+              <MessageCircle className="mr-2 h-4 w-4" />
+              Falar no WhatsApp
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
 

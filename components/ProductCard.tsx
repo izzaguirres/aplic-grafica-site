@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MessageCircle, ArrowRight } from "lucide-react"
+import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 
 interface ProductCardProps {
   name: string
@@ -13,9 +14,9 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ name, variations, image, whatsappMessage }: ProductCardProps) {
+  const { handleWhatsAppClick } = useWhatsAppConversion()
+  
   const defaultMessage = `Olá,%20vim%20do%20site.%20Quero%20orçamento%20de:%20${encodeURIComponent(name)}${variations ? `%0AVariação/Medida:%20${encodeURIComponent(variations)}` : ""}%0AObservações:%20`
-
-  const whatsappUrl = `https://wa.me/5548999128310?text=${whatsappMessage || defaultMessage}`
 
   return (
     <Card className="group relative overflow-hidden rounded-3xl border-0 bg-white/80 backdrop-blur-sm shadow-lg shadow-black/5 hover:shadow-2xl hover:shadow-black/10 transition-all duration-500 hover:-translate-y-2 h-full">
@@ -54,15 +55,13 @@ export function ProductCard({ name, variations, image, whatsappMessage }: Produc
 
       <CardFooter className="relative p-3 md:p-4 pt-0">
         <Button
-          asChild
+          onClick={() => handleWhatsAppClick(whatsappMessage || defaultMessage)}
           className="w-full h-11 font-semibold bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 hover:shadow-xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 transition-all duration-300 rounded-2xl group/btn border-0"
         >
-          <Link href={whatsappUrl}>
-            <MessageCircle className="mr-2 h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
-            <span className="md:hidden">Comprar</span>
-            <span className="hidden md:inline">Comprar pelo WhatsApp</span>
-            <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
-          </Link>
+          <MessageCircle className="mr-2 h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
+          <span className="md:hidden">Comprar</span>
+          <span className="hidden md:inline">Comprar pelo WhatsApp</span>
+          <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
         </Button>
       </CardFooter>
     </Card>
