@@ -56,7 +56,7 @@ export function ProductCard({ name, variations, image, whatsappMessage }: Produc
 
       <CardFooter className="relative p-3 md:p-4 pt-0">
         <Button
-          onClick={() => handleWhatsAppClick(whatsappMessage || defaultMessage)}
+          onClick={() => handleWhatsAppClick(whatsappMessage || defaultMessage, 'product_card', name)}
           className="w-full h-11 font-semibold bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 hover:shadow-xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 transition-all duration-300 rounded-2xl group/btn border-0"
         >
           <MessageCircle className="mr-2 h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />

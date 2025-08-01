@@ -73,7 +73,7 @@ export function Header() {
 
             {/* WhatsApp CTA */}
             <Button
-              onClick={() => handleWhatsAppClick()}
+              onClick={() => handleWhatsAppClick(undefined, 'header_desktop')}
               className="hidden md:inline-flex h-9 md:h-10 px-4 md:px-5 font-semibold text-xs md:text-sm bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 hover:shadow-xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 border-0"
             >
               <MessageCircle className="mr-2 h-3 w-3 md:h-4 md:w-4" />
@@ -82,7 +82,7 @@ export function Header() {
 
             {/* Mobile WhatsApp */}
             <Button
-              onClick={() => handleWhatsAppClick()}
+              onClick={() => handleWhatsAppClick(undefined, 'header_mobile')}
               size="icon"
               className="md:hidden h-9 w-9 bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 border-0"
             >

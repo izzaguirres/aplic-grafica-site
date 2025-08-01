@@ -29,7 +29,7 @@ export function ContactBlock() {
 
           <Button
             size="lg"
-            onClick={() => handleWhatsAppClick("Olá,%20preciso%20de%20ajuda%20com%20um%20pedido.")}
+            onClick={() => handleWhatsAppClick("Olá,%20preciso%20de%20ajuda%20com%20um%20pedido.", 'contact_block')}
             className="text-sm md:text-base px-6 md:px-8 py-4 md:py-6 h-12 md:h-14 font-semibold shadow-lg hover:shadow-xl transition-all group w-full md:w-auto"
           >
             <MessageCircle className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />

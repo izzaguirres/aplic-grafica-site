@@ -6,6 +6,7 @@ import "./globals.css"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import { GoogleAnalytics } from "@/components/GoogleAnalytics"
 
 const rethinkSans = Rethink_Sans({
   subsets: ["latin"],
@@ -88,6 +89,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID
+  
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
@@ -121,6 +124,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${rethinkSans.variable} font-sans antialiased`}>
+        <GoogleAnalytics gaId={gaId || ""} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Header />
           <main className="min-h-screen">{children}</main>

@@ -24,7 +24,7 @@ export function Footer() {
               Grande Florianópolis.
             </p>
             <Button 
-              onClick={() => handleWhatsAppClick()}
+              onClick={() => handleWhatsAppClick(undefined, 'footer')}
               variant="secondary" 
               className="font-medium"
             >
