@@ -9,13 +9,13 @@ const stats = [
   },
   {
     icon: Package,
-    value: "+50k",
+    value: "+200mil",
     unit: "",
     label: "produtos entregues",
   },
   {
     icon: Users,
-    value: "+15k",
+    value: "+50mil",
     unit: "",
     label: "clientes satisfeitos",
   },

@@ -49,7 +49,7 @@ export function Hero() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium px-4">
-              Entrega em toda Florianópolis. Produção expressa e qualidade profissional para o seu negócio.
+              Atendemos toda Florianópolis... Produção expressa e qualidade profissional para o seu negócio.
             </p>
           </div>
 
