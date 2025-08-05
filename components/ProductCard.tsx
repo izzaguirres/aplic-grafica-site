@@ -17,7 +17,7 @@ interface ProductCardProps {
 export function ProductCard({ name, variations, image, whatsappMessage }: ProductCardProps) {
   const { handleWhatsAppClick } = useWhatsAppConversion()
   
-  const defaultMessage = `Olá,%20vim%20do%20site.%20Quero%20orçamento%20de:%20${encodeURIComponent(name)}${variations ? `%0AVariação/Medida:%20${encodeURIComponent(variations)}` : ""}%0AObservações:%20`
+  const defaultMessage = `Olá,%20vim%20do%20site.%20Gostaria%20de%20mais%20informações%20sobre%20${encodeURIComponent(name)}`
 
   return (
     <Card className="group relative overflow-hidden rounded-3xl border-0 bg-white/80 backdrop-blur-sm shadow-lg shadow-black/5 hover:shadow-2xl hover:shadow-black/10 transition-all duration-500 hover:-translate-y-2 h-full">

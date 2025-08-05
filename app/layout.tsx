@@ -108,15 +108,9 @@ export default function RootLayout({
         </Script>
         <Script id="google-ads-conversion" strategy="afterInteractive">
           {`
-            function gtag_report_conversion(url) {
-              var callback = function () {
-                if (typeof(url) != 'undefined') {
-                  window.location = url;
-                }
-              };
+            function gtag_report_conversion() {
               gtag('event', 'conversion', {
-                  'send_to': 'AW-761339571/L8JaCPqqmJgBELO9hOsC',
-                  'event_callback': callback
+                  'send_to': 'AW-761339571/L8JaCPqqmJgBELO9hOsC'
               });
               return false;
             }
