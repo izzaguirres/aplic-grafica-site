@@ -36,18 +36,24 @@ export function Header() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2 group">
-          <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110">
+          <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110 flex-shrink-0">
             <Image 
               src="/images/favicon.png" 
-              alt="Aplic Gráfica Logo" 
+              alt="Aplic Gráfica Ícone" 
               fill
               className="object-contain"
               sizes="40px"
             />
           </div>
-          <span className={`font-bold text-lg md:text-xl tracking-tight ${isScrolled ? "text-[#28282D]" : "text-[#28282D]"}`}>
-            Aplic<span className="text-[#E6FF50] ml-0.5">.</span>
-          </span>
+          <div className="relative h-6 w-24 md:h-8 md:w-32 transition-opacity duration-300 group-hover:opacity-80">
+            <Image 
+              src="/images/logo2.png" 
+              alt="Aplic Gráfica" 
+              fill
+              className="object-contain object-left"
+              sizes="(max-width: 768px) 96px, 128px"
+            />
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
