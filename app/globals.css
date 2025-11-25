@@ -4,48 +4,48 @@
 
 @layer base {
   :root {
-    --background: 0 0% 93%;
-    --foreground: 210 6% 15%;
+    --background: 210 9% 96%; /* Iron Light / White Smoke equivalent for main bg */
+    --foreground: 240 6% 17%; /* Shark #28282D */
     --card: 0 0% 100%;
-    --card-foreground: 210 6% 15%;
+    --card-foreground: 240 6% 17%; /* Shark */
     --popover: 0 0% 100%;
-    --popover-foreground: 210 6% 15%;
-    --primary: 74 89% 69%;
-    --primary-foreground: 210 6% 15%;
-    --secondary: 60 9% 96%;
-    --secondary-foreground: 210 6% 15%;
-    --muted: 120 4% 79%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 60 9% 96%;
-    --accent-foreground: 210 6% 15%;
-    --destructive: 0 84% 60%;
+    --popover-foreground: 240 6% 17%;
+    --primary: 74 100% 66%; /* Canary #E6FF50 */
+    --primary-foreground: 240 6% 17%; /* Shark text on Canary button */
+    --secondary: 210 9% 82%; /* Iron #CDD2D7 */
+    --secondary-foreground: 240 6% 17%; /* Shark */
+    --muted: 210 9% 90%; /* Lighter Iron for subtle backgrounds */
+    --muted-foreground: 240 4% 40%; /* Softer Shark */
+    --accent: 74 100% 66%; /* Canary */
+    --accent-foreground: 240 6% 17%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 74 89% 69%;
-    --radius: 0.75rem;
+    --border: 210 9% 82%; /* Iron border */
+    --input: 210 9% 82%;
+    --ring: 74 100% 66%; /* Canary Ring */
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0 0% 93%;
-    --foreground: 210 6% 15%;
-    --card: 210 6% 15%;
-    --card-foreground: 0 0% 98%;
-    --popover: 210 6% 15%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 74 89% 69%;
-    --primary-foreground: 210 6% 15%;
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 32% 17%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62% 30%;
+    --background: 240 6% 17%; /* Shark Background */
+    --foreground: 210 9% 96%; /* Iron Text */
+    --card: 240 6% 19%; /* Slightly lighter Shark */
+    --card-foreground: 210 9% 96%;
+    --popover: 240 6% 17%;
+    --popover-foreground: 210 9% 96%;
+    --primary: 74 100% 66%; /* Canary */
+    --primary-foreground: 240 6% 17%; /* Shark Text */
+    --secondary: 240 6% 25%;
+    --secondary-foreground: 210 9% 96%;
+    --muted: 240 6% 25%;
+    --muted-foreground: 210 9% 70%;
+    --accent: 240 6% 25%;
+    --accent-foreground: 210 9% 96%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 74 89% 69%;
+    --border: 240 6% 25%;
+    --input: 240 6% 25%;
+    --ring: 74 100% 66%;
   }
 }
 
@@ -127,3 +127,27 @@ html {
   color: hsl(210 6% 10%) !important;
   font-weight: 600;
 }
+
+/* Scroll Reveal Animation */
+.reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(50px);
+  transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal.active {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Staggered delays */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+.delay-600 { transition-delay: 0.6s; }
+.delay-700 { transition-delay: 0.7s; }

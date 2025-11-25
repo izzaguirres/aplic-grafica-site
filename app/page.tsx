@@ -8,152 +8,110 @@ import { Section } from "@/components/Section"
 import { FAQ } from "@/components/FAQ"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-
-const maisVendidos = [
-  {
-    name: "Cartão de Visita - Brilho Total",
-    variations: "à partir de 100 unidades",
-    image: "/images/produtos/Cartao de Visita - Brilho Total.png",
-  },
-  {
-    name: "Cartão de Visita - Fosco",
-    variations: "à partir de 500 unidades",
-    image: "/images/produtos/Cartao de Visita - Fosco.png",
-  },
-  {
-    name: "Cartão de Visita - Mini",
-    variations: "à partir de 500 unidades",
-    image: "/images/produtos/Mini Cartao de Visita.png",
-  },
-  {
-    name: "Cartão com Cantos Arredondados",
-    variations: "à partir de 500 unidades",
-    image: "/images/produtos/Cartao de Visita - Cantos Arredondados.png",
-  },
-  {
-    name: "Panfleto 10×14cm",
-    variations: "à partir de 1.000 unidades",
-    image: "/images/produtos/Panfleto 10x14.png",
-  },
-  {
-    name: "Banner em Lona",
-    variations: "à partir de 50x70cm",
-    image: "/images/produtos/Banner em Lona.png",
-  },
-  {
-    name: "Etiqueta Adesiva",
-    variations: "à partir de 100 unidades",
-    image: "/images/produtos/Etiqueta Adesiva.png",
-  },
-  {
-    name: "Lona com Ilhós",
-    variations: "à partir de 50x50cm",
-    image: "/images/produtos/Lona com Ilhos.png",
-  },
-]
-
-const maisProcurados = [
-  {
-    name: "Tag com Furo",
-    variations: "à partir de 250 unidades",
-    image: "/images/produtos/Tag com Furo.png",
-  },
-  {
-    name: "Cavalete de Ferro",
-    variations: "50x100cm",
-    image: "/images/produtos/Cavalete de Ferro.png",
-  },
-  {
-    name: "Cavalete de Madeira",
-    variations: "50x100cm",
-    image: "/images/produtos/Cavalete de Madeira.png",
-  },
-  {
-    name: "Blocos/Receituários",
-    variations: "à partir de 10 Blocos",
-    image: "/images/produtos/Blocos Receituarios.png",
-  },
-  {
-    name: "Placa Não Perturbe",
-    variations: "à partir de 100 unidades",
-    image: "/images/produtos/Nao Perturbe.png",
-  },
-  {
-    name: "Crachá Empresarial",
-    variations: "à partir de 5 unidades",
-    image: "/images/produtos/Cracha Empresarial.png",
-  },
-  {
-    name: "Pasta com Bolso",
-    variations: "à partir de 25 unidades",
-    image: "/images/produtos/Pasta com Bolso.png",
-  },
-  {
-    name: "Impressão Digital",
-    variations: "à partir de 50x50cm",
-    image: "/images/produtos/Impressao Digital.png",
-  },
-]
+import { ArrowRight, Star } from "lucide-react"
+import { productsData } from "@/lib/products-data"
 
 export default function HomePage() {
+  const featuredProducts = productsData.filter(p => p.isFeatured)
+  const otherProducts = productsData.filter(p => !p.isFeatured)
+
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Hero />
-      <StatsStrip />
+      
+      {/* Trust Badges Strip */}
+      <div className="reveal">
+        <StatsStrip />
+      </div>
 
-      <Section id="mais-vendidos">
-        <ProductGrid products={maisVendidos} title="Mais Vendidos" />
-      </Section>
-
-      <Section background="secondary">
-        <h2 className="text-3xl font-bold text-center mb-12">Por que escolher a Aplic Gráfica?</h2>
-        <Benefits />
-      </Section>
-
-      <Section>
-        <ProductGrid products={maisProcurados} title="Os Mais Procurados" />
-      </Section>
-
-      <Section background="secondary">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Confiança e qualidade gráfica há mais de 14 anos</h2>
-            <p className="text-lg text-muted-foreground">
-              Atendemos empresas e profissionais com impressão offset e digital, comunicação visual, adesivos e lonas.
-              Produção e entrega expressas em toda Florianópolis. Nosso compromisso é unir qualidade, prazo e
-              atendimento rápido para você vender mais.
+      {/* Featured Section */}
+      <Section className="bg-secondary/30 relative overflow-hidden reveal">
+        {/* Background Decorative Pattern */}
+        <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]" />
+        
+        <div className="relative z-10">
+          <div className="flex flex-col items-center text-center mb-10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-4 reveal">
+              <Star className="w-4 h-4 fill-primary" />
+              Os Favoritos
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 reveal delay-100">Mais Vendidos da Semana</h2>
+            <p className="text-muted-foreground max-w-xl reveal delay-200">
+              Qualidade comprovada por centenas de clientes. Produção rápida e acabamento impecável.
             </p>
           </div>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300 bg-white text-gray-900 transition-all duration-300 hover:scale-105 rounded-2xl shadow-lg hover:shadow-xl"
-          >
-            <Link href="/sobre">
-              Conheça nossa história
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          
+          <ProductGrid products={featuredProducts} />
         </div>
       </Section>
 
-      <Section>
-        <h2 className="text-3xl font-bold text-center mb-12">Confiado por muitos</h2>
+      {/* Main Catalog */}
+      <Section id="catalogo" className="reveal">
+        <ProductGrid 
+          products={otherProducts} 
+          title="Catálogo Completo" 
+          subtitle="Encontre exatamente o que sua empresa precisa para se destacar." 
+        />
+      </Section>
+
+      {/* Why Choose Us */}
+      <Section background="secondary" className="border-t border-border/50 reveal">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4 reveal">Por que escolher a Aplic Gráfica?</h2>
+          <p className="text-muted-foreground reveal delay-100">Tecnologia de ponta e atendimento humanizado.</p>
+        </div>
+        <Benefits />
+      </Section>
+
+      {/* About Teaser */}
+      <Section className="bg-gradient-to-b from-background to-secondary/20 reveal">
+        <div className="max-w-5xl mx-auto text-center space-y-8">
+          <div className="space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight reveal">
+              Excelência Gráfica há mais de 14 anos
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed reveal delay-100">
+              Não somos apenas uma gráfica online. Somos parceiros do seu negócio. 
+              Com parque gráfico próprio em Florianópolis, garantimos agilidade real 
+              e controle total de qualidade do arquivo à entrega.
+            </p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-4 reveal delay-200">
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold h-12 px-8 rounded-full shadow-lg hover:shadow-primary/25 transition-all"
+            >
+              <Link href="/sobre">
+                Conheça nossa História
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </Section>
+
+      {/* Social Proof */}
+      <Section className="reveal">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4 reveal">Quem imprime, recomenda</h2>
+        </div>
         <TestimonialsCarousel />
       </Section>
 
-      <Section background="secondary">
+      <Section background="secondary" className="reveal">
         <FAQ />
       </Section>
 
-      <CTASection
-        headline="Pronto para começar?"
-        subtitle="Fale agora pelo WhatsApp e receba seu orçamento em minutos."
-        buttonText="Conversar no WhatsApp"
-        buttonUrl="https://wa.me/5548999128310?text=Olá,%20preciso%20de%20ajuda%20com%20um%20pedido."
-      />
-    </>
+      <div className="reveal">
+        <CTASection
+          headline="Seu projeto pronto para imprimir?"
+          subtitle="Ou precisa de ajuda com a arte? Nossa equipe está pronta para te atender agora."
+          buttonText="Chamar no WhatsApp"
+          buttonUrl="https://wa.me/5548999128310?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento."
+        />
+      </div>
+    </div>
   )
 }

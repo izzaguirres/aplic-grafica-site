@@ -3,79 +3,77 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { MessageCircle, ArrowRight, Sparkles, Star } from "lucide-react"
+import { MessageCircle, ArrowRight, Zap, CheckCircle2 } from "lucide-react"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 
 export function Hero() {
   const { handleWhatsAppClick } = useWhatsAppConversion()
   
-  const products = [
-    "Cartões de Visita",
-    "Panfletos",
-    "Banners",
-    "Adesivos",
-    "Etiquetas",
-    "Cardápios",
-    "Blocos",
+  const tags = [
+    "Entrega Agilizada",
+    "Alta Definição",
+    "Atendimento Humano",
+    "Parque Gráfico Próprio"
   ]
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-secondary/20">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/3 rounded-full blur-3xl" />
+    <section className="relative overflow-hidden bg-background">
+      {/* Tech Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
+      
+      {/* Glow Effects */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[128px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[128px]" />
 
-      <div className="container relative">
-        <div className="flex flex-col items-center text-center py-12 md:py-16 lg:py-20 xl:py-24 space-y-6 md:space-y-8">
-          {/* Badge */}
-          <Badge
-            variant="secondary"
-            className="inline-flex items-center gap-1 md:gap-2 bg-white/20 backdrop-blur-md border-white/30 px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm font-semibold text-foreground hover:bg-white/30 transition-colors"
-          >
-            <Sparkles className="h-3 w-3 md:h-4 md:w-4" />
-            <span className="hidden sm:inline">Mais de 14 anos de experiência</span>
-            <span className="sm:hidden">14+ anos</span>
-            <div className="flex items-center gap-1 ml-1 md:ml-2">
-              <Star className="h-2.5 w-2.5 md:h-3 md:w-3 fill-foreground text-foreground" />
-              <span className="text-xs">4.8</span>
-            </div>
-          </Badge>
+      <div className="container relative z-20">
+        <div className="flex flex-col items-center text-center py-20 lg:py-32 space-y-8">
+          
+          {/* Trust Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 backdrop-blur-md border border-border/50 animate-fade-in">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span className="text-sm font-medium text-muted-foreground">
+              A Gráfica Rápida que você procura em Florianópolis
+            </span>
+          </div>
 
-          {/* Main Heading */}
-          <div className="space-y-3 md:space-y-4 max-w-5xl">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[0.9] text-foreground">
-              A Gráfica Rápida que você procura!
+          {/* Main Headline */}
+          <div className="space-y-4 max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-[#28282D] leading-[0.95] animate-fade-in [animation-delay:100ms]">
+              Sua marca, impressa com <span className="relative inline-block text-[#28282D]">
+                excelência
+                <svg className="absolute w-full h-3 -bottom-2 left-0 text-[#E6FF50]" viewBox="0 0 100 10" preserveAspectRatio="none">
+                   <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
+                </svg>
+              </span>.
             </h1>
-
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium px-4">
-              Atendemos toda Florianópolis... Produção expressa e qualidade profissional para o seu negócio.
+            <p className="text-xl md:text-2xl text-[#28282D]/70 max-w-2xl mx-auto leading-relaxed animate-fade-in [animation-delay:200ms]">
+              Do cartão de visita ao banner gigante. Qualidade premium e agilidade que seu negócio precisa para crescer.
             </p>
           </div>
 
-          {/* Products Showcase */}
-          <div className="w-full max-w-6xl px-4">
-            <div className="flex flex-wrap justify-center gap-1.5 md:gap-2 lg:gap-3">
-              {products.map((product) => (
-                <div
-                  key={product}
-                  className="group relative overflow-hidden rounded-lg md:rounded-xl bg-white/60 dark:bg-card/60 backdrop-blur-sm border border-border/50 px-2 md:px-3 py-1.5 md:py-2 hover:bg-white/80 dark:hover:bg-card/80 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/10"
-                >
-                  <span className="text-xs md:text-sm font-semibold text-foreground relative z-10">{product}</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              ))}
-            </div>
+          {/* Feature Tags */}
+          <div className="flex flex-wrap justify-center gap-3 animate-fade-in [animation-delay:300ms]">
+            {tags.map((tag) => (
+              <div key={tag} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#CDD2D7]/30 border border-[#CDD2D7] text-sm font-semibold text-[#28282D]">
+                <CheckCircle2 className="w-4 h-4 text-[#28282D]" />
+                {tag}
+              </div>
+            ))}
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4 w-full max-w-md sm:max-w-lg">
+          <div className="flex flex-col sm:flex-row gap-4 pt-8 w-full max-w-md sm:max-w-lg justify-center animate-fade-in [animation-delay:400ms]">
             <Button
               size="lg"
               onClick={() => handleWhatsAppClick(undefined, 'hero_cta')}
-              className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-bold bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-2xl shadow-lime-500/25 hover:shadow-3xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 transition-all duration-300 hover:scale-105 rounded-2xl border-0"
+              className="h-14 px-8 text-base font-bold bg-[#E6FF50] text-[#28282D] hover:bg-[#D9F040] hover:scale-105 transition-all rounded-xl border-0 shadow-lg shadow-[#E6FF50]/20"
             >
-              <MessageCircle className="mr-2 md:mr-3 h-5 w-5 md:h-6 md:w-6" />
+              <MessageCircle className="mr-2 h-5 w-5" />
               Conversar no WhatsApp
             </Button>
 
@@ -83,11 +81,11 @@ export function Hero() {
               size="lg"
               variant="outline"
               asChild
-              className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-bold border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300 bg-white text-gray-900 transition-all duration-300 hover:scale-105 rounded-2xl shadow-lg hover:shadow-xl"
+              className="h-14 px-8 text-base font-bold border-2 border-[#CDD2D7] text-[#28282D] hover:bg-[#CDD2D7]/20 transition-all rounded-xl"
             >
-              <Link href="#mais-vendidos">
-                Ver Produtos
-                <ArrowRight className="ml-2 md:ml-3 h-5 w-5 md:h-6 md:w-6" />
+              <Link href="#catalogo">
+                Ver Catálogo
+                <Zap className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

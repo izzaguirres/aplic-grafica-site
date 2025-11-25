@@ -113,18 +113,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-background/20 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-background/60 text-sm">© 2024 Aplic Gráfica. Todos os direitos reservados.</p>
-            <div className="flex space-x-6 text-sm">
-              <Link href="/termos" className="text-background/60 hover:text-primary transition-colors">
-                Termos de Uso
-              </Link>
-              <Link href="/privacidade" className="text-background/60 hover:text-primary transition-colors">
-                Política de Privacidade
-              </Link>
-            </div>
-          </div>
+        <div className="mt-12 pt-8 border-t border-border/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+          <p className="text-sm text-muted-foreground">
+            &copy; 2025 Aplic Gráfica. Todos os direitos reservados.
+          </p>
+          <p className="text-sm text-muted-foreground flex items-center gap-1">
+            Desenvolvido por <a href="https://izaguirres.vercel.app" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E6FF50] hover:underline">Izaguirres</a>
+          </p>
         </div>
       </div>
     </footer>

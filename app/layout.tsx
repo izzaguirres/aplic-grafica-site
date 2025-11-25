@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Rethink_Sans } from "next/font/google"
+import localFont from "next/font/local"
 import Script from "next/script"
 import "./globals.css"
 import { Header } from "@/components/Header"
@@ -8,32 +8,34 @@ import { Footer } from "@/components/Footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { GoogleAnalytics } from "@/components/GoogleAnalytics"
 import { Analytics } from "@vercel/analytics/next"
+import { ScrollReveal } from "@/components/ScrollReveal"
 
-const rethinkSans = Rethink_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-rethink-sans",
-  display: "swap",
+const googleSans = localFont({
+  src: "./fonts/GoogleSansFlex.ttf",
+  variable: "--font-google-sans",
+  weight: "100 1000",
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aplicgrafica.com.br"),
   title: {
-    default: "Aplic Gráfica - A Gráfica que você procura! | Florianópolis",
+    default: "Aplic Gráfica | Gráfica Rápida em Florianópolis - Entrega Expressa",
     template: "%s | Aplic Gráfica Florianópolis",
   },
   description:
-    "Gráfica em Florianópolis com entrega grátis. Cartões, panfletos, banners, adesivos e mais. Produção expressa e qualidade profissional há mais de 14 anos.",
-  icons: {
-    icon: "/images/favicon.png",
-  },
+    "Gráfica em Florianópolis com entrega rápida. Cartões de Visita, Panfletos, Banners, Adesivos e Comunicação Visual. Peça pelo WhatsApp e receba em 24h.",
   keywords: [
     "gráfica florianópolis",
-    "impressão",
-    "cartão de visita",
+    "gráfica rápida",
+    "cartão de visita florianópolis",
+    "banners florianópolis",
     "panfletos",
-    "banners",
     "adesivos",
     "comunicação visual",
+    "impressão digital",
+    "centro",
+    "trindade",
+    "estreito",
   ],
   authors: [{ name: "Aplic Gráfica" }],
   creator: "Aplic Gráfica",
@@ -43,32 +45,29 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://aplicgrafica.com.br"), // TODO: Substituir pela URL real
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://aplicgrafica.com.br", // TODO: Substituir pela URL real
-    siteName: "Aplic Gráfica",
-    title: "Aplic Gráfica - A Gráfica Rapida que você procura! | Florianópolis",
-    description:
-      "Gráfica em Florianópolis com entrega rápida. Cartões, panfletos, banners, adesivos e mais. Produção expressa e qualidade profissional há mais de 13 anos.",
+    url: "https://aplicgrafica.com.br",
+    siteName: "Aplic Gráfica Rápida",
+    title: "Aplic Gráfica - A Melhor Gráfica de Florianópolis",
+    description: "Impressão de alta qualidade com entrega expressa na Grande Florianópolis. Peça seu orçamento agora pelo WhatsApp.",
     images: [
       {
         url: "/images/thumbnail.png",
         width: 1200,
         height: 630,
-        alt: "Aplic Gráfica Florianópolis",
+        alt: "Aplic Gráfica Florianópolis - Fachada e Produtos",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aplic Gráfica - A Gráfica Rápida que você procura! | Florianópolis",
-    description:
-      "Gráfica em Florianópolis com entrega rápida. Cartões, panfletos, banners, adesivos e mais. Produção expressa e qualidade profissional há mais de 13 anos.",
+    title: "Aplic Gráfica - Gráfica Rápida em Florianópolis",
+    description: "Cartões, Banners e Adesivos com entrega expressa. Peça agora!",
     images: ["/images/thumbnail.png"],
   },
   robots: {
@@ -82,7 +81,16 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-    generator: 'v0.dev'
+  other: {
+    "geo.region": "BR-SC",
+    "geo.placename": "Florianópolis",
+    "geo.position": "-27.594870;-48.548220", // Coordenadas aproximadas do Centro de Floripa
+    "ICBM": "-27.594870, -48.548220",
+  },
+  icons: {
+    icon: "/images/favicon.png",
+  },
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -118,9 +126,54 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${rethinkSans.variable} font-sans antialiased`}>
+      <body className={`${googleSans.variable} font-sans antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Aplic Gráfica",
+              "image": "https://aplicgrafica.com.br/images/thumbnail.png",
+              "@id": "https://aplicgrafica.com.br",
+              "url": "https://aplicgrafica.com.br",
+              "telephone": "+5548999128310",
+              "priceRange": "$$",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Rua Jerônimo Coelho, 123 (Exemplo)", // Você pode ajustar o endereço exato depois
+                "addressLocality": "Florianópolis",
+                "addressRegion": "SC",
+                "postalCode": "88010-000",
+                "addressCountry": "BR"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": -27.594870,
+                "longitude": -48.548220
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "09:00",
+                "closes": "18:00"
+              },
+              "sameAs": [
+                "https://www.instagram.com/aplicgrafica",
+                "https://www.facebook.com/aplicgrafica"
+              ]
+            }),
+          }}
+        />
         <GoogleAnalytics gaId={gaId || ""} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <ScrollReveal />
           <Header />
           <main className="min-h-screen">{children}</main>
           <Footer />

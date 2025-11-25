@@ -1,196 +1,77 @@
-# 🖨️ Aplic Gráfica - Site Institucional
+# Aplic Gráfica - Premium Web Experience
 
-Site institucional moderno para a Aplic Gráfica, uma gráfica localizada em Florianópolis com mais de 14 anos de experiência. Desenvolvido com Next.js 14, TypeScript e Tailwind CSS.
+Este projeto é uma plataforma web moderna, desenvolvida com foco total em **conversão via WhatsApp** e **performance**. Não é apenas um site institucional, mas um "Hub de Vendas" para a gráfica líder em Florianópolis.
 
-## 🚀 **Status do Projeto**
+## 🚀 Tecnologias e Stack
 
-✅ **Pronto para Deploy** - Site completamente funcional e otimizado
+*   **Framework:** Next.js 14 (App Router)
+*   **Linguagem:** TypeScript
+*   **Estilização:** Tailwind CSS + Shadcn/UI
+*   **Tipografia:** Google Sans Flex (Variable Font) localmente hospedada.
+*   **Animações:** CSS Nativo (Scroll Reveal) + Micro-interações.
 
-## ✨ **Características**
+## 💎 Design System: "Tech & Premium"
 
-- 🎨 **Design Moderno**: Interface limpa e profissional
-- 📱 **Responsivo**: Otimizado para mobile, tablet e desktop
-- ⚡ **Performance**: Carregamento rápido e otimizado
-- 🔒 **Seguro**: Headers de segurança e validação de dados
-- 🎯 **SEO**: Meta tags, sitemap e robots.txt configurados
-- 🌙 **Tema Escuro/Claro**: Suporte a modo escuro
-- 📞 **WhatsApp Integration**: Links diretos para contato
-- 📝 **Formulário de Contato**: API funcional
+O site foge do padrão "SaaS Genérico" e adota uma estética de estúdio de design, transmitindo solidez e modernidade.
 
-## 🛠️ **Tecnologias**
+*   **Paleta de Cores:**
+    *   **Shark (#28282D):** Fundo escuro e textos principais. Sofisticação.
+    *   **Canary (#E6FF50):** Acentos, CTAs e pontos de luz. Energia e Modernidade.
+    *   **Iron (#CDD2D7):** Estrutura, bordas e detalhes técnicos.
+*   **Conceitos Visuais:**
+    *   *Glassmorphism* (Vidro) sutil.
+    *   Cards com bordas arredondadas agressivas (estilo iOS/App).
+    *   Animações de entrada (Scroll Reveal) cinematográficas.
+    *   "WhatsApp First": Toda interação leva para uma conversa real.
 
-- **Framework**: Next.js 14 (App Router)
-- **Linguagem**: TypeScript 5
-- **Styling**: Tailwind CSS 3.4
-- **UI Components**: shadcn/ui + Radix UI
-- **Forms**: React Hook Form + Zod
-- **Icons**: Lucide React
-- **Deploy**: Vercel (configurado)
+## ⚡ Funcionalidades de Venda
 
-## 📁 **Estrutura do Projeto**
+1.  **Catálogo Inteligente:**
+    *   Busca em tempo real.
+    *   Filtros por categoria em formato "Pills" (cápsulas).
+    *   Feedback instantâneo de "Nenhum resultado encontrado".
+2.  **Calculadora de Preço (Client-Side):**
+    *   Nos cards de produto, o cliente seleciona a quantidade (ex: 1000 ou 5000 un.) e o preço atualiza na hora.
+    *   O botão do WhatsApp já gera uma mensagem personalizada com o pedido exato: *"Olá! Quero 5000 Panfletos..."*.
+3.  **Hub de Contato:**
+    *   Substituição do formulário de e-mail (lento) por um painel de triagem via WhatsApp (rápido).
+    *   Canais específicos para: Orçamento, Arquivos, Status e Dúvidas.
 
-```
-├── app/                    # App Router (Next.js 14)
-│   ├── layout.tsx         # Layout principal
-│   ├── page.tsx           # Página inicial
-│   ├── globals.css        # Estilos globais
-│   ├── api/               # API routes
-│   ├── produtos/          # Página de produtos
-│   ├── sobre/             # Página sobre
-│   └── contato/           # Página de contato
-├── components/            # Componentes React
-│   ├── ui/               # Componentes base (shadcn/ui)
-│   ├── Hero.tsx          # Seção hero
-│   ├── ProductCard.tsx   # Card de produto
-│   └── ...               # Outros componentes
-├── public/               # Arquivos estáticos
-│   └── images/           # Imagens do site
-├── scripts/              # Scripts de deploy
-├── middleware.ts         # Middleware de segurança
-└── vercel.json          # Configuração Vercel
-```
+## 🔍 SEO (Search Engine Optimization)
 
-## 🚀 **Como Executar**
+O site foi construído para dominar o Google Local em Florianópolis.
 
-### **Pré-requisitos**
-- Node.js 18+
-- npm ou yarn
+*   **JSON-LD (Dados Estruturados):** Schema de `LocalBusiness` injetado, com endereço, horários e geo-coordenadas.
+*   **Metadados:** Títulos e descrições otimizados para cauda longa ("Gráfica Rápida Florianópolis").
+*   **Sitemap & Robots:** Gerados automaticamente.
+*   **Manifest:** Configurado para PWA (Progressive Web App).
 
-### **Instalação**
-```bash
-# Clonar repositório
-git clone https://github.com/seu-usuario/aplic-grafica-site.git
-cd aplic-grafica-site
+## 🛡️ Segurança
 
-# Instalar dependências
-npm install
+O projeto segue as melhores práticas de segurança web:
 
-# Executar em desenvolvimento
-npm run dev
-```
+*   **Headers de Segurança:** Configurados no `middleware.ts` e `next.config.mjs` (HSTS, X-Frame-Options, X-XSS-Protection).
+*   **Content Security Policy (CSP):** Restritiva para evitar injeção de scripts maliciosos.
+*   **Bloqueio de Rotas:** Arquivos sensíveis (`.env`, `.git`) são bloqueados pelo middleware.
+*   **Sanitização:** Como não há banco de dados nem inputs complexos de formulário, a superfície de ataque é mínima.
 
-### **Build de Produção**
-```bash
-# Verificar tipos
-npm run type-check
+## 🛠️ Como Rodar Localmente
 
-# Executar linting
-npm run lint
+1.  Instale as dependências:
+    ```bash
+    npm install
+    # ou
+    pnpm install
+    ```
 
-# Build de produção
-npm run build
+2.  Rode o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
 
-# Executar em produção
-npm start
-```
+3.  Acesse `http://localhost:3000`.
 
-## 🔒 **Segurança**
+## 👨‍💻 Créditos
 
-O projeto inclui várias camadas de proteção:
-
-- ✅ **Headers de Segurança**: XSS, Clickjacking, etc.
-- ✅ **Rate Limiting**: Proteção contra spam
-- ✅ **Validação de Dados**: Zod schema validation
-- ✅ **Sanitização**: Remoção de caracteres perigosos
-- ✅ **HTTPS Forçado**: Redirecionamento automático
-- ✅ **Variáveis de Ambiente**: Credenciais protegidas
-
-## 📊 **Páginas**
-
-### **🏠 Página Inicial**
-- Hero section com CTA
-- Produtos em destaque
-- Estatísticas da empresa
-- Benefícios
-- Depoimentos
-- FAQ
-- Seção CTA
-
-### **🛍️ Produtos**
-- Lista completa de produtos
-- Filtros por categoria
-- Imagens otimizadas
-- Links diretos para WhatsApp
-
-### **ℹ️ Sobre**
-- História da empresa
-- Valores e missão
-- Equipe
-- Certificações
-
-### **📞 Contato**
-- Formulário funcional
-- Informações de contato
-- Mapa de atendimento
-- Horários de funcionamento
-
-## 🎨 **Design System**
-
-### **Cores**
-- **Primária**: Verde lime (#D3F26A)
-- **Secundária**: Cinza escuro (#222222)
-- **Background**: Cinza claro (#eeeeee)
-- **Texto**: Preto/Branco (modo claro/escuro)
-
-### **Tipografia**
-- **Fonte**: Geist (sans-serif)
-- **Tamanhos**: Escala responsiva
-- **Pesos**: Regular, Medium, Bold
-
-### **Componentes**
-- Cards com efeito glass morphism
-- Botões com gradientes
-- Badges com liquid glass
-- Animações suaves
-
-## 📱 **Responsividade**
-
-- **Mobile**: 320px - 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: 1024px+
-
-## 🔧 **Scripts Disponíveis**
-
-```bash
-npm run dev          # Desenvolvimento
-npm run build        # Build de produção
-npm run start        # Executar produção
-npm run lint         # Verificar código
-npm run type-check   # Verificar tipos
-npm run clean        # Limpar builds
-```
-
-## 🚀 **Deploy**
-
-### **Vercel (Recomendado)**
-```bash
-# Deploy automático
-./scripts/deploy.sh vercel
-
-# Ou manual
-npx vercel --prod
-```
-
-### **Configuração**
-- Framework: Next.js
-- Build Command: `npm run build`
-- Output Directory: `.next`
-- Install Command: `npm install`
-
-## 📞 **Contatos**
-
-- **WhatsApp**: (48) 99912-8310
-- **Email**: comercialaplic@hotmail.com
-- **Região**: Grande Florianópolis
-
-## 📄 **Licença**
-
-Este projeto é privado e pertence à Aplic Gráfica.
-
-## 🤝 **Contribuição**
-
-Para contribuições, entre em contato com a equipe de desenvolvimento.
-
----
-
-**Desenvolvido com ❤️ para a Aplic Gráfica** 
+Desenvolvido por **[Izaguirres](https://izaguirres.vercel.app)**.
+© 2025 Aplic Gráfica.

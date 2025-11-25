@@ -1,68 +1,127 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MessageCircle, ArrowRight } from "lucide-react"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
+import { Product } from "@/lib/products-data"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { cn } from "@/lib/utils"
 
 interface ProductCardProps {
-  name: string
-  variations?: string
-  image: string
-  whatsappMessage?: string
+  product: Product
 }
 
-export function ProductCard({ name, variations, image, whatsappMessage }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const { handleWhatsAppClick } = useWhatsAppConversion()
-  
-  const defaultMessage = `Olá,%20vim%20do%20site.%20Gostaria%20de%20mais%20informações%20sobre%20${encodeURIComponent(name)}`
+  const [selectedQty, setSelectedQty] = useState(product.priceTable[0].quantidade)
+
+  const currentPriceItem = product.priceTable.find((p) => p.quantidade === selectedQty) || product.priceTable[0]
+  const currentPrice = currentPriceItem.valor
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(value)
+  }
+
+  const message = `Olá! Gostaria de encomendar *${selectedQty} unidades* de *${product.name}* por *${formatCurrency(currentPrice)}*. Como prosseguir?`
 
   return (
-    <Card className="group relative overflow-hidden rounded-3xl border-0 bg-white/80 backdrop-blur-sm shadow-lg shadow-black/5 hover:shadow-2xl hover:shadow-black/10 transition-all duration-500 hover:-translate-y-2 h-full">
-      {/* Gradient Border */}
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-border/50 via-transparent to-border/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <div className="absolute inset-[1px] rounded-3xl bg-white/90 backdrop-blur-sm" />
+    <Card className="group relative flex flex-col h-full overflow-hidden rounded-xl border border-border/60 bg-white shadow-tech hover:shadow-tech-hover transition-all duration-300">
+      {/* Featured Badge */}
+      {product.isFeatured && (
+        <div className="absolute top-3 right-3 z-10">
+          <Badge className="bg-[#E6FF50] text-[#28282D] hover:bg-[#D9F040] font-bold border-0 rounded-md px-3 py-1 text-xs uppercase tracking-wide shadow-sm">
+            Mais Vendido
+          </Badge>
+        </div>
+      )}
 
-      <CardContent className="relative p-3 md:p-4">
-        <div className="aspect-square relative mb-3 rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/50 to-secondary/30">
-          <Image
-            src={image || "/placeholder.svg"}
-            alt={name}
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Image Area - Optimized to fill space */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white">
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
+        {/* Overlay Gradient */}
+        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      </div>
 
-          {/* Floating Badge */}
-          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-            <Badge className="bg-primary/90 text-primary-foreground text-xs font-semibold">Disponível</Badge>
-          </div>
+      {/* Content Section - Grows to push footer down */}
+      <CardContent className="flex flex-col flex-1 p-5 space-y-4">
+        
+        {/* Header */}
+        <div className="space-y-2">
+          <h3 className="font-bold text-lg leading-tight text-[#28282D] group-hover:text-black transition-colors min-h-[1.5rem]">
+            {product.name}
+          </h3>
+          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed min-h-[2.5rem]">
+            {product.description}
+          </p>
         </div>
 
-        <div className="space-y-2 md:space-y-3 text-center">
-          <h3 className="font-bold text-sm md:text-base lg:text-lg leading-tight line-clamp-2 group-hover:text-foreground transition-colors duration-300 min-h-[2.5rem] md:min-h-[3rem] flex items-center justify-center">
-            {name}
-          </h3>
-          {variations && (
-            <Badge variant="secondary" className="text-xs font-medium bg-secondary/80 text-muted-foreground mx-auto">
-              {variations}
-            </Badge>
-          )}
+        {/* Quantity Selector - Pushed to bottom of content area if needed, or just part of flow */}
+        <div className="space-y-1.5 mt-auto pt-2">
+          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Quantidade</label>
+          <Select
+            value={selectedQty.toString()}
+            onValueChange={(val) => setSelectedQty(Number(val))}
+          >
+            <SelectTrigger className="w-full bg-[#F5F5F7] border-0 focus:ring-1 focus:ring-[#E6FF50] text-[#28282D] font-medium h-9 rounded-lg">
+              <SelectValue placeholder="Selecione a quantidade" />
+            </SelectTrigger>
+            <SelectContent>
+              {product.priceTable.map((item) => (
+                <SelectItem key={item.quantidade} value={item.quantidade.toString()}>
+                  {item.quantidade} un.
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </CardContent>
 
-      <CardFooter className="relative p-3 md:p-4 pt-0">
+      {/* Footer Section - Always at bottom */}
+      <CardFooter className="p-5 pt-0 mt-auto flex flex-col gap-4">
+        {/* Price Display */}
+        <div className="w-full flex items-baseline justify-between border-t border-border/40 pt-4">
+          <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Total estimado</span>
+          <div className="text-right">
+             <span className="text-xs text-muted-foreground line-through block opacity-50">
+               {formatCurrency(currentPrice * 1.2)}
+             </span>
+             <span className="text-2xl font-bold text-[#28282D] tracking-tight">
+              {formatCurrency(currentPrice)}
+            </span>
+          </div>
+        </div>
+
+        {/* CTA Button */}
         <Button
-          onClick={() => handleWhatsAppClick(whatsappMessage || defaultMessage, 'product_card', name)}
-          className="w-full h-11 font-semibold bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 hover:shadow-xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 transition-all duration-300 rounded-2xl group/btn border-0"
+          onClick={() => handleWhatsAppClick(message, 'product_card', product.name)}
+          className={cn(
+            "w-full h-11 font-bold tracking-wide rounded-lg transition-all duration-300 border-0",
+            "bg-[#E6FF50] text-[#28282D] hover:bg-[#D9F040]",
+            "hover:translate-y-[-1px] active:translate-y-[0px] shadow-sm"
+          )}
         >
-          <MessageCircle className="mr-2 h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
-          <span className="md:hidden">Comprar</span>
-          <span className="hidden md:inline">Comprar pelo WhatsApp</span>
-          <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+          <MessageCircle className="mr-2 h-4 w-4" />
+          Cotar no WhatsApp
+          <ArrowRight className="ml-2 h-4 w-4 opacity-50 group-hover:translate-x-1 transition-transform" />
         </Button>
       </CardFooter>
     </Card>

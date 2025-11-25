@@ -1,207 +1,162 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { ProductGrid } from "@/components/ProductGrid"
 import { Section } from "@/components/Section"
 import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-
-const allProducts = [
-  // Cartões
-  {
-    name: "Cartão de Visita - Brilho Total",
-    variations: "à partir de 100 unidades",
-    category: "cartoes",
-    image: "/images/produtos/Cartao de Visita - Brilho Total.png",
-  },
-  {
-    name: "Cartão de Visita - Fosco",
-    variations: "à partir de 500 unidades",
-    category: "cartoes",
-    image: "/images/produtos/Cartao de Visita - Fosco.png",
-  },
-  {
-    name: "Cartão de Visita - Mini",
-    variations: "à partir de 500 unidades",
-    category: "cartoes",
-    image: "/images/produtos/Mini Cartao de Visita.png",
-  },
-  {
-    name: "Cartão com Cantos Arredondados",
-    variations: "à partir de 500 unidades",
-    category: "cartoes",
-    image: "/images/produtos/Cartao de Visita - Cantos Arredondados.png",
-  },
-
-  // Panfletos
-  {
-    name: "Panfleto 10×14cm",
-    variations: "à partir de 1.000 unidades",
-    category: "panfletos",
-    image: "/images/produtos/Panfleto 10x14.png",
-  },
-
-  // Banners/Lonas
-  {
-    name: "Banner em Lona",
-    variations: "à partir de 50x70cm",
-    category: "banners",
-    image: "/images/produtos/Banner em Lona.png",
-  },
-  {
-    name: "Lona com Ilhós",
-    variations: "à partir de 50x50cm",
-    category: "banners",
-    image: "/images/produtos/Lona com Ilhos.png",
-  },
-
-  // Adesivos/Etiquetas
-  {
-    name: "Impressão Digital",
-    variations: "à partir de 50x50cm",
-    category: "adesivos",
-    image: "/images/produtos/Impressao Digital.png",
-  },
-  {
-    name: "Etiqueta Adesiva",
-    variations: "à partir de 100 unidades",
-    category: "adesivos",
-    image: "/images/produtos/Etiqueta Adesiva.png",
-  },
-
-  // Comunicação Visual
-  {
-    name: "Cavalete de Ferro",
-    variations: "50x100cm",
-    category: "comunicacao",
-    image: "/images/produtos/Cavalete de Ferro.png",
-  },
-  {
-    name: "Cavalete de Madeira",
-    variations: "50x100cm",
-    category: "comunicacao",
-    image: "/images/produtos/Cavalete de Madeira.png",
-  },
-  {
-    name: "Placa Não Perturbe",
-    variations: "à partir de 100 unidades",
-    category: "comunicacao",
-    image: "/images/produtos/Nao Perturbe.png",
-  },
-
-  // Diversos
-  {
-    name: "Tag com Furo",
-    variations: "à partir de 250 unidades",
-    category: "diversos",
-    image: "/images/produtos/Tag com Furo.png",
-  },
-  {
-    name: "Blocos/Receituários",
-    variations: "à partir de 10 Blocos",
-    category: "diversos",
-    image: "/images/produtos/Blocos Receituarios.png",
-  },
-  {
-    name: "Crachá Empresarial",
-    variations: "à partir de 5 unidades",
-    category: "diversos",
-    image: "/images/produtos/Cracha Empresarial.png",
-  },
-  {
-    name: "Pasta com Bolso",
-    variations: "à partir de 25 unidades",
-    category: "diversos",
-    image: "/images/produtos/Pasta com Bolso.png",
-  },
-]
+import { Input } from "@/components/ui/input"
+import { productsData } from "@/lib/products-data"
+import { Search, X, SlidersHorizontal, PackageX } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion" // Assuming framer-motion might not be installed, I'll stick to standard React/Tailwind for safety, but mimicking the motion feel.
 
 const categories = [
-  { value: "all", label: "Todas as Categorias" },
-  { value: "cartoes", label: "Cartões" },
-  { value: "panfletos", label: "Panfletos" },
-  { value: "banners", label: "Banners/Lonas" },
-  { value: "adesivos", label: "Adesivos/Etiquetas" },
-  { value: "comunicacao", label: "Comunicação Visual" },
-  { value: "diversos", label: "Diversos" },
+  { value: "all", label: "Todos" },
+  { value: "Promocional", label: "Promocional" },
+  { value: "Empresa", label: "Empresarial" },
+  { value: "Sinalização", label: "Sinalização" },
+  { value: "Adesivos", label: "Adesivos" },
+  { value: "Hotelaria", label: "Hotelaria" },
 ]
 
 export default function ProdutosPageClient() {
   const [selectedCategory, setSelectedCategory] = useState("all")
+  const [searchQuery, setSearchQuery] = useState("")
 
-  const filteredProducts = allProducts.filter((product) => {
-    if (selectedCategory !== "all" && product.category !== selectedCategory) return false
-    return true
-  })
+  // Filter Logic
+  const filteredProducts = useMemo(() => {
+    return productsData.filter((product) => {
+      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
+      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            product.description.toLowerCase().includes(searchQuery.toLowerCase())
+      return matchesCategory && matchesSearch
+    })
+  }, [selectedCategory, searchQuery])
 
   const clearFilters = () => {
     setSelectedCategory("all")
+    setSearchQuery("")
   }
 
-  const hasActiveFilter = selectedCategory !== "all"
+  const hasActiveFilter = selectedCategory !== "all" || searchQuery !== ""
 
   return (
-    <>
-      <Section>
-        <div className="space-y-8">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold">Nossos Produtos</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Confira nosso catálogo completo de produtos gráficos. Use o filtro para encontrar exatamente o que você
-              precisa.
+    <div className="min-h-screen bg-white">
+      {/* Header Compacto & Funcional */}
+      <section className="pt-32 pb-12 px-4 border-b border-[#CDD2D7]/30 bg-[#F5F5F7]/50">
+        <div className="container max-w-6xl mx-auto space-y-8">
+          <div className="text-center space-y-3">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#28282D]">
+              Catálogo Completo
+            </h1>
+            <p className="text-lg text-[#28282D]/60 max-w-2xl mx-auto font-medium">
+              Explore nossa linha de produtos premium. Digite o que procura ou navegue pelas categorias.
             </p>
           </div>
 
-          {/* Filtro Simplificado - Apenas Categoria */}
-          <div className="bg-secondary/30 rounded-3xl p-6 max-w-md mx-auto">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground">Categoria</label>
-                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger className="h-12 rounded-2xl border-2 bg-background/80 backdrop-blur-sm">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map((category) => (
-                      <SelectItem key={category.value} value={category.value}>
-                        {category.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+          {/* Search & Filter Bar */}
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between max-w-4xl mx-auto">
+            {/* Search Input */}
+            <div className="relative w-full md:w-96 group">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#28282D]/50 group-focus-within:text-[#28282D] transition-colors" />
+              <Input 
+                placeholder="Buscar produto (ex: cartão, banner)..." 
+                className="pl-10 h-12 rounded-xl border-[#CDD2D7] bg-white focus:ring-2 focus:ring-[#E6FF50] focus:border-transparent text-base"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              {searchQuery && (
+                <button 
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full text-[#28282D]/50"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              )}
+            </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-muted-foreground">
-                    {filteredProducts.length} produto{filteredProducts.length !== 1 ? "s" : ""} encontrado
-                    {filteredProducts.length !== 1 ? "s" : ""}
-                  </span>
-                  {hasActiveFilter && (
-                    <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
-                      Filtro ativo
-                    </Badge>
-                  )}
-                </div>
-                {hasActiveFilter && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={clearFilters}
-                    className="h-8 px-3 text-xs bg-transparent"
-                  >
-                    Limpar
-                  </Button>
-                )}
-              </div>
+            {/* Category Pills (Desktop) */}
+            <div className="hidden md:flex flex-wrap gap-2 justify-center">
+              {categories.map((category) => (
+                <button
+                  key={category.value}
+                  onClick={() => setSelectedCategory(category.value)}
+                  className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 border ${
+                    selectedCategory === category.value
+                      ? "bg-[#28282D] text-[#E6FF50] border-[#28282D] shadow-lg shadow-[#28282D]/20 scale-105"
+                      : "bg-white text-[#28282D]/70 border-[#CDD2D7] hover:border-[#28282D] hover:text-[#28282D]"
+                  }`}
+                >
+                  {category.label}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Grid de Produtos */}
-          <ProductGrid products={filteredProducts} />
+          {/* Mobile Category Scroll */}
+          <div className="md:hidden w-full overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+            <div className="flex gap-2 w-max">
+              {categories.map((category) => (
+                <button
+                  key={category.value}
+                  onClick={() => setSelectedCategory(category.value)}
+                  className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all border ${
+                     selectedCategory === category.value
+                      ? "bg-[#28282D] text-[#E6FF50] border-[#28282D]"
+                      : "bg-white text-[#28282D]/70 border-[#CDD2D7]"
+                  }`}
+                >
+                  {category.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Active Filter Summary */}
+          <div className="flex items-center justify-between text-sm text-[#28282D]/60 pt-2 border-t border-[#CDD2D7]/30">
+            <span>
+              Mostrando <strong>{filteredProducts.length}</strong> produtos
+            </span>
+            {hasActiveFilter && (
+              <Button
+                variant="ghost"
+                onClick={clearFilters}
+                className="h-8 px-3 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg text-xs font-bold uppercase"
+              >
+                Limpar Filtros
+                <X className="ml-2 h-3 w-3" />
+              </Button>
+            )}
+          </div>
         </div>
-      </Section>
-    </>
+      </section>
+
+      {/* Grid Results */}
+      <section className="container max-w-7xl mx-auto px-4 py-12">
+        {filteredProducts.length > 0 ? (
+          <ProductGrid products={filteredProducts} />
+        ) : (
+          /* Empty State */
+          <div className="flex flex-col items-center justify-center py-24 text-center space-y-6 animate-fade-in">
+            <div className="h-24 w-24 rounded-full bg-[#F5F5F7] flex items-center justify-center">
+              <PackageX className="h-10 w-10 text-[#28282D]/30" />
+            </div>
+            <div className="space-y-2 max-w-md">
+              <h3 className="text-xl font-bold text-[#28282D]">Nenhum produto encontrado</h3>
+              <p className="text-[#28282D]/60">
+                Não encontramos nada com esses termos. Tente buscar por categorias como "Cartão" ou "Banner".
+              </p>
+            </div>
+            <Button 
+              onClick={clearFilters}
+              variant="outline"
+              className="border-[#CDD2D7] text-[#28282D] hover:bg-[#F5F5F7]"
+            >
+              Limpar busca
+            </Button>
+          </div>
+        )}
+      </section>
+    </div>
   )
 }

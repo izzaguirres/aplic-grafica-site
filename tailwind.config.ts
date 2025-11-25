@@ -18,7 +18,7 @@ const config: Config = {
       },
     },
     fontFamily: {
-      sans: ["var(--font-rethink-sans)", "system-ui", "sans-serif"],
+      sans: ["var(--font-google-sans)", "system-ui", "sans-serif"],
     },
     extend: {
       colors: {
@@ -30,6 +30,18 @@ const config: Config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+        },
+        "canary": {
+          DEFAULT: "#E6FF50",
+          foreground: "#28282D",
+        },
+        "shark": {
+          DEFAULT: "#28282D",
+          foreground: "#CDD2D7",
+        },
+        "iron": {
+          DEFAULT: "#CDD2D7",
+          foreground: "#28282D",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -60,6 +72,11 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        'tech': '0 1px 2px 0 rgba(40, 40, 45, 0.05), 0 1px 3px 1px rgba(40, 40, 45, 0.1)', // Subtle, sharp shadow using Shark color
+        'tech-hover': '0 4px 6px -1px rgba(40, 40, 45, 0.1), 0 2px 4px -1px rgba(40, 40, 45, 0.06), 0 0 0 1px #E6FF50', // Lift + Canary border glow
+        'glass': '0 8px 32px 0 rgba(40, 40, 45, 0.05)',
       },
       keyframes: {
         "accordion-down": {

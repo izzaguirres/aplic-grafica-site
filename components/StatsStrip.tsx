@@ -5,7 +5,7 @@ const stats = [
     icon: Calendar,
     value: "+14",
     unit: "anos",
-    label: "no mercado",
+    label: "de experiência",
   },
   {
     icon: Package,
@@ -15,13 +15,13 @@ const stats = [
   },
   {
     icon: Users,
-    value: "+50mil",
+    value: "+10k",
     unit: "",
     label: "clientes satisfeitos",
   },
   {
     icon: Star,
-    value: "4.5",
+    value: "4.9",
     unit: "★",
     label: "avaliação Google",
   },
@@ -29,30 +29,26 @@ const stats = [
 
 export function StatsStrip() {
   return (
-    <section className="relative py-20 overflow-hidden" style={{ backgroundColor: '#222222' }}>
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] opacity-20" />
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
+    <section className="relative py-12 border-y border-[#CDD2D7]/50 bg-white">
       <div className="container relative">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center group">
-              <div className="flex justify-center mb-6">
-                <div className="relative">
-                  <div className="h-16 w-16 rounded-3xl bg-white/15 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-all duration-300 border border-white/20">
-                    <stat.icon className="h-8 w-8" style={{ color: '#D3F26A' }} />
-                  </div>
-                  <div className="absolute -inset-2 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-                </div>
+            <div 
+              key={index} 
+              className="flex flex-col items-center justify-center p-4 rounded-2xl transition-colors hover:bg-[#F5F5F7] group reveal"
+              style={{ transitionDelay: `${index * 0.2}s` }}
+            >
+              {/* Icon Container - Shark with clean look */}
+              <div className="mb-3 p-3 rounded-xl bg-[#28282D]/5 text-[#28282D] group-hover:scale-110 transition-transform duration-300">
+                <stat.icon className="h-6 w-6" />
               </div>
 
-              <div className="space-y-2">
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl lg:text-5xl font-bold" style={{ color: '#D3F26A' }}>{stat.value}</span>
-                  {stat.unit && <span className="text-2xl font-semibold" style={{ color: '#D3F26A' }}>{stat.unit}</span>}
+              <div className="text-center space-y-1">
+                <div className="flex items-baseline justify-center gap-0.5">
+                  <span className="text-3xl font-bold tracking-tight text-[#28282D]">{stat.value}</span>
+                  {stat.unit && <span className="text-lg font-semibold text-[#28282D] opacity-60">{stat.unit}</span>}
                 </div>
-                <p className="text-sm lg:text-base font-medium" style={{ color: '#D3F26A' }}>{stat.label}</p>
+                <p className="text-sm font-bold text-[#28282D]/60 uppercase tracking-wide">{stat.label}</p>
               </div>
             </div>
           ))}
