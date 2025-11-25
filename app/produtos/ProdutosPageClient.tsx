@@ -2,13 +2,10 @@
 
 import { useState, useMemo } from "react"
 import { ProductGrid } from "@/components/ProductGrid"
-import { Section } from "@/components/Section"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { productsData } from "@/lib/products-data"
-import { Search, X, SlidersHorizontal, PackageX } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion" // Assuming framer-motion might not be installed, I'll stick to standard React/Tailwind for safety, but mimicking the motion feel.
+import { Search, X, PackageX } from "lucide-react"
 
 const categories = [
   { value: "all", label: "Todos" },
@@ -144,7 +141,7 @@ export default function ProdutosPageClient() {
             <div className="space-y-2 max-w-md">
               <h3 className="text-xl font-bold text-[#28282D]">Nenhum produto encontrado</h3>
               <p className="text-[#28282D]/60">
-                Não encontramos nada com esses termos. Tente buscar por categorias como "Cartão" ou "Banner".
+                Não encontramos nada com esses termos. Tente buscar por categorias como &quot;Cartão&quot; ou &quot;Banner&quot;.
               </p>
             </div>
             <Button 

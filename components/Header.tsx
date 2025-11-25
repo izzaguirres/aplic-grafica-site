@@ -31,9 +31,23 @@ export function Header() {
       <div className="container">
         {/* Main Header - Altura reduzida */}
         <div className="flex h-14 md:h-16 items-center justify-between">
-          <Link href="/" className="flex items-center group">
-            <img src="/images/logo.png" alt="Aplic Gráfica" className="h-6 md:h-8 w-auto object-contain transition-all duration-300 group-hover:scale-105" />
-          </Link>
+import Image from "next/image"
+
+// ... inside the component ...
+            <Link href="/" className="flex items-center space-x-2 group">
+              <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110">
+                <Image 
+                  src="/images/favicon.png" 
+                  alt="Aplic Gráfica Logo" 
+                  fill
+                  className="object-contain"
+                  sizes="40px"
+                />
+              </div>
+              <span className="font-bold text-lg md:text-xl tracking-tight">
+                Aplic<span className="text-primary ml-0.5">.</span>
+              </span>
+            </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">

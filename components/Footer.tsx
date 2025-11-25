@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { MessageCircle, Mail, Clock, MapPin, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
@@ -17,7 +18,15 @@ export function Footer() {
           {/* Logo e Descrição */}
           <div className="space-y-4 md:space-y-6 lg:col-span-2">
             <div className="flex items-center">
-              <img src="/images/logo2.png" alt="Aplic Gráfica" className="h-8 md:h-10 w-auto object-contain" />
+              <div className="relative h-8 md:h-10 w-32 md:w-40">
+                <Image 
+                  src="/images/logo2.png" 
+                  alt="Aplic Gráfica" 
+                  fill 
+                  className="object-contain"
+                  sizes="(max-width: 768px) 128px, 160px"
+                />
+              </div>
             </div>
             <p className="text-background/80 leading-relaxed max-w-md text-sm md:text-base">
               Gráfica em Florianópolis com mais de 14 anos de experiência. Qualidade, agilidade e entrega em toda a

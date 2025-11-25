@@ -2,7 +2,7 @@
 
 import { Section } from "@/components/Section"
 import { CTASection } from "@/components/CTASection"
-import { MessageCircle, Printer, Users, Zap, CheckCircle2, History, MapPin } from "lucide-react"
+import { Printer, Users, Zap, History, MapPin } from "lucide-react"
 import Image from "next/image"
 
 export default function SobrePage() {

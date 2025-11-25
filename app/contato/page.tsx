@@ -40,7 +40,7 @@ export default function ContatoPage() {
                     Falar com um atendente
                   </h2>
                   <p className="text-white/70 text-lg max-w-md">
-                    Dúvidas gerais, consultoria ou apenas um "oi". Nossa equipe está pronta para te ouvir.
+                    Dúvidas gerais, consultoria ou apenas um &quot;oi&quot;. Nossa equipe está pronta para te ouvir.
                   </p>
                   <Button 
                     onClick={() => handleWhatsAppClick("Olá! Vim do site e gostaria de falar com um atendente.", "contact_main")}
