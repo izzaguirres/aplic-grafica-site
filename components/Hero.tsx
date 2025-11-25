@@ -2,8 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { MessageCircle, ArrowRight, Zap, CheckCircle2 } from "lucide-react"
+import { MessageCircle, Zap, CheckCircle2 } from "lucide-react"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 
 export function Hero() {

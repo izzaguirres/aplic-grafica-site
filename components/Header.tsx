@@ -2,128 +2,112 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { MessageCircle, Sun, Moon } from "lucide-react"
+import Image from "next/image"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "next-themes"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 
-const navigation = [
-  { name: "Início", href: "/" },
-  { name: "Produtos", href: "/produtos" },
-  { name: "Sobre", href: "/sobre" },
-  { name: "Contato", href: "/contato" },
-]
-
 export function Header() {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
-  const pathname = usePathname()
+  const [isScrolled, setIsScrolled] = useState(false)
   const { handleWhatsAppClick } = useWhatsAppConversion()
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const navItems = [
+    { name: "Início", href: "/" },
+    { name: "Produtos", href: "/produtos" },
+    { name: "Sobre", href: "/sobre" },
+    { name: "Contato", href: "/contato" },
+  ]
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-      <div className="container">
-        {/* Main Header - Altura reduzida */}
-        <div className="flex h-14 md:h-16 items-center justify-between">
-import Image from "next/image"
-
-// ... inside the component ...
-            <Link href="/" className="flex items-center space-x-2 group">
-              <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110">
-                <Image 
-                  src="/images/favicon.png" 
-                  alt="Aplic Gráfica Logo" 
-                  fill
-                  className="object-contain"
-                  sizes="40px"
-                />
-              </div>
-              <span className="font-bold text-lg md:text-xl tracking-tight">
-                Aplic<span className="text-primary ml-0.5">.</span>
-              </span>
-            </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-xl hover:bg-secondary/50",
-                  pathname === item.href
-                    ? "text-foreground bg-primary/10 font-semibold"
-                    : "text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {item.name}
-                {pathname === item.href && (
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />
-                )}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center space-x-3">
-            {/* Theme Toggle - Desktop */}
-            {mounted && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="hidden lg:inline-flex h-9 w-9 rounded-xl hover:bg-secondary/50 transition-colors"
-              >
-                <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                <span className="sr-only">Alternar tema</span>
-              </Button>
-            )}
-
-            {/* WhatsApp CTA */}
-            <Button
-              onClick={() => handleWhatsAppClick(undefined, 'header_desktop')}
-              className="hidden md:inline-flex h-9 md:h-10 px-4 md:px-5 font-semibold text-xs md:text-sm bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 hover:shadow-xl hover:shadow-lime-500/30 hover:from-lime-500 hover:to-lime-600 border-0"
-            >
-              <MessageCircle className="mr-2 h-3 w-3 md:h-4 md:w-4" />
-              WhatsApp
-            </Button>
-
-            {/* Mobile WhatsApp */}
-            <Button
-              onClick={() => handleWhatsAppClick(undefined, 'header_mobile')}
-              size="icon"
-              className="md:hidden h-9 w-9 bg-gradient-to-r from-lime-400 to-lime-500 text-gray-900 shadow-lg shadow-lime-500/25 border-0"
-            >
-              <MessageCircle className="h-4 w-4" />
-              <span className="sr-only">WhatsApp</span>
-            </Button>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-[#CDD2D7]/50 py-3" : "bg-transparent py-5"
+      }`}
+    >
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center space-x-2 group">
+          <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110">
+            <Image 
+              src="/images/favicon.png" 
+              alt="Aplic Gráfica Logo" 
+              fill
+              className="object-contain"
+              sizes="40px"
+            />
           </div>
-        </div>
+          <span className={`font-bold text-lg md:text-xl tracking-tight ${isScrolled ? "text-[#28282D]" : "text-[#28282D]"}`}>
+            Aplic<span className="text-[#E6FF50] ml-0.5">.</span>
+          </span>
+        </Link>
 
-        {/* Mobile Navigation Tabs - Altura reduzida */}
-        <div className="lg:hidden border-t border-border/40 bg-secondary/20">
-          <nav className="flex items-center justify-between px-1 py-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "flex-1 text-center py-2 px-2 text-sm font-medium transition-all duration-200 rounded-lg mx-1",
-                  pathname === item.href
-                    ? "text-foreground bg-primary/15 shadow-sm font-semibold"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50",
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`text-sm font-medium transition-colors hover:text-[#E6FF50] ${
+                isScrolled ? "text-[#28282D]" : "text-[#28282D]"
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <Button 
+            onClick={() => handleWhatsAppClick(undefined, 'header')}
+            className="bg-[#28282D] text-[#E6FF50] hover:bg-[#28282D]/90 font-bold rounded-xl"
+          >
+            Orçamento Rápido
+          </Button>
+        </nav>
+
+        {/* Mobile Navigation */}
+        <div className="md:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-[#28282D]">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Abrir menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <div className="sr-only">
+                <SheetTitle>Menu de Navegação</SheetTitle>
+                <SheetDescription>Navegue pelas páginas do site</SheetDescription>
+              </div>
+              <div className="flex flex-col space-y-6 mt-6">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-lg font-medium hover:text-primary transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                <Button 
+                  onClick={() => {
+                    handleWhatsAppClick(undefined, 'header_mobile')
+                    setIsOpen(false)
+                  }}
+                  className="w-full bg-[#E6FF50] text-[#28282D] hover:bg-[#E6FF50]/90 font-bold"
+                >
+                  Orçamento Rápido
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
