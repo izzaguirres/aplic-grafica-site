@@ -93,6 +93,8 @@ export const metadata: Metadata = {
   generator: 'v0.dev'
 }
 
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp"
+
 export default function RootLayout({
   children,
 }: {
@@ -102,6 +104,7 @@ export default function RootLayout({
   
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+      {/* ... scripts ... */}
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-761339571"
@@ -127,6 +130,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${googleSans.variable} font-sans antialiased`}>
+        {/* ... json-ld ... */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -176,6 +180,7 @@ export default function RootLayout({
           <ScrollReveal />
           <Header />
           <main className="min-h-screen">{children}</main>
+          <FloatingWhatsApp />
           <Footer />
           <Analytics />
         </ThemeProvider>

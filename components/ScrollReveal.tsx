@@ -20,16 +20,22 @@ export function ScrollReveal() {
           })
         },
         {
-          threshold: 0.1,
-          rootMargin: "0px 0px -20px 0px", 
+          threshold: 0, // Trigger as soon as any part is visible
+          rootMargin: "0px 0px -50px 0px", // Trigger slightly before it comes into view
         }
       )
 
       const elements = document.querySelectorAll(".reveal")
-      
-      // If no elements found (or JS disabled fallback), we might want to ensure content is visible?
-      // But for now, let's just observe.
       elements.forEach((el) => observer.observe(el))
+
+      // Fallback: Force reveal all elements after 2 seconds to prevent content from staying hidden
+      setTimeout(() => {
+        elements.forEach((el) => {
+            if (!el.classList.contains("active")) {
+                el.classList.add("active")
+            }
+        })
+      }, 2000)
       
       return () => observer.disconnect()
     }, 100)

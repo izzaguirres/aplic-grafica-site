@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
 
   // Rate limiting para API routes
   if (request.nextUrl.pathname.startsWith('/api/')) {
-    const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown'
+    const ip = request.headers.get('x-forwarded-for') || 'unknown'
     
     // Aqui você pode implementar rate limiting mais robusto
     // Por exemplo, usando Redis ou similar

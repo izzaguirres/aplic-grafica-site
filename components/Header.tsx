@@ -47,7 +47,7 @@ export function Header() {
           </div>
           <div className="relative h-6 w-24 md:h-8 md:w-32 transition-opacity duration-300 group-hover:opacity-80">
             <Image 
-              src="/images/logo2.png" 
+              src="/images/logo.png" 
               alt="Aplic Gráfica" 
               fill
               className="object-contain object-left"
@@ -57,13 +57,15 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-2">
           {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className={`text-sm font-medium transition-colors hover:text-[#E6FF50] ${
-                isScrolled ? "text-[#28282D]" : "text-[#28282D]"
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                isScrolled 
+                ? "text-zinc-800 hover:bg-zinc-100 hover:text-black" 
+                : "text-zinc-800 hover:bg-white/50 hover:text-black"
               }`}
             >
               {item.name}
@@ -71,7 +73,7 @@ export function Header() {
           ))}
           <Button 
             onClick={() => handleWhatsAppClick(undefined, 'header')}
-            className="bg-[#28282D] text-[#E6FF50] hover:bg-[#28282D]/90 font-bold rounded-xl"
+            className="ml-4 bg-[#18181b] text-[#E6FF50] hover:bg-[#18181b]/90 font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
           >
             Orçamento Rápido
           </Button>

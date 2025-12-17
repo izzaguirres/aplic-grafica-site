@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    --background: 210 9% 96%; /* Iron Light / White Smoke equivalent for main bg */
-    --foreground: 240 6% 17%; /* Shark #28282D */
+    --background: 0 0% 100%; /* Pure White */
+    --foreground: 240 10% 3.9%; /* #09090b (Zinc 950) - Super Dark for text */
     --card: 0 0% 100%;
-    --card-foreground: 240 6% 17%; /* Shark */
+    --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 6% 17%;
+    --popover-foreground: 240 10% 3.9%;
     --primary: 74 100% 66%; /* Canary #E6FF50 */
-    --primary-foreground: 240 6% 17%; /* Shark text on Canary button */
-    --secondary: 210 9% 82%; /* Iron #CDD2D7 */
-    --secondary-foreground: 240 6% 17%; /* Shark */
-    --muted: 210 9% 90%; /* Lighter Iron for subtle backgrounds */
-    --muted-foreground: 240 4% 40%; /* Softer Shark */
-    --accent: 74 100% 66%; /* Canary */
-    --accent-foreground: 240 6% 17%;
+    --primary-foreground: 240 5.9% 10%; /* Dark text on Canary button */
+    --secondary: 240 4.8% 95.9%; /* Zinc 100 */
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 9% 82%; /* Iron border */
-    --input: 210 9% 82%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
     --ring: 74 100% 66%; /* Canary Ring */
     --radius: 0.5rem;
   }
@@ -93,19 +93,31 @@ html {
 
 /* Animations */
 @keyframes fade-in {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(50px); /* Mesma distância do .reveal */
+    filter: blur(10px); /* Mesmo blur do .reveal */
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.5s ease-out;
+  opacity: 0;
+  /* 1.2s de duração, mesmo easing dos cards */
+  animation: fade-in 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
+
+/* Forçar Animation Delay (Crucial para o efeito Stagger) */
+.anim-delay-0 { animation-delay: 0ms; }
+.anim-delay-200 { animation-delay: 200ms; }
+.anim-delay-400 { animation-delay: 400ms; }
+.anim-delay-600 { animation-delay: 600ms; }
+.anim-delay-800 { animation-delay: 800ms; }
+.anim-delay-1000 { animation-delay: 1000ms; }
 
 /* Grid pattern */
 .bg-grid-pattern {

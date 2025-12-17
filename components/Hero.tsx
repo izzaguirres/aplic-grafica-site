@@ -27,64 +27,76 @@ export function Hero() {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[128px]" />
 
       <div className="container relative z-20">
-        <div className="flex flex-col items-center text-center py-20 lg:py-32 space-y-8">
+        <div className="flex flex-col items-center text-center pt-20 pb-12 lg:py-32 space-y-6 lg:space-y-8">
           
-          {/* Trust Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 backdrop-blur-md border border-border/50 animate-fade-in">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <span className="text-sm font-medium text-muted-foreground">
-              A Gráfica Rápida que você procura em Florianópolis
-            </span>
+          {/* Social Proof Badge (Novo) */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 animate-fade-in">
+             <div className="flex items-center gap-1">
+                {[1,2,3,4].map(i => (
+                    <svg key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.26.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.55-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                ))}
+                {/* Meia estrela para o 4.5 */}
+                <svg className="w-5 h-5 fill-yellow-400 text-yellow-400" viewBox="0 0 20 20">
+                     <defs>
+                        <linearGradient id="half">
+                            <stop offset="50%" stopColor="currentColor"/>
+                            <stop offset="50%" stopColor="transparent" stopOpacity="0" />
+                        </linearGradient>
+                    </defs>
+                    <path fill="url(#half)" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.26.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.55-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+             </div>
+             <span className="text-sm font-semibold text-muted-foreground">
+                4.5/5 no Google • +10.000 Clientes Atendidos
+             </span>
           </div>
 
           {/* Main Headline */}
           <div className="space-y-4 max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-[#28282D] leading-[0.95] animate-fade-in [animation-delay:100ms]">
-              Sua marca, impressa com <span className="relative inline-block text-[#28282D]">
-                excelência
-                <svg className="absolute w-full h-3 -bottom-2 left-0 text-[#E6FF50]" viewBox="0 0 100 10" preserveAspectRatio="none">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[1.1] sm:leading-[0.95] animate-fade-in anim-delay-200">
+              A Gráfica Rápida que você procura em <span className="relative inline-block text-foreground">
+                Floripa
+                <svg className="absolute w-full h-3 -bottom-2 left-0 text-primary" viewBox="0 0 100 10" preserveAspectRatio="none">
                    <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
                 </svg>
               </span>.
             </h1>
-            <p className="text-xl md:text-2xl text-[#28282D]/70 max-w-2xl mx-auto leading-relaxed animate-fade-in [animation-delay:200ms]">
-              Do cartão de visita ao banner gigante. Qualidade premium e agilidade que seu negócio precisa para crescer.
+            <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in anim-delay-400">
+              Entrega em toda Grande Florianópolis, qualidade superior e orçamento num clique. Do cartão ao banner, nós resolvemos.
             </p>
           </div>
 
-          {/* Feature Tags */}
-          <div className="flex flex-wrap justify-center gap-3 animate-fade-in [animation-delay:300ms]">
+          {/* Feature Tags (Mobile optimized) */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 animate-fade-in anim-delay-600">
             {tags.map((tag) => (
-              <div key={tag} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#CDD2D7]/30 border border-[#CDD2D7] text-sm font-semibold text-[#28282D]">
-                <CheckCircle2 className="w-4 h-4 text-[#28282D]" />
+              <div key={tag} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-xs sm:text-sm font-semibold text-foreground">
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-foreground" />
                 {tag}
               </div>
             ))}
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-8 w-full max-w-md sm:max-w-lg justify-center animate-fade-in [animation-delay:400ms]">
+          <div className="flex flex-col sm:flex-row gap-4 pt-4 sm:pt-8 w-full max-w-md sm:max-w-lg justify-center animate-fade-in anim-delay-800">
             <Button
               size="lg"
               onClick={() => handleWhatsAppClick(undefined, 'hero_cta')}
-              className="h-14 px-8 text-base font-bold bg-[#E6FF50] text-[#28282D] hover:bg-[#D9F040] hover:scale-105 transition-all rounded-xl border-0 shadow-lg shadow-[#E6FF50]/20"
+              className="h-14 px-8 text-base font-bold bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-all rounded-xl border-0 shadow-lg shadow-primary/20 w-full sm:w-auto"
             >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Conversar no WhatsApp
+              Orçar Agora no WhatsApp
             </Button>
 
             <Button
               size="lg"
-              variant="outline"
+              variant="ghost"
               asChild
-              className="h-14 px-8 text-base font-bold border-2 border-[#CDD2D7] text-[#28282D] hover:bg-[#CDD2D7]/20 transition-all rounded-xl"
+              className="h-14 px-8 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all w-full sm:w-auto"
             >
               <Link href="#catalogo">
-                Ver Catálogo
-                <Zap className="ml-2 h-4 w-4" />
+                Ver catálogo completo
               </Link>
             </Button>
           </div>
