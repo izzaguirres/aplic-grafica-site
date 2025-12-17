@@ -31,11 +31,11 @@ export default function HomePage() {
         
         <div className="relative z-10">
           <div className="flex flex-col items-center text-center mb-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-4 reveal">
-              <Star className="w-4 h-4 fill-primary" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/50 text-foreground text-sm font-bold uppercase tracking-wider mb-4 reveal border border-border/50">
+              <Star className="w-4 h-4 fill-primary text-primary" />
               Os Favoritos
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 reveal delay-100">Mais Vendidos da Semana</h2>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 reveal delay-100 text-foreground">Mais Vendidos da Semana</h2>
             <p className="text-muted-foreground max-w-xl reveal delay-200">
               Qualidade comprovada por centenas de clientes. Produção rápida e acabamento impecável.
             </p>
@@ -54,10 +54,37 @@ export default function HomePage() {
         />
       </Section>
 
+      {/* Custom Project Section (New) */}
+      <Section className="bg-zinc-900 text-white reveal">
+        <div className="container mx-auto px-4 text-center space-y-8">
+            <div className="space-y-4 max-w-3xl mx-auto">
+                <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold uppercase tracking-wider mb-2 border border-white/20">
+                    Sob Medida
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
+                    Não encontrou o que procurava?
+                </h2>
+                <p className="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
+                    Fazemos projetos personalizados para sua empresa. Adesivos especiais, cortes diferenciados, grandes formatos e muito mais.
+                </p>
+            </div>
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-black hover:bg-gray-100 font-bold h-12 px-8 rounded-full shadow-lg transition-all"
+            >
+              <Link href="https://wa.me/5548999128310?text=Ol%C3%A1%2C%20tenho%20um%20projeto%20personalizado%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank">
+                Cotar Projeto Especial
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+        </div>
+      </Section>
+
       {/* Why Choose Us */}
       <Section background="secondary" className="border-t border-border/50 reveal">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 reveal">Por que escolher a Aplic Gráfica?</h2>
+          <h2 className="text-3xl font-bold mb-4 reveal text-foreground">Por que escolher a Aplic Gráfica?</h2>
           <p className="text-muted-foreground reveal delay-100">Tecnologia de ponta e atendimento humanizado.</p>
         </div>
         <Benefits />

@@ -1,29 +1,29 @@
-import { Star, Users, Package, Calendar } from "lucide-react"
+import { Star, MapPin, Printer, Clock } from "lucide-react"
 
 const stats = [
   {
-    icon: Calendar,
-    value: "+14",
-    unit: "anos",
-    label: "de experiência",
+    icon: MapPin,
+    value: "Local",
+    unit: "",
+    label: "Sede em Florianópolis",
   },
   {
-    icon: Package,
-    value: "+200mil",
+    icon: Printer,
+    value: "100%",
     unit: "",
-    label: "produtos entregues",
+    label: "Produção Própria",
   },
   {
-    icon: Users,
-    value: "+10k",
+    icon: Clock,
+    value: "24h",
     unit: "",
-    label: "clientes satisfeitos",
+    label: "Prazos Expressos",
   },
   {
     icon: Star,
-    value: "4.9",
-    unit: "★",
-    label: "avaliação Google",
+    value: "4.5",
+    unit: "/5",
+    label: "Excelência no Google",
   },
 ]
 
