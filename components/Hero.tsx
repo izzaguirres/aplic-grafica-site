@@ -30,8 +30,8 @@ export function Hero() {
         <div className="flex flex-col items-center text-center pt-20 pb-12 lg:py-32 space-y-6 lg:space-y-8">
           
           {/* Social Proof Badge (Novo) */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 animate-fade-in">
-             <div className="flex items-center gap-1">
+          <div className="flex flex-col sm:flex-row items-center gap-3 animate-fade-in" aria-label="Avaliação 4.5 de 5 estrelas no Google">
+             <div className="flex items-center gap-1" aria-hidden="true">
                 {[1,2,3,4].map(i => (
                     <svg key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.26.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.55-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -83,7 +83,7 @@ export function Hero() {
             <Button
               size="lg"
               onClick={() => handleWhatsAppClick(undefined, 'hero_cta')}
-              className="h-14 px-8 text-base font-bold bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-all rounded-xl border-0 shadow-lg shadow-primary/20 w-full sm:w-auto"
+              className="h-14 px-8 text-base font-bold bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform transition-colors rounded-xl border-0 shadow-lg shadow-primary/20 w-full sm:w-auto"
             >
               <MessageCircle className="mr-2 h-5 w-5" />
               Orçar Agora no WhatsApp
@@ -93,7 +93,7 @@ export function Hero() {
               size="lg"
               variant="ghost"
               asChild
-              className="h-14 px-8 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all w-full sm:w-auto"
+              className="h-14 px-8 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors w-full sm:w-auto"
             >
               <Link href="#catalogo">
                 Ver catálogo completo

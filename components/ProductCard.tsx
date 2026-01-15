@@ -17,6 +17,14 @@ import {
 } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 
+// Hoisted: formatador criado uma única vez, reutilizado por todos os cards
+const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+})
+
+const formatCurrency = (value: number) => currencyFormatter.format(value)
+
 interface ProductCardProps {
   product: Product
 }
@@ -28,17 +36,10 @@ export function ProductCard({ product }: ProductCardProps) {
   const currentPriceItem = product.priceTable.find((p) => p.quantidade === selectedQty) || product.priceTable[0]
   const currentPrice = currentPriceItem.valor
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(value)
-  }
-
   const message = `Olá! Gostaria de encomendar *${selectedQty} unidades* de *${product.name}* por *${formatCurrency(currentPrice)}*. Como prosseguir?`
 
   return (
-    <Card className="group relative flex flex-col h-full overflow-hidden rounded-xl border border-border/60 bg-white shadow-tech hover:shadow-tech-hover transition-all duration-300">
+    <Card className="group relative flex flex-col h-full overflow-hidden rounded-xl border border-border/60 bg-white shadow-tech hover:shadow-tech-hover transition-shadow duration-300">
       {/* Featured Badge */}
       {product.isFeatured && (
         <div className="absolute top-3 right-3 z-10">
@@ -114,7 +115,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <Button
           onClick={() => handleWhatsAppClick(message, 'product_card', product.name)}
           className={cn(
-            "w-full h-11 font-bold tracking-wide rounded-lg transition-all duration-300 border-0",
+            "w-full h-11 font-bold tracking-wide rounded-lg transition-colors transition-transform duration-300 border-0",
             "bg-[#E6FF50] text-[#28282D] hover:bg-[#D9F040]",
             "hover:translate-y-[-1px] active:translate-y-[0px] shadow-sm"
           )}

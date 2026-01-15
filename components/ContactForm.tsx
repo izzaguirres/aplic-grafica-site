@@ -76,7 +76,7 @@ export function ContactForm() {
                 <FormItem>
                   <FormLabel>Nome *</FormLabel>
                   <FormControl>
-                    <Input placeholder="Seu nome completo" {...field} />
+                    <Input placeholder="Seu nome completo" autoComplete="name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -90,7 +90,7 @@ export function ContactForm() {
                 <FormItem>
                   <FormLabel>E-mail *</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="seu@email.com" {...field} />
+                    <Input type="email" placeholder="seu@email.com" autoComplete="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

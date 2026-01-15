@@ -6,7 +6,6 @@ import "./globals.css"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { ThemeProvider } from "@/components/theme-provider"
-import { GoogleAnalytics } from "@/components/GoogleAnalytics"
 import { Analytics } from "@vercel/analytics/next"
 import { ScrollReveal } from "@/components/ScrollReveal"
 
@@ -101,28 +100,26 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID
-  
+
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      {/* ... scripts ... */}
       <head>
+        {/* Google Analytics & Ads - lazyOnload para não bloquear hidratação */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-761339571"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-761339571');
-          `}
-        </Script>
-        <Script id="google-ads-conversion" strategy="afterInteractive">
-          {`
+            ${gaId ? `gtag('config', '${gaId}');` : ''}
+
             function gtag_report_conversion() {
               gtag('event', 'conversion', {
-                  'send_to': 'AW-761339571/L8JaCPqqmJgBELO9hOsC'
+                'send_to': 'AW-761339571/L8JaCPqqmJgBELO9hOsC'
               });
               return false;
             }
@@ -175,7 +172,6 @@ export default function RootLayout({
             }),
           }}
         />
-        <GoogleAnalytics gaId={gaId || ""} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollReveal />
           <Header />

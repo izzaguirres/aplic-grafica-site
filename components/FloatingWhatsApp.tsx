@@ -33,11 +33,12 @@ export function FloatingWhatsApp() {
       {/* Balão de CTA (Opcional - aumenta conversão) */}
       {isOpen && (
         <div className="bg-white p-4 rounded-xl shadow-xl border border-border max-w-[250px] relative animate-in zoom-in origin-bottom-right">
-            <button 
+            <button
                 onClick={() => setIsOpen(false)}
-                className="absolute -top-2 -left-2 bg-gray-100 hover:bg-gray-200 rounded-full p-1"
+                aria-label="Fechar balão de mensagem"
+                className="absolute -top-2 -left-2 bg-gray-100 hover:bg-gray-200 rounded-full p-1 transition-colors"
             >
-                <X className="w-3 h-3 text-gray-500" />
+                <X className="w-3 h-3 text-gray-500" aria-hidden="true" />
             </button>
             <p className="text-sm font-medium text-gray-800 mb-2">
                 👋 Precisa de um orçamento rápido?
@@ -60,7 +61,7 @@ export function FloatingWhatsApp() {
         onClick={() => handleWhatsAppClick(undefined, 'floating_button')}
         size="icon"
         className={cn(
-          "h-16 w-16 rounded-full shadow-2xl transition-all duration-300 hover:scale-110",
+          "h-16 w-16 rounded-full shadow-2xl transition-transform transition-colors duration-300 hover:scale-110",
           "bg-[#25D366] hover:bg-[#128C7E] text-white border-4 border-white"
         )}
       >

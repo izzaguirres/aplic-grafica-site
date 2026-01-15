@@ -118,7 +118,7 @@ export function TestimonialsCarousel() {
                   </div>
 
                   <blockquote className="text-base text-[#28282D] mb-6 flex-1 leading-relaxed">
-                    "{testimonial.text}"
+                    &ldquo;{testimonial.text}&rdquo;
                   </blockquote>
 
                   <div className="flex items-center space-x-3 pt-4 border-t border-black/5">
@@ -142,16 +142,20 @@ export function TestimonialsCarousel() {
           variant="ghost"
           size="icon"
           onClick={prev}
+          aria-label="Depoimento anterior"
           className="hover:bg-gray-100 rounded-full"
         >
-          <ChevronLeft className="h-6 w-6 text-gray-400" />
+          <ChevronLeft className="h-6 w-6 text-gray-400" aria-hidden="true" />
         </Button>
 
-        <div className="flex space-x-2">
+        <div className="flex space-x-2" role="tablist" aria-label="Navegação de depoimentos">
           {Array.from({ length: maxIndex + 1 }).map((_, index) => (
             <button
               key={index}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              role="tab"
+              aria-selected={index === currentIndex}
+              aria-label={`Ir para depoimento ${index + 1}`}
+              className={`w-2 h-2 rounded-full transition-colors transition-[width] duration-300 ${
                 index === currentIndex ? "bg-[#28282D] w-6" : "bg-gray-300"
               }`}
               onClick={() => setCurrentIndex(index)}
@@ -163,9 +167,10 @@ export function TestimonialsCarousel() {
           variant="ghost"
           size="icon"
           onClick={next}
+          aria-label="Próximo depoimento"
           className="hover:bg-gray-100 rounded-full"
         >
-          <ChevronRight className="h-6 w-6 text-gray-400" />
+          <ChevronRight className="h-6 w-6 text-gray-400" aria-hidden="true" />
         </Button>
       </div>
     </div>

@@ -19,10 +19,11 @@ export function Footer() {
           <div className="space-y-4 md:space-y-6 lg:col-span-2">
             <div className="flex items-center">
               <div className="relative h-8 md:h-10 w-32 md:w-40">
-                <Image 
-                  src="/images/logo2.png" 
-                  alt="Aplic Gráfica" 
-                  fill 
+                <Image
+                  src="/images/logo2.png"
+                  alt="Aplic Gráfica"
+                  fill
+                  loading="lazy"
                   className="object-contain"
                   sizes="(max-width: 768px) 128px, 160px"
                 />
@@ -52,7 +53,7 @@ export function Footer() {
                   href="/"
                   className="text-background/80 hover:text-primary transition-colors flex items-center group"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   Início
                 </Link>
               </li>
@@ -61,7 +62,7 @@ export function Footer() {
                   href="/produtos"
                   className="text-background/80 hover:text-primary transition-colors flex items-center group"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   Produtos
                 </Link>
               </li>
@@ -70,7 +71,7 @@ export function Footer() {
                   href="/sobre"
                   className="text-background/80 hover:text-primary transition-colors flex items-center group"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   Sobre
                 </Link>
               </li>
@@ -79,7 +80,7 @@ export function Footer() {
                   href="/contato"
                   className="text-background/80 hover:text-primary transition-colors flex items-center group"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   Contato
                 </Link>
               </li>
