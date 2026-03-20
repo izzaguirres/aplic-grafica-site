@@ -8,6 +8,8 @@ import { Footer } from "@/components/Footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/next"
 import { ScrollReveal } from "@/components/ScrollReveal"
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp"
+import { absoluteUrl, siteConfig } from "@/lib/site"
 
 const googleSans = localFont({
   src: "./fonts/GoogleSansFlex.ttf",
@@ -16,13 +18,13 @@ const googleSans = localFont({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aplicgrafica.com.br"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Aplic Gráfica | Gráfica Rápida em Florianópolis - Entrega Expressa",
-    template: "%s | Aplic Gráfica Florianópolis",
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Gráfica em Florianópolis com entrega rápida. Cartões de Visita, Panfletos, Banners, Adesivos e Comunicação Visual. Peça pelo WhatsApp e receba em 24h.",
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
   keywords: [
     "gráfica florianópolis",
     "gráfica rápida",
@@ -36,38 +38,38 @@ export const metadata: Metadata = {
     "trindade",
     "estreito",
   ],
-  authors: [{ name: "Aplic Gráfica" }],
-  creator: "Aplic Gráfica",
-  publisher: "Aplic Gráfica",
+  authors: [{ name: siteConfig.name, url: absoluteUrl("/") }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   alternates: {
-    canonical: "/",
+    canonical: absoluteUrl("/"),
   },
   openGraph: {
     type: "website",
-    locale: "pt_BR",
-    url: "https://aplicgrafica.com.br",
-    siteName: "Aplic Gráfica Rápida",
-    title: "Aplic Gráfica - A Melhor Gráfica de Florianópolis",
-    description: "Impressão de alta qualidade com entrega expressa na Grande Florianópolis. Peça seu orçamento agora pelo WhatsApp.",
+    locale: siteConfig.locale,
+    url: absoluteUrl("/"),
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
     images: [
       {
-        url: "/images/thumbnail.png",
+        url: absoluteUrl(siteConfig.ogImage),
         width: 1200,
         height: 630,
-        alt: "Aplic Gráfica Florianópolis - Fachada e Produtos",
+        alt: "Aplic Gráfica em Florianópolis",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aplic Gráfica - Gráfica Rápida em Florianópolis",
-    description: "Cartões, Banners e Adesivos com entrega expressa. Peça agora!",
-    images: ["/images/thumbnail.png"],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [absoluteUrl(siteConfig.twitterImage)],
   },
   robots: {
     index: true,
@@ -80,19 +82,13 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  other: {
-    "geo.region": "BR-SC",
-    "geo.placename": "Florianópolis",
-    "geo.position": "-27.594870;-48.548220", // Coordenadas aproximadas do Centro de Floripa
-    "ICBM": "-27.594870, -48.548220",
-  },
   icons: {
     icon: "/images/favicon.png",
+    shortcut: "/images/favicon.png",
+    apple: "/images/favicon.png",
   },
-  generator: 'v0.dev'
+  generator: "Next.js",
 }
-
-import { FloatingWhatsApp } from "@/components/FloatingWhatsApp"
 
 export default function RootLayout({
   children,
@@ -127,51 +123,6 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${googleSans.variable} font-sans antialiased`}>
-        {/* ... json-ld ... */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Aplic Gráfica",
-              "image": "https://aplicgrafica.com.br/images/thumbnail.png",
-              "@id": "https://aplicgrafica.com.br",
-              "url": "https://aplicgrafica.com.br",
-              "telephone": "+5548999128310",
-              "priceRange": "$$",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Rua Jerônimo Coelho, 123 (Exemplo)", // Você pode ajustar o endereço exato depois
-                "addressLocality": "Florianópolis",
-                "addressRegion": "SC",
-                "postalCode": "88010-000",
-                "addressCountry": "BR"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": -27.594870,
-                "longitude": -48.548220
-              },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday"
-                ],
-                "opens": "09:00",
-                "closes": "18:00"
-              },
-              "sameAs": [
-                "https://www.instagram.com/aplicgrafica",
-                "https://www.facebook.com/aplicgrafica"
-              ]
-            }),
-          }}
-        />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollReveal />
           <Header />

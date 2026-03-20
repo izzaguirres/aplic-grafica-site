@@ -1,10 +1,11 @@
 import { MetadataRoute } from "next"
+import { siteConfig } from "@/lib/site"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Aplic Gráfica Rápida",
-    short_name: "Aplic Gráfica",
-    description: "Sua gráfica rápida em Florianópolis. Cartões, banners e impressos com entrega expressa.",
+    name: siteConfig.title,
+    short_name: siteConfig.shortName,
+    description: siteConfig.description,
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

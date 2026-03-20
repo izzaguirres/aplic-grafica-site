@@ -1,32 +1,31 @@
 import { MetadataRoute } from "next"
+import { absoluteUrl } from "@/lib/site"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://aplicgrafica.com.br" // URL de produção
-
   return [
     {
-      url: baseUrl,
+      url: absoluteUrl("/"),
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: `${baseUrl}/produtos`,
+      url: absoluteUrl("/produtos"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/sobre`,
+      url: absoluteUrl("/sobre"),
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.5,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/contato`,
+      url: absoluteUrl("/contato"),
       lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.5,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
   ]
 }
