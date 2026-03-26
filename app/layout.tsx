@@ -100,7 +100,15 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
-        {/* Google Analytics & Ads - lazyOnload para não bloquear hidratação */}
+        <Script id="gtm-base" strategy="beforeInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-KGJD4Q33');
+          `}
+        </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-761339571"
           strategy="lazyOnload"
@@ -115,14 +123,54 @@ export default function RootLayout({
 
             function gtag_report_conversion() {
               gtag('event', 'conversion', {
-                'send_to': 'AW-761339571/L8JaCPqqmJgBELO9hOsC'
+                'send_to': 'AW-761339571/gKh7CPWrrZgBELO9hOsC'
               });
               return false;
             }
           `}
         </Script>
+        <Script id="whatsapp-click-tracking" strategy="afterInteractive">
+          {`
+            document.addEventListener('click', function (e) {
+              var target = e.target;
+              if (!target) return;
+              var link = target.closest ? target.closest('a') : null;
+              if (!link) return;
+
+              var href = link.getAttribute('href') || '';
+              var isWhatsapp = /wa\.me|api\.whatsapp\.com|whatsapp:\/\//i.test(href);
+              if (!isWhatsapp) return;
+
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: 'whatsapp_click',
+                whatsapp_url: href,
+                page_location: window.location.href,
+                page_path: window.location.pathname,
+                page_title: document.title
+              });
+
+              if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {
+                  send_to: 'AW-761339571/gKh7CPWrrZgBELO9hOsC',
+                  event_category: 'lead',
+                  event_label: 'whatsapp_click',
+                  value: 1
+                });
+              }
+            }, true);
+          `}
+        </Script>
       </head>
       <body className={`${googleSans.variable} font-sans antialiased`}>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KGJD4Q33"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollReveal />
           <Header />
