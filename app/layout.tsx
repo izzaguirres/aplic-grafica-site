@@ -111,9 +111,9 @@ export default function RootLayout({
         </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-761339571"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
-        <Script id="gtag-init" strategy="lazyOnload">
+        <Script id="gtag-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -150,14 +150,18 @@ export default function RootLayout({
                 page_title: document.title
               });
 
-              if (typeof gtag === 'function') {
-                gtag('event', 'conversion', {
-                  send_to: 'AW-761339571/gKh7CPWrrZgBELO9hOsC',
-                  event_category: 'lead',
-                  event_label: 'whatsapp_click',
-                  value: 1
-                });
-              }
+              // Push conversion via dataLayer with beacon transport.
+              // Using dataLayer (not direct gtag()) ensures the event is queued
+              // even if gtag.js hasn't finished loading yet — gtag processes
+              // the queue on init. transport_type:'beacon' makes the request
+              // survive the navigation to wa.me.
+              window.dataLayer.push(['event', 'conversion', {
+                send_to: 'AW-761339571/gKh7CPWrrZgBELO9hOsC',
+                event_category: 'lead',
+                event_label: 'whatsapp_click',
+                value: 1,
+                transport_type: 'beacon'
+              }]);
             }, true);
           `}
         </Script>
