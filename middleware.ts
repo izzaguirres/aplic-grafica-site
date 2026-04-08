@@ -11,14 +11,31 @@ export function middleware(request: NextRequest) {
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
 
-  // Proteção contra clickjacking
-  response.headers.set('Content-Security-Policy', 
+  // Content Security Policy — allowlist para GTM, Google Ads conversion tracking,
+  // Google Analytics e Vercel. Sem isso o browser bloqueia silenciosamente os
+  // scripts do Google e nenhuma conversão é registrada.
+  response.headers.set('Content-Security-Policy',
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live; " +
-    "style-src 'self' 'unsafe-inline'; " +
+    "script-src 'self' 'unsafe-eval' 'unsafe-inline' " +
+      "https://vercel.live " +
+      "https://www.googletagmanager.com " +
+      "https://www.google-analytics.com " +
+      "https://ssl.google-analytics.com " +
+      "https://www.googleadservices.com " +
+      "https://googleads.g.doubleclick.net " +
+      "https://www.google.com; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "img-src 'self' data: https:; " +
-    "font-src 'self' data:; " +
-    "connect-src 'self' https://api.vercel.com; " +
+    "font-src 'self' data: https://fonts.gstatic.com; " +
+    "connect-src 'self' " +
+      "https://api.vercel.com " +
+      "https://www.google-analytics.com " +
+      "https://stats.g.doubleclick.net " +
+      "https://www.googletagmanager.com " +
+      "https://www.googleadservices.com " +
+      "https://googleads.g.doubleclick.net " +
+      "https://www.google.com; " +
+    "frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net; " +
     "frame-ancestors 'none';"
   )
 
