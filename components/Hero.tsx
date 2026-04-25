@@ -2,7 +2,16 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { MessageCircle, Zap, CheckCircle2 } from "lucide-react"
+import { CheckCircle2 } from "lucide-react"
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39-.065 0-.124-.029-.198-.064-.564-.234-1.045-.534-1.5-.871-.557-.41-1.046-.916-1.461-1.481-.075-.121-.225-.36-.225-.51 0-.405.766-.795.766-1.305 0-.18-.044-.345-.135-.495-.179-.345-.643-1.215-.853-1.605-.105-.225-.18-.255-.405-.255-.105 0-.21-.015-.33-.015-.225 0-.45.045-.645.135-.555.27-1.005.99-1.05 1.605-.045.555.075 1.125.39 1.59.99 1.575 2.205 2.97 3.795 3.93.6.36 1.245.66 1.92.87.81.255 1.65.345 2.49.21.84-.135 1.65-.69 1.95-1.485.18-.42.18-.84.105-1.275-.06-.135-.255-.21-.51-.345-.255-.135-1.395-.69-1.62-.78z"/>
+      <path d="M27.85 4.075C24.7 1 20.5-.6 16-.6c-9.18 0-16.65 7.395-16.65 16.5 0 2.91.78 5.745 2.265 8.235L0 32l8.16-2.13a16.65 16.65 0 0 0 7.84 1.965h.01c9.18 0 16.65-7.395 16.65-16.5 0-4.41-1.785-8.55-4.81-11.665zM16 29.115h-.005a13.95 13.95 0 0 1-7.05-1.92l-.51-.3-5.235 1.365 1.395-5.085-.33-.525a13.665 13.665 0 0 1-2.115-7.34c0-7.605 6.225-13.785 13.86-13.785 3.705 0 7.185 1.44 9.795 4.05a13.65 13.65 0 0 1 4.05 9.75c.005 7.605-6.225 13.785-13.86 13.785z"/>
+    </svg>
+  )
+}
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 import { TrustedClients } from "@/components/TrustedClients"
 
@@ -87,7 +96,7 @@ export function Hero() {
               onClick={() => handleWhatsAppClick(undefined, 'hero_cta')}
               className="h-14 px-8 text-base font-bold bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform transition-colors rounded-xl border-0 shadow-lg shadow-primary/20 w-full sm:w-auto"
             >
-              <MessageCircle className="mr-2 h-5 w-5" />
+              <WhatsAppIcon className="mr-2 h-5 w-5" />
               Orçar Agora no WhatsApp
             </Button>
 

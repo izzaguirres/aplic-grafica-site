@@ -21,11 +21,11 @@ export function TrustedClients() {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <p className="text-center text-[11px] font-medium text-[#28282D]/50 uppercase tracking-[0.22em] mb-6">
+      <p className="text-center text-[11px] font-medium text-[#28282D]/50 uppercase tracking-[0.22em] mb-8">
         Empresas que confiam em nós
       </p>
       <div className="ticker-mask overflow-hidden">
-        <div className="ticker-track flex w-max items-center gap-12 md:gap-16">
+        <div className="ticker-track flex w-max items-center gap-16 md:gap-20">
           {loop.map((client, i) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -33,7 +33,7 @@ export function TrustedClients() {
               src={client.logo}
               alt={client.name}
               title={client.name}
-              className="h-12 md:h-16 w-auto max-w-[180px] object-contain grayscale opacity-70 shrink-0"
+              className="h-20 md:h-24 w-auto max-w-[260px] object-contain grayscale opacity-80 shrink-0"
             />
           ))}
         </div>
