@@ -5,10 +5,12 @@ import Image from "next/image"
 import { MessageCircle, Mail, Clock, MapPin, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
+import { getYearsInBusiness } from "@/lib/site"
 
 export function Footer() {
   const { handleWhatsAppClick } = useWhatsAppConversion()
-  
+  const years = getYearsInBusiness()
+
   return (
     <footer className="bg-foreground text-background relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-foreground to-foreground/90" />
@@ -30,8 +32,8 @@ export function Footer() {
               </div>
             </div>
             <p className="text-background/80 leading-relaxed max-w-md text-sm md:text-base">
-              Gráfica em Florianópolis com mais de 14 anos de experiência. Qualidade, agilidade e entrega em toda a
-              Grande Florianópolis.
+              Gráfica em Florianópolis com {years} anos de mercado. Atendimento direto pelo WhatsApp
+              e entrega em toda a Grande Florianópolis.
             </p>
             <Button 
               onClick={() => handleWhatsAppClick(undefined, 'footer')}
@@ -125,7 +127,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <p className="text-sm text-muted-foreground">
-            &copy; 2025 Aplic Gráfica. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} Aplic Gráfica. Todos os direitos reservados.
           </p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
             Desenvolvido por <a href="https://izaguirres.vercel.app" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E6FF50] hover:underline">Izaguirres</a>

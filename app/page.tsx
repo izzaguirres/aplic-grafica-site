@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import { Hero } from "@/components/Hero"
+import { TrustedClients } from "@/components/TrustedClients"
 import { StatsStrip } from "@/components/StatsStrip"
 import { ProductGrid } from "@/components/ProductGrid"
+import { CatalogSearch } from "@/components/CatalogSearch"
 import { Benefits } from "@/components/Benefits"
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel"
 import { CTASection } from "@/components/CTASection"
@@ -17,7 +19,9 @@ const homeTitle = "Gráfica Rápida em Florianópolis | Cartões, Banners, Panfl
 const homeDescription =
   "Aplic Gráfica em Florianópolis com produção ágil para cartões de visita, panfletos, banners, adesivos e comunicação visual. Atendimento rápido pelo WhatsApp."
 
-const featuredProducts = productsData.filter((product) => product.isFeatured)
+const featuredProducts = productsData
+  .filter((product) => product.isFeatured)
+  .sort((a, b) => (a.featuredOrder ?? 99) - (b.featuredOrder ?? 99))
 const otherProducts = productsData.filter((product) => !product.isFeatured)
 
 const homeSchema = {
@@ -136,7 +140,12 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
       />
       <Hero />
-      
+
+      {/* Logos de clientes fixos */}
+      <div className="reveal">
+        <TrustedClients />
+      </div>
+
       {/* Trust Badges Strip */}
       <div className="reveal">
         <StatsStrip />
@@ -165,10 +174,10 @@ export default function HomePage() {
 
       {/* Main Catalog */}
       <Section id="catalogo" className="reveal">
-        <ProductGrid 
-          products={otherProducts} 
-          title="Catálogo Completo" 
-          subtitle="Encontre exatamente o que sua empresa precisa para se destacar." 
+        <CatalogSearch
+          products={otherProducts}
+          title="Catálogo Completo"
+          subtitle="Busque pelo produto que tua empresa precisa. Se não estiver aqui, a gente faz sob medida."
         />
       </Section>
 
@@ -213,12 +222,12 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto text-center space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight reveal">
-              Excelência Gráfica há mais de 14 anos
+              15 anos em Florianópolis
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed reveal delay-100">
-              Não somos apenas uma gráfica online. Somos parceiros do seu negócio. 
-              Com parque gráfico próprio em Florianópolis, garantimos agilidade real 
-              e controle total de qualidade do arquivo à entrega.
+              Não somos apenas uma gráfica online. Somos parceiros do seu negócio.
+              Desde 2011 em Florianópolis, acompanhamos cada pedido do arquivo ao
+              balcão — com o atendimento direto de quem conhece a sua empresa.
             </p>
           </div>
           
@@ -239,8 +248,17 @@ export default function HomePage() {
 
       {/* Social Proof */}
       <Section className="reveal">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 reveal">Quem imprime, recomenda</h2>
+        <div className="text-center mb-12 max-w-2xl mx-auto">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/70 border border-border text-xs font-bold uppercase tracking-[0.15em] text-foreground mb-4 reveal">
+            <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+            4.5 no Google · Avaliações verificadas
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 reveal">
+            O que dizem os nossos clientes
+          </h2>
+          <p className="text-muted-foreground reveal delay-100">
+            Avaliações reais, coletadas direto do perfil da Aplic Gráfica no Google.
+          </p>
         </div>
         <TestimonialsCarousel />
       </Section>

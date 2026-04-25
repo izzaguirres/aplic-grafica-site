@@ -12,7 +12,7 @@ export function Hero() {
     "Entrega Agilizada",
     "Alta Definição",
     "Atendimento Humano",
-    "Parque Gráfico Próprio"
+    "Resposta em 15 min",
   ]
 
   return (
@@ -29,8 +29,8 @@ export function Hero() {
       <div className="container relative z-20">
         <div className="flex flex-col items-center text-center pt-20 pb-12 lg:py-32 space-y-6 lg:space-y-8">
           
-          {/* Social Proof Badge (Novo) */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 animate-fade-in" aria-label="Avaliação 4.5 de 5 estrelas no Google">
+          {/* Social Proof Badge */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 animate-fade-in" aria-label="Avaliação 4.5 de 5 estrelas no Google, 15 anos em Florianópolis">
              <div className="flex items-center gap-1" aria-hidden="true">
                 {[1,2,3,4].map(i => (
                     <svg key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" viewBox="0 0 20 20">
@@ -49,7 +49,7 @@ export function Hero() {
                 </svg>
              </div>
              <span className="text-sm font-semibold text-muted-foreground">
-                4.5/5 no Google • +10.000 Clientes Atendidos
+                4.5/5 no Google · 15 anos em Florianópolis
              </span>
           </div>
 
@@ -64,7 +64,8 @@ export function Hero() {
               </span>.
             </h1>
             <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in anim-delay-400">
-              Entrega em toda Grande Florianópolis, qualidade superior e orçamento num clique. Do cartão ao banner, nós resolvemos.
+              Cartões, banners, panfletos e adesivos.
+              Atendimento direto com o dono pelo WhatsApp, entrega em toda Grande Floripa.
             </p>
           </div>
 

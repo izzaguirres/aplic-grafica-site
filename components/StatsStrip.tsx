@@ -1,4 +1,4 @@
-import { Star, MapPin, Printer, Clock } from "lucide-react"
+import { Star, MapPin, Printer, MessageCircle } from "lucide-react"
 
 const stats = [
   {
@@ -9,21 +9,21 @@ const stats = [
   },
   {
     icon: Printer,
-    value: "100%",
-    unit: "",
-    label: "Produção Própria",
+    value: "15",
+    unit: "+",
+    label: "Anos de Mercado",
   },
   {
-    icon: Clock,
-    value: "24h",
-    unit: "",
-    label: "Prazos Expressos",
+    icon: MessageCircle,
+    value: "15",
+    unit: "min",
+    label: "Resposta no WhatsApp",
   },
   {
     icon: Star,
     value: "4.5",
     unit: "/5",
-    label: "Excelência no Google",
+    label: "Avaliação no Google",
   },
 ]
 

@@ -45,6 +45,10 @@ export function absoluteUrl(path = "/") {
   return `${siteConfig.url}${path.startsWith("/") ? path : `/${path}`}`
 }
 
+export function getYearsInBusiness() {
+  return new Date().getFullYear() - parseInt(siteConfig.foundedYear, 10)
+}
+
 type PageMetadataOptions = {
   title: string
   description: string

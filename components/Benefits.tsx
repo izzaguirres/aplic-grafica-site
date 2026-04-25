@@ -3,23 +3,23 @@ import { CheckCircle2, Clock, Truck, UserCheck } from "lucide-react"
 const benefits = [
   {
     icon: CheckCircle2,
-    title: "Qualidade Premium",
-    description: "Parque gráfico próprio com tecnologia de ponta para cores vivas e acabamento perfeito.",
+    title: "Qualidade Consistente",
+    description: "15 anos escolhendo os melhores fornecedores de Floripa. Acabamento impecável em cada pedido.",
   },
   {
     icon: Clock,
-    title: "Produção Ágil",
-    description: "Sistemas otimizados para garantir que seu material esteja pronto quando você precisa.",
+    title: "Prazo que se cumpre",
+    description: "Arte aprovada hoje até 14h, produção começa no mesmo dia. Prazo combinado é prazo entregue.",
   },
   {
     icon: Truck,
-    title: "Logística Inteligente",
-    description: "Entrega expressa em toda Grande Florianópolis para sua comodidade.",
+    title: "Entrega em Floripa",
+    description: "Entrega em toda Grande Florianópolis — Centro, Estreito, Palhoça, São José e região.",
   },
   {
     icon: UserCheck,
-    title: "Atendimento Consultivo",
-    description: "Não somos robôs. Especialistas reais prontos para ajudar na sua escolha pelo WhatsApp.",
+    title: "Direto com o Dono",
+    description: "Sem atendente tercerizado. Você fala direto com quem resolve, pelo WhatsApp.",
   },
 ]
 
