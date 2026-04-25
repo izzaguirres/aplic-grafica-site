@@ -119,6 +119,20 @@ html {
 .anim-delay-800 { animation-delay: 800ms; }
 .anim-delay-1000 { animation-delay: 1000ms; }
 
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  animation: ticker-scroll 50s linear infinite;
+}
+
+.ticker-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
 /* Grid pattern */
 .bg-grid-pattern {
   background-image: radial-gradient(circle, hsl(var(--muted)) 1px, transparent 1px);

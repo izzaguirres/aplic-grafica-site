@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { Hero } from "@/components/Hero"
-import { TrustedClients } from "@/components/TrustedClients"
 import { StatsStrip } from "@/components/StatsStrip"
 import { ProductGrid } from "@/components/ProductGrid"
 import { CatalogSearch } from "@/components/CatalogSearch"
@@ -140,11 +139,6 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
       />
       <Hero />
-
-      {/* Logos de clientes fixos */}
-      <div className="reveal">
-        <TrustedClients />
-      </div>
 
       {/* Trust Badges Strip */}
       <div className="reveal">

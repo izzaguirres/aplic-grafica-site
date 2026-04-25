@@ -17,25 +17,27 @@ const clients: Client[] = [
 ]
 
 export function TrustedClients() {
+  const loop = [...clients, ...clients]
+
   return (
-    <section className="py-10 md:py-14 bg-white border-y border-[#CDD2D7]/50">
-      <div className="container">
-        <p className="text-center text-xs font-bold text-[#28282D]/60 uppercase tracking-[0.2em] mb-8 md:mb-10">
-          Empresas que imprimem com a Aplic
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-14 lg:gap-x-16">
-          {clients.map((client) => (
+    <div className="w-full max-w-4xl mx-auto">
+      <p className="text-center text-[11px] font-medium text-[#28282D]/50 uppercase tracking-[0.22em] mb-6">
+        Empresas que confiam em nós
+      </p>
+      <div className="ticker-mask overflow-hidden">
+        <div className="ticker-track flex w-max items-center gap-12 md:gap-16">
+          {loop.map((client, i) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              key={client.name}
+              key={`${client.name}-${i}`}
               src={client.logo}
               alt={client.name}
               title={client.name}
-              className="h-10 md:h-12 w-auto max-w-[140px] object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-300"
+              className="h-12 md:h-16 w-auto max-w-[180px] object-contain grayscale opacity-70 shrink-0"
             />
           ))}
         </div>
       </div>
-    </section>
+    </div>
   )
 }

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { MessageCircle, Zap, CheckCircle2 } from "lucide-react"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
+import { TrustedClients } from "@/components/TrustedClients"
 
 export function Hero() {
   const { handleWhatsAppClick } = useWhatsAppConversion()
@@ -100,6 +101,11 @@ export function Hero() {
                 Ver catálogo completo
               </Link>
             </Button>
+          </div>
+
+          {/* Logos de clientes — ticker embed */}
+          <div className="w-full pt-10 lg:pt-14 animate-fade-in anim-delay-1000">
+            <TrustedClients />
           </div>
         </div>
       </div>
