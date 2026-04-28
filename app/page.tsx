@@ -6,6 +6,7 @@ import { CatalogSearch } from "@/components/CatalogSearch"
 import { Benefits } from "@/components/Benefits"
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel"
 import { CTASection } from "@/components/CTASection"
+import { CustomProjectCTA } from "@/components/CustomProjectCTA"
 import { Section } from "@/components/Section"
 import { FAQ } from "@/components/FAQ"
 import Link from "next/link"
@@ -189,16 +190,7 @@ export default function HomePage() {
                     Fazemos projetos personalizados para sua empresa. Adesivos especiais, cortes diferenciados, grandes formatos e muito mais.
                 </p>
             </div>
-            <Button
-              asChild
-              size="lg"
-              className="bg-white text-black hover:bg-gray-100 font-bold h-12 px-8 rounded-full shadow-lg transition-all"
-            >
-              <Link href="https://wa.me/5548999128310?text=Ol%C3%A1%2C%20tenho%20um%20projeto%20personalizado%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank">
-                Cotar Projeto Especial
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <CustomProjectCTA />
         </div>
       </Section>
 

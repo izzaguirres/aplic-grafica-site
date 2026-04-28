@@ -1,6 +1,9 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { MessageCircle, ArrowRight } from "lucide-react"
+import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 
 interface CTASectionProps {
   headline: string
@@ -8,21 +11,42 @@ interface CTASectionProps {
   buttonText: string
   buttonUrl: string
   background?: "primary" | "secondary" | "white"
+  analyticsSource?: string
 }
 
-export function CTASection({ headline, subtitle, buttonText, buttonUrl, background = "primary" }: CTASectionProps) {
+export function CTASection({
+  headline,
+  subtitle,
+  buttonText,
+  buttonUrl,
+  background = "primary",
+  analyticsSource = "cta_section",
+}: CTASectionProps) {
+  const { handleWhatsAppClick } = useWhatsAppConversion()
+  const isWhatsapp = /wa\.me|api\.whatsapp/i.test(buttonUrl)
+
   const bgClass = {
     primary: "primary-section relative overflow-hidden",
     secondary: "bg-secondary/50",
     white: "bg-background",
   }[background]
 
+  const whatsappMessage = (() => {
+    if (!isWhatsapp) return undefined
+    try {
+      return new URL(buttonUrl).searchParams.get("text") ?? undefined
+    } catch {
+      return undefined
+    }
+  })()
+
+  const buttonClassName =
+    "text-base md:text-lg px-8 py-6 h-14 font-bold bg-white text-gray-900 shadow-2xl hover:shadow-3xl hover:bg-gray-50 transition-all group hover:scale-105 rounded-2xl border-0"
+
   return (
     <section className={`py-20 md:py-28 ${bgClass}`}>
       {background === "primary" && (
-        <>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] opacity-20" />
-        </>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] opacity-20" />
       )}
 
       <div className="container mx-auto px-4 relative">
@@ -36,17 +60,25 @@ export function CTASection({ headline, subtitle, buttonText, buttonUrl, backgrou
             </p>
           </div>
 
-          <Button
-            size="lg"
-            asChild
-            className="text-base md:text-lg px-8 py-6 h-14 font-bold bg-white text-gray-900 shadow-2xl hover:shadow-3xl hover:bg-gray-50 transition-all group hover:scale-105 rounded-2xl border-0"
-          >
-            <Link href={buttonUrl}>
+          {isWhatsapp ? (
+            <Button
+              size="lg"
+              onClick={() => handleWhatsAppClick(whatsappMessage, analyticsSource)}
+              className={buttonClassName}
+            >
               <MessageCircle className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               {buttonText}
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
+            </Button>
+          ) : (
+            <Button size="lg" asChild className={buttonClassName}>
+              <Link href={buttonUrl}>
+                <MessageCircle className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                {buttonText}
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </section>
