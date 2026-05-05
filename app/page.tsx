@@ -15,7 +15,7 @@ import { ArrowRight, Star } from "lucide-react"
 import { productsData } from "@/lib/products-data"
 import { absoluteUrl, createPageMetadata, siteConfig } from "@/lib/site"
 
-const homeTitle = "Gráfica Rápida em Florianópolis | Cartões, Banners, Panfletos e Adesivos"
+const homeTitle = "Gráfica em Florianópolis - Cartões, Banners, Panfletos e Adesivos | Aplic Gráfica"
 const homeDescription =
   "Aplic Gráfica em Florianópolis com produção ágil para cartões de visita, panfletos, banners, adesivos e comunicação visual. Atendimento rápido pelo WhatsApp."
 
@@ -109,7 +109,7 @@ const homeSchema = {
       itemListElement: featuredProducts.map((product, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: absoluteUrl("/produtos"),
+        url: absoluteUrl(product.landingPage ?? "/produtos"),
         name: product.name,
         description: product.description,
       })),

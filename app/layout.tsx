@@ -32,6 +32,8 @@ export const metadata: Metadata = {
     "banners florianópolis",
     "panfletos",
     "adesivos",
+    "etiqueta adesiva florianópolis",
+    "blocos receituários florianópolis",
     "comunicação visual",
     "impressão digital",
     "centro",
@@ -123,7 +125,8 @@ export default function RootLayout({
 
             function gtag_report_conversion() {
               gtag('event', 'conversion', {
-                'send_to': 'AW-761339571/gKh7CPWrrZgBELO9hOsC'
+                'send_to': 'AW-761339571/gKh7CPWrrZgBELO9hOsC',
+                'transport_type': 'beacon'
               });
               return false;
             }

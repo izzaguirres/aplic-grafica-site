@@ -16,7 +16,7 @@ export const siteConfig = {
   name: "Aplic Gráfica",
   shortName: "Aplic Gráfica",
   url: siteUrl,
-  title: "Aplic Gráfica | Gráfica Rápida em Florianópolis - Entrega Expressa",
+  title: "Gráfica em Florianópolis | Aplic Gráfica - Entrega Rápida",
   description:
     "Gráfica em Florianópolis com entrega rápida para cartões de visita, panfletos, banners, adesivos e comunicação visual. Atendimento ágil pelo WhatsApp.",
   ogImage: "/opengraph-image",
