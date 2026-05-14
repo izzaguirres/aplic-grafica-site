@@ -1,40 +1,53 @@
+declare global {
+  interface Window {
+    dataLayer?: Record<string, unknown>[]
+  }
+}
+
+const push = (payload: Record<string, unknown>) => {
+  if (typeof window === 'undefined') return
+  window.dataLayer = window.dataLayer ?? []
+  window.dataLayer.push(payload)
+}
+
 export const useAnalytics = () => {
-  const trackEvent = (eventName: string, parameters?: Record<string, any>) => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('event', eventName, parameters)
-    }
+  const trackEvent = (eventName: string, parameters?: Record<string, unknown>) => {
+    push({ event: eventName, ...parameters })
   }
 
   const trackPageView = (url: string) => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
-        page_path: url,
-      })
-    }
+    push({ event: 'page_view', page_path: url })
   }
 
-  const trackWhatsAppClick = (source: string, product?: string) => {
-    trackEvent('whatsapp_click', {
+  const trackWhatsAppClick = (source: string, product?: string, whatsappUrl?: string) => {
+    push({
+      event: 'whatsapp_click',
       event_category: 'engagement',
       event_label: source,
-      product: product,
-      value: 1
+      product,
+      whatsapp_url: whatsappUrl,
+      page_location: typeof window !== 'undefined' ? window.location.href : undefined,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : undefined,
+      page_title: typeof document !== 'undefined' ? document.title : undefined,
+      value: 1,
     })
   }
 
   const trackProductView = (productName: string) => {
-    trackEvent('view_item', {
+    push({
+      event: 'view_item',
       event_category: 'ecommerce',
       event_label: productName,
-      value: 1
+      value: 1,
     })
   }
 
   const trackContactForm = (formType: string) => {
-    trackEvent('form_submit', {
+    push({
+      event: 'form_submit',
       event_category: 'engagement',
       event_label: formType,
-      value: 1
+      value: 1,
     })
   }
 
@@ -43,6 +56,6 @@ export const useAnalytics = () => {
     trackPageView,
     trackWhatsAppClick,
     trackProductView,
-    trackContactForm
+    trackContactForm,
   }
-} 
+}

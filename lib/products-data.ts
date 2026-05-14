@@ -20,6 +20,8 @@ export interface Product {
   selectorLabel?: string
   /** Unidade exibida após o número ("un.", "cm", "", etc). Default: "un." */
   itemUnit?: string
+  /** Slug da landing page do produto (`/cartao-de-visita`, `/panfleto`, etc). */
+  landingPage?: string
 }
 
 export const productsData: Product[] = [

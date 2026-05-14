@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
-import Script from "next/script"
 import "./globals.css"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
@@ -9,7 +8,10 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/next"
 import { ScrollReveal } from "@/components/ScrollReveal"
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp"
+import { GoogleTagManager } from "@/components/google-tag-manager"
 import { absoluteUrl, siteConfig } from "@/lib/site"
+
+const gtmContainerId = process.env.NEXT_PUBLIC_GTM_ID
 
 const googleSans = localFont({
   src: "./fonts/GoogleSansFlex.ttf",
@@ -97,87 +99,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID
-
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <head>
-        <Script id="gtm-base" strategy="beforeInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-KGJD4Q33');
-          `}
-        </Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-761339571"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-761339571');
-            ${gaId ? `gtag('config', '${gaId}');` : ''}
-
-            function gtag_report_conversion() {
-              gtag('event', 'conversion', {
-                'send_to': 'AW-761339571/gKh7CPWrrZgBELO9hOsC',
-                'transport_type': 'beacon'
-              });
-              return false;
-            }
-          `}
-        </Script>
-        <Script id="whatsapp-click-tracking" strategy="afterInteractive">
-          {`
-            document.addEventListener('click', function (e) {
-              var target = e.target;
-              if (!target) return;
-              var link = target.closest ? target.closest('a') : null;
-              if (!link) return;
-
-              var href = link.getAttribute('href') || '';
-              var isWhatsapp = /wa\.me|api\.whatsapp\.com|whatsapp:\/\//i.test(href);
-              if (!isWhatsapp) return;
-
-              window.dataLayer = window.dataLayer || [];
-              window.dataLayer.push({
-                event: 'whatsapp_click',
-                whatsapp_url: href,
-                page_location: window.location.href,
-                page_path: window.location.pathname,
-                page_title: document.title
-              });
-
-              // Push conversion via dataLayer with beacon transport.
-              // Using dataLayer (not direct gtag()) ensures the event is queued
-              // even if gtag.js hasn't finished loading yet — gtag processes
-              // the queue on init. transport_type:'beacon' makes the request
-              // survive the navigation to wa.me.
-              window.dataLayer.push(['event', 'conversion', {
-                send_to: 'AW-761339571/gKh7CPWrrZgBELO9hOsC',
-                event_category: 'lead',
-                event_label: 'whatsapp_click',
-                value: 1,
-                transport_type: 'beacon'
-              }]);
-            }, true);
-          `}
-        </Script>
-      </head>
       <body className={`${googleSans.variable} font-sans antialiased`}>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-KGJD4Q33"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+        <GoogleTagManager containerId={gtmContainerId} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollReveal />
           <Header />
