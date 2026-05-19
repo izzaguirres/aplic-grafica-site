@@ -212,8 +212,8 @@ export default function HomePage() {
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed reveal delay-100">
               Não somos apenas uma gráfica online. Somos parceiros do seu negócio.
-              Desde 2011 em Florianópolis, acompanhamos cada pedido do arquivo ao
-              balcão — com o atendimento direto de quem conhece a sua empresa.
+              Desde 2011 em Florianópolis, acompanhamos cada pedido do arquivo à
+              entrega — com o atendimento direto de quem conhece a sua empresa.
             </p>
           </div>
           

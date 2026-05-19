@@ -63,7 +63,7 @@ export default function SobrePageClient() {
                 </div>
                 <h3 className="text-2xl font-bold text-[#28282D]">Tecnologia de Ponta</h3>
                 <p className="text-[#28282D]/70 font-medium max-w-md">
-                  Investimos constantemente em inovação. Nosso parque gráfico conta com máquinas de última geração para impressão digital e acabamento, garantindo cores vibrantes e precisão milimétrica em cada detalhe.
+                  Trabalhamos com tecnologia de impressão profissional e fornecedores premium. Cada material passa por controle de qualidade antes de sair pra entrega, garantindo cores vibrantes e precisão milimétrica.
                 </p>
               </div>
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#E6FF50]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#E6FF50]/20 transition-colors" />
@@ -96,21 +96,21 @@ export default function SobrePageClient() {
               <div className="space-y-4 flex-1">
                 <div className="flex items-center gap-2 text-[#28282D]">
                   <MapPin className="h-6 w-6" />
-                  <h3 className="text-xl font-bold">Localização Estratégica</h3>
+                  <h3 className="text-xl font-bold">Atendemos toda Floripa</h3>
                 </div>
                 <p className="text-[#28282D]/70 font-medium">
-                  Estamos localizados no coração de Florianópolis, permitindo uma logística eficiente para toda a região.
+                  Operamos online com entrega rápida em toda Florianópolis e região continental. Motoboy parceiro leva seu material até você.
                 </p>
                 <div className="flex gap-2">
-                  <span className="px-3 py-1 rounded-lg bg-[#F5F5F7] text-xs font-bold text-[#28282D]">Centro</span>
-                  <span className="px-3 py-1 rounded-lg bg-[#F5F5F7] text-xs font-bold text-[#28282D]">Trindade</span>
-                  <span className="px-3 py-1 rounded-lg bg-[#F5F5F7] text-xs font-bold text-[#28282D]">Estreito</span>
+                  <span className="px-3 py-1 rounded-lg bg-[#F5F5F7] text-xs font-bold text-[#28282D]">Ilha</span>
+                  <span className="px-3 py-1 rounded-lg bg-[#F5F5F7] text-xs font-bold text-[#28282D]">Continente</span>
+                  <span className="px-3 py-1 rounded-lg bg-[#F5F5F7] text-xs font-bold text-[#28282D]">Norte da Ilha</span>
                 </div>
               </div>
               <div className="w-full md:w-1/2 aspect-video bg-[#F5F5F7] rounded-xl overflow-hidden relative border border-[#CDD2D7]/50">
                 <Image
                   src="/images/13.png"
-                  alt="Fachada da Aplic Gráfica"
+                  alt="Equipe Aplic Gráfica em ação"
                   fill
                   className="object-cover"
                 />
@@ -154,9 +154,9 @@ export default function SobrePageClient() {
               <div className="flex gap-8 relative reveal delay-400">
                 <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[#E6FF50] text-[#28282D] flex items-center justify-center font-bold text-xl border-4 border-white z-10 shadow-lg">3</div>
                 <div className="pt-2 space-y-2">
-                  <h3 className="text-xl font-bold text-[#28282D]">Entrega ou Retirada</h3>
+                  <h3 className="text-xl font-bold text-[#28282D]">Entrega pra você</h3>
                   <p className="text-[#28282D]/70 font-medium leading-relaxed">
-                    Avisamos assim que ficar pronto. Você pode retirar no balcão ou solicitamos um motoboy parceiro para levar até sua porta.
+                    Avisamos assim que ficar pronto. Motoboy parceiro leva até você em Floripa e região, ou combinamos retirada no nosso escritório.
                   </p>
                 </div>
               </div>

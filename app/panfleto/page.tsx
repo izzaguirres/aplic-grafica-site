@@ -127,7 +127,7 @@ export default function PanfletoPage() {
 
       <CTASection
         headline="Pronto pra divulgar?"
-        subtitle="Do arquivo ao balcão, pelo WhatsApp. Prazo confirmado no orçamento."
+        subtitle="Do arquivo à entrega, pelo WhatsApp. Prazo confirmado no orçamento."
         buttonText="Chamar no WhatsApp"
         buttonUrl={whatsappUrl}
       />

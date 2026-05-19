@@ -90,7 +90,7 @@ export default function CartaoDeVisitaPage() {
                 <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
               </svg>
             </span>
-            , do arquivo ao balcão.
+            , do arquivo à entrega.
           </>
         }
         subheadline="Brilho total em até 3 dias úteis · Fosco com verniz localizado em 5 a 7 dias. Atendimento direto com o dono pelo WhatsApp."
