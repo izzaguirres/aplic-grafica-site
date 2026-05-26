@@ -32,8 +32,8 @@ export function Footer() {
               </div>
             </div>
             <p className="text-background/80 leading-relaxed max-w-md text-sm md:text-base">
-              Gráfica em Florianópolis com {years} anos de mercado. Atendimento direto pelo WhatsApp
-              e entrega em toda a Grande Florianópolis.
+              Gráfica online em Florianópolis com {years} anos de mercado. Atendimento pelo WhatsApp,
+              entrega no endereço e retirada somente com horário combinado.
             </p>
             <Button 
               onClick={() => handleWhatsAppClick(undefined, 'footer')}
@@ -93,11 +93,25 @@ export function Footer() {
           <div className="space-y-4 md:space-y-6">
             <h3 className="font-semibold text-base md:text-lg">Produtos</h3>
             <ul className="space-y-2 md:space-y-3">
-              <li className="text-background/80">Cartões de Visita</li>
-              <li className="text-background/80">Panfletos</li>
-              <li className="text-background/80">Banners e Lonas</li>
-              <li className="text-background/80">Adesivos</li>
-              <li className="text-background/80">Comunicação Visual</li>
+              {[
+                { label: "Cartão de Visita", href: "/cartao-de-visita" },
+                { label: "Panfleto", href: "/panfleto" },
+                { label: "Banner em Lona", href: "/banner" },
+                { label: "Crachá Empresarial", href: "/cracha" },
+                { label: "Etiquetas Adesivas", href: "/etiquetas-adesivas" },
+                { label: "Pasta com Bolso", href: "/pasta-com-bolso" },
+                { label: "Blocos e Receituário", href: "/blocos-receituario" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-background/80 hover:text-primary transition-colors flex items-center group"
+                  >
+                    <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -119,7 +133,9 @@ export function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
-                <span className="text-background/80 text-xs md:text-sm">Entrega em toda Grande Florianópolis</span>
+                <span className="text-background/80 text-xs md:text-sm">
+                  Escritório operacional em Florianópolis. Atendimento e retirada só combinados pelo WhatsApp.
+                </span>
               </div>
             </div>
           </div>

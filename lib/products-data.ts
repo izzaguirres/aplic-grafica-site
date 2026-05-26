@@ -33,6 +33,7 @@ export const productsData: Product[] = [
     image: "/images/produtos/Banner em Lona.png",
     category: "Sinalização",
     expressDelivery: true,
+    landingPage: "/banner",
     selectorLabel: "Tamanho",
     itemUnit: "",
     priceTable: [
@@ -68,6 +69,7 @@ export const productsData: Product[] = [
     description: "15x21cm · Couchê brilho 90g · Frente e verso.",
     image: "/images/produtos/Panfleto 10x14.png",
     category: "Promocional",
+    landingPage: "/panfleto",
     priceTable: [
       { quantidade: 1000, valor: 460.00 },
       { quantidade: 2500, valor: 695.00 },
@@ -81,6 +83,7 @@ export const productsData: Product[] = [
     description: "A4 aberto 28x20cm · Couchê 90g · Frente e verso, duas dobras. Pra apresentação institucional e cardápio.",
     image: "/images/produtos/Impressao Digital.png",
     category: "Promocional",
+    landingPage: "/panfleto",
     priceTable: [
       { quantidade: 1000, valor: 940.00 },
       { quantidade: 2500, valor: 1445.00 },
@@ -93,6 +96,7 @@ export const productsData: Product[] = [
     description: "9x5cm · PVC couchê 300g colorido · Cordão preto incluso.",
     image: "/images/produtos/Cracha Empresarial.png",
     category: "Empresa",
+    landingPage: "/cracha",
     priceTable: [
       { quantidade: 5, valor: 235.00 },
       { quantidade: 10, valor: 325.00 },
@@ -110,8 +114,9 @@ export const productsData: Product[] = [
     image: "/images/produtos/Cartao de Visita - Fosco.png",
     category: "Empresa",
     isFeatured: true,
-    badge: "PREMIUM",
+    badge: "FOSCO + VERNIZ",
     featuredOrder: 1,
+    landingPage: "/cartao-de-visita",
     priceTable: [
       { quantidade: 500, valor: 345.00 },
       { quantidade: 1000, valor: 385.00 },
@@ -127,6 +132,7 @@ export const productsData: Product[] = [
     badge: "MAIS VENDIDO",
     featuredOrder: 2,
     expressDelivery: true,
+    landingPage: "/cartao-de-visita",
     priceTable: [
       { quantidade: 100, valor: 185.00 },
       { quantidade: 500, valor: 245.00 },
@@ -143,6 +149,7 @@ export const productsData: Product[] = [
     badge: "MELHOR CUSTO",
     featuredOrder: 3,
     expressDelivery: true,
+    landingPage: "/panfleto",
     priceTable: [
       { quantidade: 1000, valor: 385.00 },
       { quantidade: 2500, valor: 495.00 },
@@ -160,6 +167,7 @@ export const productsData: Product[] = [
     badge: "IDEAL PRA RÓTULO",
     featuredOrder: 4,
     expressDelivery: true,
+    landingPage: "/etiquetas-adesivas",
     priceTable: [
       { quantidade: 100, valor: 255.00 },
       { quantidade: 250, valor: 325.00 },
@@ -175,6 +183,7 @@ export const productsData: Product[] = [
     description: "A4 · Papel supremo 300g · Colorido na capa e contracapa. Pra contrato, proposta e apresentação corporativa.",
     image: "/images/produtos/Pasta com Bolso.png",
     category: "Empresa",
+    landingPage: "/pasta-com-bolso",
     priceTable: [
       { quantidade: 5, valor: 365.00 },
       { quantidade: 25, valor: 545.00 },
@@ -230,6 +239,7 @@ export const productsData: Product[] = [
     description: "4x5cm · Couchê 250g · Laminação brilho. Formato menor, mais estiloso.",
     image: "/images/produtos/Mini Cartao de Visita.png",
     category: "Empresa",
+    landingPage: "/cartao-de-visita",
     priceTable: [
       { quantidade: 500, valor: 245.00 },
       { quantidade: 1000, valor: 285.00 },

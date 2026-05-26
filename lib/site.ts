@@ -18,7 +18,7 @@ export const siteConfig = {
   url: siteUrl,
   title: "Gráfica em Florianópolis | Aplic Gráfica - Entrega Rápida",
   description:
-    "Gráfica em Florianópolis com entrega rápida para cartões de visita, panfletos, banners, adesivos e comunicação visual. Atendimento ágil pelo WhatsApp.",
+    "Gráfica online em Florianópolis para cartões de visita, panfletos, banners, adesivos e comunicação visual. Atendimento pelo WhatsApp, entrega e retirada combinadas.",
   ogImage: "/opengraph-image",
   twitterImage: "/twitter-image",
   locale: "pt_BR",
@@ -36,6 +36,9 @@ export const siteConfig = {
     region: "SC",
     country: "BR",
     areaServed: "Grande Florianópolis",
+    serviceArea: ["Florianópolis", "São José", "Palhoça", "Biguaçu"],
+    operationalOfficeNote:
+      "Escritório operacional em Florianópolis. Atendimento pelo WhatsApp; retirada somente com horário combinado.",
   },
 } as const
 
@@ -91,5 +94,112 @@ export function createPageMetadata({
       description,
       images: [absoluteUrl(siteConfig.twitterImage)],
     },
+  }
+}
+
+type ServicePageSchemaOptions = {
+  path: string
+  name: string
+  description: string
+  serviceType: string
+  faqs?: Array<{ question: string; answer: string }>
+  relatedProducts?: Array<{ name: string; description: string; url?: string }>
+}
+
+export function createServicePageSchema({
+  path,
+  name,
+  description,
+  serviceType,
+  faqs = [],
+  relatedProducts = [],
+}: ServicePageSchemaOptions) {
+  const pageUrl = absoluteUrl(path)
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Início",
+            item: absoluteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name,
+            item: pageUrl,
+          },
+        ],
+      },
+      {
+        "@type": "Service",
+        "@id": `${pageUrl}#service`,
+        name,
+        description,
+        serviceType,
+        provider: {
+          "@type": ["Organization", "LocalBusiness"],
+          "@id": `${absoluteUrl("/")}#organization`,
+          name: siteConfig.name,
+          url: absoluteUrl("/"),
+          telephone: siteConfig.phoneE164,
+          email: siteConfig.email,
+          image: absoluteUrl("/images/thumbnail.png"),
+          logo: absoluteUrl("/images/logo.png"),
+          areaServed: siteConfig.location.serviceArea,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: siteConfig.location.city,
+            addressRegion: siteConfig.location.region,
+            addressCountry: siteConfig.location.country,
+          },
+        },
+        areaServed: siteConfig.location.serviceArea,
+        availableChannel: {
+          "@type": "ServiceChannel",
+          serviceUrl: absoluteUrl("/contato"),
+          availableLanguage: ["pt-BR"],
+        },
+        url: pageUrl,
+        hasOfferCatalog:
+          relatedProducts.length > 0
+            ? {
+                "@type": "OfferCatalog",
+                name: "Produtos relacionados",
+                itemListElement: relatedProducts.map((product) => ({
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Product",
+                    name: product.name,
+                    description: product.description,
+                    url: product.url ? absoluteUrl(product.url) : pageUrl,
+                  },
+                })),
+              }
+            : undefined,
+      },
+      ...(faqs.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${pageUrl}#faq`,
+              mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: faq.answer,
+                },
+              })),
+            },
+          ]
+        : []),
+    ],
   }
 }

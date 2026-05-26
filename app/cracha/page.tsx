@@ -7,8 +7,9 @@ import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
 import { ProductGrid } from "@/components/ProductGrid"
 import { Section } from "@/components/Section"
 import { CTASection } from "@/components/CTASection"
+import { JsonLd } from "@/components/JsonLd"
 import { productsData } from "@/lib/products-data"
-import { createPageMetadata } from "@/lib/site"
+import { createPageMetadata, createServicePageSchema } from "@/lib/site"
 
 const whatsappMessage = "Olá, vim pelo site e quero um orçamento de crachá empresarial."
 const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
@@ -64,7 +65,7 @@ const faqs: LpFaqItem[] = [
 ]
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Crachá Empresarial em Florianópolis — 5 dias úteis | Aplic Gráfica",
+  title: "Crachá Empresarial em Florianópolis — 5 dias úteis",
   description:
     "Crachá empresarial em Florianópolis em 5 dias úteis. PVC laminado, cordão incluso, de 5 a 100 funcionários. Atendimento direto pelo WhatsApp.",
   path: "/cracha",
@@ -77,9 +78,24 @@ export const metadata: Metadata = createPageMetadata({
   ],
 })
 
+const pageSchema = createServicePageSchema({
+  path: "/cracha",
+  name: "Crachá empresarial em Florianópolis",
+  description:
+    "Crachá empresarial em Florianópolis para equipes, clínicas, escritórios e empresas, com atendimento pelo WhatsApp.",
+  serviceType: "Produção de crachá empresarial",
+  faqs,
+  relatedProducts: products.map((product) => ({
+    name: product.name,
+    description: product.description,
+    url: product.landingPage,
+  })),
+})
+
 export default function CrachaPage() {
   return (
     <>
+      <JsonLd data={pageSchema} />
       <LpHero
         headline={
           <>

@@ -7,8 +7,9 @@ import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
 import { ProductGrid } from "@/components/ProductGrid"
 import { Section } from "@/components/Section"
 import { CTASection } from "@/components/CTASection"
+import { JsonLd } from "@/components/JsonLd"
 import { productsData } from "@/lib/products-data"
-import { createPageMetadata } from "@/lib/site"
+import { createPageMetadata, createServicePageSchema } from "@/lib/site"
 
 const whatsappMessage = "Olá, vim pelo Google e quero um orçamento com a Aplic Gráfica."
 const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
@@ -62,7 +63,7 @@ const faqs: LpFaqItem[] = [
 ]
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Gráfica em Florianópolis | Aplic Gráfica",
+  title: "Gráfica em Florianópolis",
   description:
     "Gráfica em Florianópolis para cartões, panfletos, banners, crachás, etiquetas, pastas e materiais para empresas. Atendimento pelo WhatsApp.",
   path: "/grafica-em-floripa",
@@ -75,9 +76,24 @@ export const metadata: Metadata = createPageMetadata({
   ],
 })
 
+const pageSchema = createServicePageSchema({
+  path: "/grafica-em-floripa",
+  name: "Gráfica em Florianópolis",
+  description:
+    "Gráfica online em Florianópolis para cartões, panfletos, banners, crachás, etiquetas, pastas e materiais para empresas.",
+  serviceType: "Serviços gráficos online",
+  faqs,
+  relatedProducts: products.map((product) => ({
+    name: product.name,
+    description: product.description,
+    url: product.landingPage,
+  })),
+})
+
 export default function GraficaEmFloripaPage() {
   return (
     <>
+      <JsonLd data={pageSchema} />
       <LpHero
         kicker="Aplic Gráfica · 15 anos em Floripa"
         headline={

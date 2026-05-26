@@ -18,8 +18,8 @@ const benefits = [
   },
   {
     icon: UserCheck,
-    title: "Direto com o Dono",
-    description: "Sem atendente tercerizado. Você fala direto com quem resolve, pelo WhatsApp.",
+    title: "Atendimento pelo WhatsApp",
+    description: "Você envia o arquivo, tira dúvidas e combina orçamento, entrega ou retirada em uma conversa objetiva.",
   },
 ]
 

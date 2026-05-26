@@ -23,7 +23,7 @@ export function ContactBlock() {
           <div className="space-y-2 md:space-y-3">
             <h3 className="text-xl md:text-2xl lg:text-3xl font-bold">Fale com nosso time agora</h3>
             <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-md mx-auto leading-relaxed">
-              Tire suas dúvidas e faça seu orçamento pelo WhatsApp. Resposta em minutos!
+              Tire suas dúvidas e faça seu orçamento pelo WhatsApp. Resposta rápida no horário comercial.
             </p>
           </div>
 

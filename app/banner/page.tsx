@@ -7,8 +7,9 @@ import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
 import { ProductGrid } from "@/components/ProductGrid"
 import { Section } from "@/components/Section"
 import { CTASection } from "@/components/CTASection"
+import { JsonLd } from "@/components/JsonLd"
 import { productsData } from "@/lib/products-data"
-import { createPageMetadata } from "@/lib/site"
+import { createPageMetadata, createServicePageSchema } from "@/lib/site"
 
 const whatsappMessage = "Olá, vim pelo site e quero um orçamento de banner em lona."
 const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
@@ -64,7 +65,7 @@ const faqs: LpFaqItem[] = [
 ]
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Banner em Lona em Florianópolis — 3 dias úteis | Aplic Gráfica",
+  title: "Banner em Lona em Florianópolis — 3 dias úteis",
   description:
     "Banner em lona em Florianópolis com prazo de 3 dias úteis. Lona fosca resistente, acabamento em madeira e corda. Atendimento direto pelo WhatsApp.",
   path: "/banner",
@@ -77,9 +78,24 @@ export const metadata: Metadata = createPageMetadata({
   ],
 })
 
+const pageSchema = createServicePageSchema({
+  path: "/banner",
+  name: "Banner em lona em Florianópolis",
+  description:
+    "Banner em lona para lojas, eventos, fachadas e avisos em Florianópolis, com atendimento pelo WhatsApp e entrega ou retirada combinada.",
+  serviceType: "Impressão de banner em lona",
+  faqs,
+  relatedProducts: products.map((product) => ({
+    name: product.name,
+    description: product.description,
+    url: product.landingPage,
+  })),
+})
+
 export default function BannerPage() {
   return (
     <>
+      <JsonLd data={pageSchema} />
       <LpHero
         headline={
           <>

@@ -47,7 +47,7 @@ export default function ProdutosPageClient() {
               Catálogo Completo
             </h1>
             <p className="text-lg text-[#28282D]/60 max-w-2xl mx-auto font-medium">
-              Explore nossa linha de produtos premium. Digite o que procura ou navegue pelas categorias.
+              Explore nossa linha de produtos gráficos. Digite o que procura ou navegue pelas categorias.
             </p>
           </div>
 

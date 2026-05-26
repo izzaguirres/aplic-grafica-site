@@ -7,8 +7,9 @@ import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
 import { ProductGrid } from "@/components/ProductGrid"
 import { Section } from "@/components/Section"
 import { CTASection } from "@/components/CTASection"
+import { JsonLd } from "@/components/JsonLd"
 import { productsData } from "@/lib/products-data"
-import { createPageMetadata } from "@/lib/site"
+import { createPageMetadata, createServicePageSchema } from "@/lib/site"
 
 const whatsappMessage = "Olá, vim pelo site e quero um orçamento de cartão de visita."
 const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
@@ -64,9 +65,9 @@ const faqs: LpFaqItem[] = [
 ]
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Cartão de Visita em Florianópolis — 3 dias úteis | Aplic Gráfica",
+  title: "Cartão de Visita em Florianópolis — 3 dias úteis",
   description:
-    "Cartão de visita em Florianópolis com prazo de 3 dias úteis. Couchê 300g, brilho total, fosco e brilho localizado. Atendimento direto pelo WhatsApp.",
+    "Cartão de visita em Florianópolis com prazo de 3 dias úteis. Couchê 300g, brilho total, fosco e brilho localizado. Atendimento pelo WhatsApp.",
   path: "/cartao-de-visita",
   keywords: [
     "cartão de visita florianópolis",
@@ -77,9 +78,24 @@ export const metadata: Metadata = createPageMetadata({
   ],
 })
 
+const pageSchema = createServicePageSchema({
+  path: "/cartao-de-visita",
+  name: "Cartão de visita em Florianópolis",
+  description:
+    "Cartão de visita em Florianópolis com brilho total, fosco e verniz localizado, atendimento pelo WhatsApp e entrega ou retirada combinada.",
+  serviceType: "Impressão de cartão de visita",
+  faqs,
+  relatedProducts: products.map((product) => ({
+    name: product.name,
+    description: product.description,
+    url: product.landingPage,
+  })),
+})
+
 export default function CartaoDeVisitaPage() {
   return (
     <>
+      <JsonLd data={pageSchema} />
       <LpHero
         headline={
           <>
@@ -93,8 +109,8 @@ export default function CartaoDeVisitaPage() {
             , do arquivo à entrega.
           </>
         }
-        subheadline="Brilho total em até 3 dias úteis · Fosco com verniz localizado em 5 a 7 dias. Atendimento direto com o dono pelo WhatsApp."
-        bullets={["Couchê 300g", "Brilho ou Fosco", "Direto com o dono"]}
+        subheadline="Brilho total em até 3 dias úteis · Fosco com verniz localizado em 5 a 7 dias. Atendimento pelo WhatsApp, do arquivo à entrega."
+        bullets={["Couchê 300g", "Brilho ou Fosco", "Atendimento online"]}
         priceAnchor="100 un. a partir de R$ 185 · 1000 un. a partir de R$ 275"
         whatsappMessage={whatsappMessage}
         analyticsSource="lp_cartao_hero"
@@ -124,7 +140,7 @@ export default function CartaoDeVisitaPage() {
 
       <CTASection
         headline="Pronto pra fechar seu cartão?"
-        subtitle="Atendimento direto com o dono pelo WhatsApp. Prazo confirmado no orçamento."
+        subtitle="Atendimento pelo WhatsApp. Prazo confirmado no orçamento."
         buttonText="Chamar no WhatsApp"
         buttonUrl={whatsappUrl}
       />

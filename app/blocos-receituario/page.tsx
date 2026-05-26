@@ -5,7 +5,8 @@ import { TrustedClients } from "@/components/TrustedClients"
 import { LpBenefits, type LpBenefit } from "@/components/LpBenefits"
 import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
 import { CTASection } from "@/components/CTASection"
-import { createPageMetadata } from "@/lib/site"
+import { JsonLd } from "@/components/JsonLd"
+import { createPageMetadata, createServicePageSchema } from "@/lib/site"
 
 const whatsappMessage = "Olá, vim pelo Google e quero um orçamento de blocos ou receituário."
 const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
@@ -55,7 +56,7 @@ const faqs: LpFaqItem[] = [
 ]
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Blocos e Receituário Médico em Florianópolis | Aplic Gráfica",
+  title: "Blocos e Receituário Médico em Florianópolis",
   description:
     "Blocos personalizados, receituários médicos e materiais de escritório em Florianópolis. Atendimento pelo WhatsApp e produção sob orçamento.",
   path: "/blocos-receituario",
@@ -67,9 +68,19 @@ export const metadata: Metadata = createPageMetadata({
   ],
 })
 
+const pageSchema = createServicePageSchema({
+  path: "/blocos-receituario",
+  name: "Blocos e receituário médico em Florianópolis",
+  description:
+    "Blocos personalizados, receituários médicos e materiais de escritório em Florianópolis, com atendimento pelo WhatsApp.",
+  serviceType: "Impressão de blocos e receituários",
+  faqs,
+})
+
 export default function BlocosReceituarioPage() {
   return (
     <>
+      <JsonLd data={pageSchema} />
       <LpHero
         kicker="Aplic Gráfica · Blocos e receituários"
         headline={

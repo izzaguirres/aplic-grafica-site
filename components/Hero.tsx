@@ -22,7 +22,7 @@ export function Hero() {
     "Entrega Agilizada",
     "Alta Definição",
     "Atendimento Humano",
-    "Resposta em 15 min",
+    "Resposta rápida no WhatsApp",
   ]
 
   return (
@@ -75,7 +75,7 @@ export function Hero() {
             </h1>
             <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in anim-delay-400">
               Cartões, banners, panfletos e adesivos.
-              Atendimento direto com o dono pelo WhatsApp, entrega em toda Grande Floripa.
+              Atendimento pelo WhatsApp, entrega no endereço e retirada somente com horário combinado.
             </p>
           </div>
 

@@ -7,8 +7,9 @@ import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
 import { ProductGrid } from "@/components/ProductGrid"
 import { Section } from "@/components/Section"
 import { CTASection } from "@/components/CTASection"
+import { JsonLd } from "@/components/JsonLd"
 import { productsData } from "@/lib/products-data"
-import { createPageMetadata } from "@/lib/site"
+import { createPageMetadata, createServicePageSchema } from "@/lib/site"
 
 const whatsappMessage = "Olá, vim pelo site e quero um orçamento de panfleto."
 const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
@@ -66,7 +67,7 @@ const faqs: LpFaqItem[] = [
 ]
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Panfleto em Florianópolis — 3 dias úteis | Aplic Gráfica",
+  title: "Panfleto em Florianópolis — 3 dias úteis",
   description:
     "Panfleto em Florianópolis com prazo de 3 dias úteis. Couchê 90g, frente e verso, entrega em toda Grande Floripa. Atendimento direto pelo WhatsApp.",
   path: "/panfleto",
@@ -80,9 +81,24 @@ export const metadata: Metadata = createPageMetadata({
   ],
 })
 
+const pageSchema = createServicePageSchema({
+  path: "/panfleto",
+  name: "Panfleto em Florianópolis",
+  description:
+    "Panfleto A5, A6, folder e filipeta em Florianópolis, com atendimento pelo WhatsApp e entrega ou retirada combinada.",
+  serviceType: "Impressão de panfletos",
+  faqs,
+  relatedProducts: products.map((product) => ({
+    name: product.name,
+    description: product.description,
+    url: product.landingPage,
+  })),
+})
+
 export default function PanfletoPage() {
   return (
     <>
+      <JsonLd data={pageSchema} />
       <LpHero
         headline={
           <>

@@ -53,7 +53,7 @@ export function LpFaq({
         <div className="mt-10 p-6 md:p-8 rounded-2xl bg-secondary/40 border border-border/50 text-center space-y-3">
           <h3 className="text-xl font-bold">Ainda com dúvida?</h3>
           <p className="text-muted-foreground max-w-lg mx-auto">
-            Fala direto com quem resolve. Resposta em até 15 minutos no horário comercial.
+            Fale com a Aplic pelo WhatsApp. A resposta é rápida no horário comercial.
           </p>
           <Button
             onClick={() => handleWhatsAppClick(whatsappMessage, analyticsSource)}

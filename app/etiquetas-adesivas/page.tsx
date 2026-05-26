@@ -7,8 +7,9 @@ import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
 import { ProductGrid } from "@/components/ProductGrid"
 import { Section } from "@/components/Section"
 import { CTASection } from "@/components/CTASection"
+import { JsonLd } from "@/components/JsonLd"
 import { productsData } from "@/lib/products-data"
-import { createPageMetadata } from "@/lib/site"
+import { createPageMetadata, createServicePageSchema } from "@/lib/site"
 
 const whatsappMessage = "Olá, vim pelo Google e quero um orçamento de etiquetas adesivas."
 const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
@@ -60,7 +61,7 @@ const faqs: LpFaqItem[] = [
 ]
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Etiquetas Adesivas em Florianópolis | Aplic Gráfica",
+  title: "Etiquetas Adesivas em Florianópolis",
   description:
     "Etiquetas adesivas personalizadas em Florianópolis para produtos, embalagens e negócios locais. Atendimento pelo WhatsApp e entrega combinada.",
   path: "/etiquetas-adesivas",
@@ -72,9 +73,24 @@ export const metadata: Metadata = createPageMetadata({
   ],
 })
 
+const pageSchema = createServicePageSchema({
+  path: "/etiquetas-adesivas",
+  name: "Etiquetas adesivas em Florianópolis",
+  description:
+    "Etiquetas adesivas personalizadas em Florianópolis para produtos, rótulos, embalagens e negócios locais.",
+  serviceType: "Impressão de etiquetas adesivas",
+  faqs,
+  relatedProducts: products.map((product) => ({
+    name: product.name,
+    description: product.description,
+    url: product.landingPage,
+  })),
+})
+
 export default function EtiquetasAdesivasPage() {
   return (
     <>
+      <JsonLd data={pageSchema} />
       <LpHero
         kicker="Aplic Gráfica · Etiquetas e rótulos"
         headline={

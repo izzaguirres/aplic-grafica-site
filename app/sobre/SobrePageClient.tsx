@@ -63,7 +63,7 @@ export default function SobrePageClient() {
                 </div>
                 <h3 className="text-2xl font-bold text-[#28282D]">Tecnologia de Ponta</h3>
                 <p className="text-[#28282D]/70 font-medium max-w-md">
-                  Trabalhamos com tecnologia de impressão profissional e fornecedores premium. Cada material passa por controle de qualidade antes de sair pra entrega, garantindo cores vibrantes e precisão milimétrica.
+                  Trabalhamos com tecnologia de impressão profissional e fornecedores selecionados. Cada material passa por controle de qualidade antes de sair pra entrega, garantindo cores vibrantes e precisão milimétrica.
                 </p>
               </div>
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#E6FF50]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#E6FF50]/20 transition-colors" />
@@ -76,7 +76,7 @@ export default function SobrePageClient() {
                 </div>
                 <h3 className="text-2xl font-bold">Agilidade Real</h3>
                 <p className="text-white/70 font-medium text-sm">
-                  Processos otimizados para quem não pode esperar. Entrega expressa na ilha e continente.
+                  Processos otimizados para empresas que precisam de prazo claro. Produção, entrega e retirada são combinadas antes de iniciar.
                 </p>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-1 bg-[#E6FF50]" />
@@ -99,7 +99,7 @@ export default function SobrePageClient() {
                   <h3 className="text-xl font-bold">Atendemos toda Floripa</h3>
                 </div>
                 <p className="text-[#28282D]/70 font-medium">
-                  Operamos online com entrega rápida em toda Florianópolis e região continental. Motoboy parceiro leva seu material até você.
+                  Operamos online com entrega em toda Florianópolis e região continental. Quando fizer sentido, a retirada no escritório é combinada pelo WhatsApp.
                 </p>
                 <div className="flex gap-2">
                   <span className="px-3 py-1 rounded-lg bg-[#F5F5F7] text-xs font-bold text-[#28282D]">Ilha</span>
@@ -144,9 +144,9 @@ export default function SobrePageClient() {
               <div className="flex gap-8 relative reveal delay-300">
                 <div className="flex-shrink-0 w-14 h-14 rounded-full bg-white border-2 border-[#CDD2D7] text-[#28282D] flex items-center justify-center font-bold text-xl z-10">2</div>
                 <div className="pt-2 space-y-2">
-                  <h3 className="text-xl font-bold text-[#28282D]">Produção Flash</h3>
+                  <h3 className="text-xl font-bold text-[#28282D]">Produção com prazo combinado</h3>
                   <p className="text-[#28282D]/70 font-medium leading-relaxed">
-                    Aprovou? Vai para a máquina. Nossos equipamentos de alta performance garantem que seu pedido seja impresso em tempo recorde com qualidade offset ou digital.
+                    Aprovou? A produção entra na fila combinada. Confirmamos prazo, acabamento e forma de entrega antes de iniciar o pedido.
                   </p>
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default function SobrePageClient() {
                 <div className="pt-2 space-y-2">
                   <h3 className="text-xl font-bold text-[#28282D]">Entrega pra você</h3>
                   <p className="text-[#28282D]/70 font-medium leading-relaxed">
-                    Avisamos assim que ficar pronto. Motoboy parceiro leva até você em Floripa e região, ou combinamos retirada no nosso escritório.
+                    Avisamos assim que ficar pronto. Entregamos no seu endereço em Floripa e região ou combinamos retirada no escritório operacional.
                   </p>
                 </div>
               </div>
@@ -168,8 +168,8 @@ export default function SobrePageClient() {
       <div className="reveal">
         <CTASection
           headline="Sua empresa merece essa qualidade."
-          subtitle="Pare de sofrer com gráficas que atrasam. Venha para a Aplic."
-          buttonText="Iniciar Projeto"
+          subtitle="Faça seu pedido pelo WhatsApp. A Aplic combina prazo, entrega ou retirada antes da produção."
+          buttonText="Chamar no WhatsApp"
           buttonUrl="https://wa.me/5548999128310"
         />
       </div>
