@@ -84,7 +84,7 @@ export function LpHero({
               className="h-14 px-8 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors w-full sm:w-auto"
             >
               <Link href="/contato">
-                Deixar telefone · a gente liga
+                Tirar dúvida no WhatsApp
               </Link>
             </Button>
           </div>

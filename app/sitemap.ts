@@ -51,5 +51,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    {
+      url: absoluteUrl("/grafica-em-floripa"),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: absoluteUrl("/etiquetas-adesivas"),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: absoluteUrl("/pasta-com-bolso"),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: absoluteUrl("/blocos-receituario"),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
   ]
 }
