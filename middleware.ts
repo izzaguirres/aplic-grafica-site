@@ -12,10 +12,10 @@ export function middleware(request: NextRequest) {
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
 
   // Content Security Policy — allowlist para GTM, Google Ads conversion tracking,
-  // Google Analytics e Vercel. Sem isso o browser bloqueia silenciosamente os
-  // scripts do Google e nenhuma conversão é registrada.
+  // Google Analytics, Microsoft Clarity e Vercel. Sem isso o browser bloqueia
+  // silenciosamente scripts/coletores e nenhuma sessão ou conversão é registrada.
   response.headers.set('Content-Security-Policy',
-    "default-src 'self'; " +
+    "default-src 'self' https://*.clarity.ms https://c.bing.com; " +
     "script-src 'self' 'unsafe-eval' 'unsafe-inline' " +
       "https://vercel.live " +
       "https://www.googletagmanager.com " +
@@ -23,7 +23,8 @@ export function middleware(request: NextRequest) {
       "https://ssl.google-analytics.com " +
       "https://www.googleadservices.com " +
       "https://googleads.g.doubleclick.net " +
-      "https://www.google.com; " +
+      "https://www.google.com " +
+      "https://www.clarity.ms; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "img-src 'self' data: https:; " +
     "font-src 'self' data: https://fonts.gstatic.com; " +
@@ -34,7 +35,9 @@ export function middleware(request: NextRequest) {
       "https://www.googletagmanager.com " +
       "https://www.googleadservices.com " +
       "https://googleads.g.doubleclick.net " +
-      "https://www.google.com; " +
+      "https://www.google.com " +
+      "https://*.clarity.ms " +
+      "https://c.bing.com; " +
     "frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net; " +
     "frame-ancestors 'none';"
   )
@@ -85,4 +88,4 @@ export const config = {
      */
     '/((?!_next/static|_next/image|favicon.ico|images/|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
-} 
+}
