@@ -93,7 +93,7 @@ export function TestimonialsCarousel() {
   }, [maxIndex, next])
 
   return (
-    <div className="relative reveal">
+    <div className="relative">
       <div className="overflow-hidden rounded-3xl">
         <div
           className="flex transition-transform duration-500 ease-out"

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { CheckCircle2 } from "lucide-react"
+import { CheckCircle2, Star } from "lucide-react"
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -19,10 +19,8 @@ export function Hero() {
   const { handleWhatsAppClick } = useWhatsAppConversion()
   
   const tags = [
-    "Entrega Agilizada",
-    "Alta Definição",
-    "Atendimento Humano",
-    "Resposta rápida no WhatsApp",
+    "Entrega em toda Floripa",
+    "Orçamento rápido",
   ]
 
   return (
@@ -37,35 +35,20 @@ export function Hero() {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[128px]" />
 
       <div className="container relative z-20">
-        <div className="flex flex-col items-center text-center pt-20 pb-12 lg:py-32 space-y-6 lg:space-y-8">
+        <div className="flex flex-col items-center text-center pt-20 pb-10 lg:py-28 space-y-5 lg:space-y-7">
           
           {/* Social Proof Badge */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 animate-fade-in" aria-label="Avaliação 4.5 de 5 estrelas no Google, 15 anos em Florianópolis">
-             <div className="flex items-center gap-1" aria-hidden="true">
-                {[1,2,3,4].map(i => (
-                    <svg key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.26.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.55-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                ))}
-                {/* Meia estrela para o 4.5 */}
-                <svg className="w-5 h-5 fill-yellow-400 text-yellow-400" viewBox="0 0 20 20">
-                     <defs>
-                        <linearGradient id="half">
-                            <stop offset="50%" stopColor="currentColor"/>
-                            <stop offset="50%" stopColor="transparent" stopOpacity="0" />
-                        </linearGradient>
-                    </defs>
-                    <path fill="url(#half)" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.26.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.55-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-             </div>
-             <span className="text-sm font-semibold text-muted-foreground">
-                4.5/5 no Google · 15 anos em Florianópolis
-             </span>
+          <div
+            className="inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-border bg-white/70 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-sm sm:text-sm"
+            aria-label="Avaliação 4.5 de 5 no Google, 15 anos em Florianópolis"
+          >
+             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
+             4.5 no Google · 15 anos em Floripa
           </div>
 
           {/* Main Headline */}
           <div className="space-y-4 max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[1.1] sm:leading-[0.95] animate-fade-in anim-delay-200">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[1.1] sm:leading-[0.95]">
               A Gráfica Rápida que você procura em <span className="relative inline-block text-foreground">
                 Floripa
                 <svg className="absolute w-full h-3 -bottom-2 left-0 text-primary" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -73,14 +56,13 @@ export function Hero() {
                 </svg>
               </span>.
             </h1>
-            <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in anim-delay-400">
-              Cartões, banners, panfletos e adesivos.
-              Atendimento pelo WhatsApp, entrega no endereço e retirada somente com horário combinado.
+            <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Cartões, panfletos, banners, adesivos e materiais gráficos para sua empresa.
             </p>
           </div>
 
           {/* Feature Tags (Mobile optimized) */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 animate-fade-in anim-delay-600">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {tags.map((tag) => (
               <div key={tag} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-xs sm:text-sm font-semibold text-foreground">
                 <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-foreground" />
@@ -90,7 +72,7 @@ export function Hero() {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 sm:pt-8 w-full max-w-md sm:max-w-lg justify-center animate-fade-in anim-delay-800">
+          <div className="flex flex-col items-center gap-4 pt-3 sm:pt-5 w-full max-w-md sm:max-w-lg justify-center">
             <Button
               size="lg"
               onClick={() => handleWhatsAppClick(undefined, 'hero_cta')}
@@ -100,20 +82,16 @@ export function Hero() {
               Orçar Agora no WhatsApp
             </Button>
 
-            <Button
-              size="lg"
-              variant="ghost"
-              asChild
-              className="h-14 px-8 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors w-full sm:w-auto"
+            <Link
+              href="#catalogo"
+              className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Link href="#catalogo">
-                Ver catálogo completo
-              </Link>
-            </Button>
+              Ver catálogo completo
+            </Link>
           </div>
 
           {/* Logos de clientes — ticker embed */}
-          <div className="w-full pt-10 lg:pt-14 animate-fade-in anim-delay-1000">
+          <div className="w-full pt-8 lg:pt-12">
             <TrustedClients />
           </div>
         </div>

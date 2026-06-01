@@ -28,11 +28,11 @@ export function FloatingWhatsApp() {
   if (!isVisible) return null
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 animate-in fade-in slide-in-from-bottom-10 duration-500">
+    <div className="fixed bottom-6 right-6 z-50 hidden flex-col items-end gap-4 animate-in fade-in slide-in-from-bottom-10 duration-500 md:flex">
       
       {/* Balão de CTA (Opcional - aumenta conversão) */}
       {isOpen && (
-        <div className="bg-white p-4 rounded-xl shadow-xl border border-border max-w-[250px] relative animate-in zoom-in origin-bottom-right">
+        <div className="hidden bg-white p-4 rounded-xl shadow-xl border border-border max-w-[250px] relative animate-in zoom-in origin-bottom-right md:block">
             <button
                 onClick={() => setIsOpen(false)}
                 aria-label="Fechar balão de mensagem"

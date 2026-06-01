@@ -32,8 +32,8 @@ export function Footer() {
               </div>
             </div>
             <p className="text-background/80 leading-relaxed max-w-md text-sm md:text-base">
-              Gráfica online em Florianópolis com {years} anos de mercado. Atendimento pelo WhatsApp,
-              entrega no endereço e retirada somente com horário combinado.
+              Gráfica online em Florianópolis com {years} anos de mercado.
+              Orçamento pelo WhatsApp, produção combinada e entrega no seu endereço.
             </p>
             <Button 
               onClick={() => handleWhatsAppClick(undefined, 'footer')}
@@ -134,7 +134,7 @@ export function Footer() {
               <div className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
                 <span className="text-background/80 text-xs md:text-sm">
-                  Escritório operacional em Florianópolis. Atendimento e retirada só combinados pelo WhatsApp.
+                  Escritório operacional em Florianópolis. Pedidos, entregas e retiradas são combinados pelo WhatsApp.
                 </span>
               </div>
             </div>

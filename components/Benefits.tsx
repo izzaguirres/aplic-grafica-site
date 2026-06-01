@@ -3,23 +3,23 @@ import { CheckCircle2, Clock, Truck, UserCheck } from "lucide-react"
 const benefits = [
   {
     icon: CheckCircle2,
-    title: "Qualidade Consistente",
-    description: "15 anos escolhendo os melhores fornecedores de Floripa. Acabamento impecável em cada pedido.",
+    title: "Acabamento consistente",
+    description: "Material conferido antes da produção e acabamento alinhado ao uso da sua empresa.",
   },
   {
     icon: Clock,
     title: "Prazo que se cumpre",
-    description: "Arte aprovada hoje até 14h, produção começa no mesmo dia. Prazo combinado é prazo entregue.",
+    description: "Você recebe um prazo real antes de aprovar o pedido. O combinado guia a produção.",
   },
   {
     icon: Truck,
-    title: "Entrega em Floripa",
-    description: "Entrega em toda Grande Florianópolis — Centro, Estreito, Palhoça, São José e região.",
+    title: "Entrega no seu endereço",
+    description: "Entregamos em Floripa e região, com retirada combinada quando fizer mais sentido.",
   },
   {
     icon: UserCheck,
-    title: "Atendimento pelo WhatsApp",
-    description: "Você envia o arquivo, tira dúvidas e combina orçamento, entrega ou retirada em uma conversa objetiva.",
+    title: "Tudo pelo WhatsApp",
+    description: "Você envia o arquivo, tira dúvidas, aprova o orçamento e combina a entrega em uma conversa objetiva.",
   },
 ]
 
@@ -29,7 +29,7 @@ export function Benefits() {
       {benefits.map((benefit, index) => (
         <div
           key={index}
-          className="group p-6 rounded-2xl bg-white border border-[#CDD2D7] hover:border-[#28282D] hover:shadow-lg transition-all duration-300 reveal"
+          className="group p-6 rounded-2xl bg-white border border-[#CDD2D7] hover:border-[#28282D] hover:shadow-lg transition-all duration-300"
           style={{ transitionDelay: `${index * 0.15}s` }}
         >
           {/* Icon - Dark Grey */}
