@@ -31,9 +31,9 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { handleWhatsAppClick } = useWhatsAppConversion()
-  const [selectedQty, setSelectedQty] = useState(product.priceTable[0].quantidade)
+  const [selectedPriceIndex, setSelectedPriceIndex] = useState(0)
 
-  const currentPriceItem = product.priceTable.find((p) => p.quantidade === selectedQty) || product.priceTable[0]
+  const currentPriceItem = product.priceTable[selectedPriceIndex] || product.priceTable[0]
   const currentPrice = currentPriceItem.valor
 
   const selectorLabel = product.selectorLabel ?? "Quantidade"
@@ -44,7 +44,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const currentItemLabel = renderItemLabel(currentPriceItem)
   const quantityPhrase = currentPriceItem.label
     ? `*${product.name} ${currentPriceItem.label}*`
-    : `*${selectedQty} unidades* de *${product.name}*`
+    : `*${currentPriceItem.quantidade} unidades* de *${product.name}*`
 
   const message = `Olá! Gostaria de encomendar ${quantityPhrase} por *${formatCurrency(currentPrice)}*. Como prosseguir?`
 
@@ -101,8 +101,8 @@ export function ProductCard({ product }: ProductCardProps) {
             {selectorLabel}
           </label>
           <Select
-            value={selectedQty.toString()}
-            onValueChange={(val) => setSelectedQty(Number(val))}
+            value={selectedPriceIndex.toString()}
+            onValueChange={(val) => setSelectedPriceIndex(Number(val))}
           >
             <SelectTrigger className="w-full bg-[#F5F5F7] border-0 focus:ring-1 focus:ring-[#E6FF50] text-[#28282D] font-medium h-9 rounded-lg">
               <SelectValue placeholder={`Selecione: ${selectorLabel.toLowerCase()}`}>
@@ -110,8 +110,8 @@ export function ProductCard({ product }: ProductCardProps) {
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {product.priceTable.map((item) => (
-                <SelectItem key={item.quantidade} value={item.quantidade.toString()}>
+              {product.priceTable.map((item, index) => (
+                <SelectItem key={`${item.label ?? item.quantidade}-${index}`} value={index.toString()}>
                   {renderItemLabel(item)}
                 </SelectItem>
               ))}
@@ -124,7 +124,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <CardFooter className="p-5 pt-0 mt-auto flex flex-col gap-4">
         {/* Price Display */}
         <div className="w-full flex items-baseline justify-between border-t border-border/40 pt-4">
-          <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Total estimado</span>
+          <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">A partir de</span>
           <span className="text-2xl font-bold text-[#28282D] tracking-tight">
             {formatCurrency(currentPrice)}
           </span>
