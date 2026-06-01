@@ -175,7 +175,7 @@ export function createServicePageSchema({
                 itemListElement: relatedProducts.map((product) => ({
                   "@type": "Offer",
                   itemOffered: {
-                    "@type": "Product",
+                    "@type": "Service",
                     name: product.name,
                     description: product.description,
                     url: product.url ? absoluteUrl(product.url) : pageUrl,
