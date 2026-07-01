@@ -76,7 +76,8 @@ export function ProductCard({ product }: ProductCardProps) {
           alt={product.name}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 48px), (max-width: 1280px) calc(33vw - 48px), calc(25vw - 48px)"
+          quality={72}
         />
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
