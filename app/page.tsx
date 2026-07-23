@@ -6,18 +6,17 @@ import { Benefits } from "@/components/Benefits"
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel"
 import { CTASection } from "@/components/CTASection"
 import { CustomProjectCTA } from "@/components/CustomProjectCTA"
+import { HomeWhatsAppCTA } from "@/components/HomeWhatsAppCTA"
 import { Section } from "@/components/Section"
 import { FAQ } from "@/components/FAQ"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, MessageCircle, Star } from "lucide-react"
+import { Star } from "lucide-react"
 import { productsData } from "@/lib/products-data"
 import { absoluteUrl, createPageMetadata, siteConfig } from "@/lib/site"
 
 const homeTitle = "Gráfica em Florianópolis - Cartões, Banners, Panfletos e Adesivos | Aplic Gráfica"
 const homeDescription =
   "Aplic Gráfica em Florianópolis com produção ágil para cartões de visita, panfletos, banners, adesivos e comunicação visual. Atendimento rápido pelo WhatsApp."
-const homeWhatsappUrl = `${siteConfig.whatsappUrl}?text=${encodeURIComponent("Olá, gostaria de fazer um orçamento com a Aplic Gráfica.")}`
 
 const featuredProducts = productsData
   .filter((product) => product.isFeatured)
@@ -211,17 +210,7 @@ export default function HomePage() {
           </div>
           
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold h-12 px-8 rounded-full shadow-lg hover:shadow-primary/25 transition-all"
-            >
-              <Link href={homeWhatsappUrl}>
-                <MessageCircle className="mr-2 h-4 w-4" />
-                Orçar pelo WhatsApp
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <HomeWhatsAppCTA />
             <Link
               href="/sobre"
               className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
