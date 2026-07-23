@@ -29,7 +29,6 @@ export const useAnalytics = () => {
       page_location: typeof window !== 'undefined' ? window.location.href : undefined,
       page_path: typeof window !== 'undefined' ? window.location.pathname : undefined,
       page_title: typeof document !== 'undefined' ? document.title : undefined,
-      value: 1,
     })
   }
 
