@@ -7,6 +7,7 @@ import { TestimonialsCarousel } from "@/components/TestimonialsCarousel"
 import { CTASection } from "@/components/CTASection"
 import { CustomProjectCTA } from "@/components/CustomProjectCTA"
 import { HomeWhatsAppCTA } from "@/components/HomeWhatsAppCTA"
+import { SitesBanner } from "@/components/SitesBanner"
 import { Section } from "@/components/Section"
 import { FAQ } from "@/components/FAQ"
 import Link from "next/link"
@@ -166,6 +167,10 @@ export default function HomePage() {
         />
       </Section>
 
+      <Section size="sm" className="pt-0 md:pt-0">
+        <SitesBanner />
+      </Section>
+
       {/* Custom Project Section (New) */}
       <Section className="bg-zinc-900 text-white">
         <div className="container mx-auto px-4 text-center space-y-8">
@@ -226,13 +231,13 @@ export default function HomePage() {
         <div className="text-center mb-12 max-w-2xl mx-auto">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/70 border border-border text-xs font-bold uppercase tracking-[0.15em] text-foreground mb-4">
             <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-            4.5 no Google · Avaliações verificadas
+            4.5 no Google · Perfil da Aplic
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            O que dizem os nossos clientes
+            O que os clientes dizem no Google
           </h2>
           <p className="text-muted-foreground">
-            Avaliações reais, coletadas direto do perfil da Aplic Gráfica no Google.
+            Avaliações publicadas no perfil da Aplic Gráfica no Google.
           </p>
         </div>
         <TestimonialsCarousel />

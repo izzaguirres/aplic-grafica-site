@@ -19,7 +19,7 @@ export default function ContatoPageClient() {
               Vamos tirar seu projeto do papel?
             </h1>
             <p className="text-xl text-[#28282D]/60 max-w-2xl mx-auto font-medium reveal delay-100">
-              Esqueça os formulários lentos. Aqui o atendimento é direto e em tempo real pelo WhatsApp.
+              Esqueça os formulários lentos. Aqui o atendimento é direto pelo WhatsApp.
             </p>
           </div>
 
@@ -28,8 +28,8 @@ export default function ContatoPageClient() {
               <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="space-y-6 text-center md:text-left">
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E6FF50]/10 border border-[#E6FF50]/20 text-[#E6FF50] text-sm font-bold uppercase tracking-wide">
-                    <div className="w-2 h-2 rounded-full bg-[#E6FF50] animate-pulse" />
-                    Online Agora
+                    <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
+                    Atendimento pelo WhatsApp
                   </div>
                   <h2 className="text-3xl md:text-4xl font-bold text-white">
                     Falar com um atendente

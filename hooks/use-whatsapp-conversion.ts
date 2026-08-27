@@ -10,9 +10,8 @@ export const useWhatsAppConversion = () => {
   const { trackWhatsAppClick } = useAnalytics()
 
   const handleWhatsAppClick = (message?: string, source: string = 'general', product?: string) => {
-    const whatsappUrl = `https://wa.me/5548999128310?text=${
-      message || 'Olá,%20vim%20do%20site%20da%20Aplic%20Gráfica%20e%20quero%20um%20orçamento.'
-    }`
+    const text = message || 'Olá, vim do site da Aplic Gráfica e quero um orçamento.'
+    const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(text)}`
 
     trackWhatsAppClick(source, product, whatsappUrl)
     window.open(whatsappUrl, '_blank')

@@ -28,7 +28,7 @@ export default function SobrePageClient() {
               </h1>
               <p className="text-xl text-[#28282D]/70 leading-relaxed font-medium reveal delay-200">
                 Nascemos com uma missão clara: provar que gráfica rápida pode ter qualidade de ateliê.
-                Hoje, somos parceiros estratégicos de milhares de empresas em Florianópolis.
+                Hoje, produzimos materiais gráficos para empresas de Florianópolis e região.
               </p>
             </div>
             <div className="flex-1 relative aspect-square md:aspect-[4/3] w-full bg-[#F5F5F7] rounded-[2rem] overflow-hidden border border-[#CDD2D7] reveal delay-300">
@@ -63,7 +63,7 @@ export default function SobrePageClient() {
                 </div>
                 <h3 className="text-2xl font-bold text-[#28282D]">Tecnologia de Ponta</h3>
                 <p className="text-[#28282D]/70 font-medium max-w-md">
-                  Trabalhamos com tecnologia de impressão profissional e fornecedores selecionados. Cada material passa por controle de qualidade antes de sair pra entrega, garantindo cores vibrantes e precisão milimétrica.
+                  Trabalhamos com tecnologia de impressão profissional e fornecedores selecionados. Cada material passa por conferência antes de sair para entrega, com acabamento alinhado ao uso combinado.
                 </p>
               </div>
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#E6FF50]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#E6FF50]/20 transition-colors" />

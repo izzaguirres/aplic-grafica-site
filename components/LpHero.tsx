@@ -1,7 +1,6 @@
 "use client"
 
 import type { ReactNode } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { MessageCircle, CheckCircle2 } from "lucide-react"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
@@ -80,12 +79,15 @@ export function LpHero({
             <Button
               size="lg"
               variant="ghost"
-              asChild
+              onClick={() =>
+                handleWhatsAppClick(
+                  "Olá! Vim do site da Aplic e gostaria de tirar uma dúvida.",
+                  `${analyticsSource}_question`,
+                )
+              }
               className="h-14 px-8 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors w-full sm:w-auto"
             >
-              <Link href="/contato">
-                Tirar dúvida no WhatsApp
-              </Link>
+              Tirar dúvida no WhatsApp
             </Button>
           </div>
 

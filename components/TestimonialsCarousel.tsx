@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight, Star, Quote, CheckCircle2 } from "lucide-react"
+import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -112,8 +112,8 @@ export function TestimonialsCarousel() {
                           ))}
                         </div>
                      </div>
-                     <span className="text-[10px] uppercase font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3" /> Verificado
+                     <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold uppercase text-muted-foreground">
+                        Avaliação no Google
                      </span>
                   </div>
 
@@ -127,7 +127,7 @@ export function TestimonialsCarousel() {
                     </div>
                     <div className="flex flex-col">
                         <cite className="font-bold text-[#28282D] text-sm not-italic">{testimonial.name}</cite>
-                        <span className="text-[10px] text-muted-foreground">Cliente via Google</span>
+                        <span className="text-[10px] text-muted-foreground">Perfil da Aplic no Google</span>
                     </div>
                   </div>
                 </CardContent>
