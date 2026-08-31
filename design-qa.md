@@ -160,3 +160,36 @@ passed
 ### Result
 
 passed
+
+## Gate 9 — Controlled production release — 2026-08-31
+
+### Release identity
+
+- Approved source commit: `0a21cb7de4620b04bbe7e05aedec2ca5afe94a33` on `origin/main`.
+- Vercel deployment: `dpl_D15Qk2Ch9Q2m1YLfpp8Qg1f4Ugo1`, status `Ready`, target `production`.
+- Canonical domain: `https://aplicgrafica.com.br`.
+- Local release checks remained green: `npm run type-check`, `npm run build`, and `git diff --check`.
+
+### Public surface QA
+
+- Browser QA covered `/`, `/produtos`, `/contato`, `/cartao-de-visita`, `/panfleto`, `/banner`, `/etiquetas-adesivas`, `/cracha`, `/pasta-com-bolso`, `/blocos-receituario`, and `/grafica-em-floripa` at 1536 × 1000 and 390 × 844.
+- All 22 route-and-viewport checks had a visible H1, correct WhatsApp destination, complete conversion source/scope, complete catalogue-product metadata, zero broken images, and zero horizontal overflow.
+- The public mobile menu rendered as a 288 × 296 px floating dialog, locked the background, closed with Escape, and returned focus to the menu button.
+- The public catalogue changed Cartão de Visita from 100 to 500 units and from R$ 185,00 to R$ 245,00 without layout regression. The resulting WhatsApp URL contained the selected product, quantity, and price.
+- The in-app browser console stayed clean. Chrome exposed one unrelated pre-existing browser-extension injection error; no site-owned script appeared in that stack.
+
+### Production measurement
+
+- Google Tag Assistant connected to `GTM-KHJXCLT5` and found the GTM, GA4 `G-02JHQCQSWZ`, and Ads `AW-761339571` tags.
+- One catalogue CTA activation produced event `7 whatsapp_click` with source `product_catalog_card`, scope `catalog_product`, product `Cartão de Visita Brilho Total`, product ID `cartao-brilho-frente`, variation and quantity `500 un.`, price `245`, currency `BRL`, page path `/produtos`, and the exact prefilled WhatsApp URL.
+- `GA4 Event — WhatsApp click` fired once and `Ads Conversion — WhatsApp click` fired once for that single activation.
+- The handoff opened WhatsApp with the prefilled context; no message was sent during QA.
+
+### Measurement boundary
+
+- This gate confirms deployment, the technical click event, and tag delivery only.
+- Conversation, quote, order, and sale remain downstream commercial states and were not inferred.
+
+### Result
+
+passed
