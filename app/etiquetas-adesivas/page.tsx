@@ -1,144 +1,37 @@
-import type { Metadata } from "next"
-import { Package, Scissors, Send } from "lucide-react"
-import { LpHero } from "@/components/LpHero"
-import { TrustedClients } from "@/components/TrustedClients"
-import { LpBenefits, type LpBenefit } from "@/components/LpBenefits"
-import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
-import { ProductGrid } from "@/components/ProductGrid"
-import { Section } from "@/components/Section"
-import { CTASection } from "@/components/CTASection"
-import { JsonLd } from "@/components/JsonLd"
-import { productsData } from "@/lib/products-data"
-import { createPageMetadata, createServicePageSchema } from "@/lib/site"
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { ProductLandingPage, type ProductLandingFaq } from "@/components/site/ProductLandingPage";
+import { productsData } from "@/lib/products-data";
+import { createPageMetadata, createServicePageSchema } from "@/lib/site";
 
-const whatsappMessage = "Olá, vim pelo Google e quero um orçamento de etiquetas adesivas."
-const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
+const whatsappMessage = "Olá! Quero um orçamento de etiquetas adesivas. Vou enviar a medida, a quantidade e a arte ou referência.";
+const products = productsData.filter((product) => /etiqueta|tag|adesivo/i.test(product.id));
+const faqs: ProductLandingFaq[] = [
+  { question: "Que tipo de etiqueta vocês fazem?", answer: "Produzimos etiquetas e rótulos para produtos, embalagens e identificação. O material e o corte são confirmados conforme o uso." },
+  { question: "Vocês fazem corte personalizado?", answer: "Sim. Envie a medida e o formato desejado para avaliarmos o corte e o melhor aproveitamento." },
+  { question: "Preciso enviar a arte pronta?", answer: "O ideal é enviar a arte final. Ajustes simples podem ser avaliados antes de confirmar o pedido." },
+  { question: "Qual é o prazo?", answer: "As etiquetas do catálogo podem sair em até 3 dias úteis. Formatos especiais têm prazo confirmado no orçamento." },
+];
 
-const products = productsData.filter((p) => /etiqueta|tag|adesivo/i.test(p.id))
-
-const benefits: LpBenefit[] = [
-  {
-    icon: Package,
-    title: "Rótulo para produto",
-    description:
-      "Etiquetas para embalagens, potes, caixas, sacolas e identificação de produtos artesanais ou comerciais.",
-  },
-  {
-    icon: Scissors,
-    title: "Formato sob medida",
-    description:
-      "A produção pode ser ajustada ao arquivo, ao tamanho da embalagem e ao acabamento indicado para o uso.",
-  },
-  {
-    icon: Send,
-    title: "Pedido pelo WhatsApp",
-    description:
-      "Envie a arte, medida e quantidade desejada. A Aplic orienta material, prazo e entrega antes de fechar.",
-  },
-]
-
-const faqs: LpFaqItem[] = [
-  {
-    question: "Que tipo de etiqueta adesiva vocês fazem?",
-    answer:
-      "Fazemos etiquetas e rótulos personalizados para produtos, embalagens, identificação e comunicação visual. O material ideal depende do uso e da quantidade.",
-  },
-  {
-    question: "Preciso ter a arte pronta?",
-    answer:
-      "O ideal é enviar a arte pronta. Se faltar algum ajuste simples de arquivo, a gente avalia no atendimento antes da produção.",
-  },
-  {
-    question: "Vocês fazem corte personalizado?",
-    answer:
-      "Sim, o corte pode ser personalizado conforme o formato do rótulo ou etiqueta. Envie a medida pelo WhatsApp para cotar corretamente.",
-  },
-  {
-    question: "Qual é o prazo?",
-    answer:
-      "O prazo depende do formato, quantidade e acabamento. A Aplic confirma tudo no orçamento antes de iniciar a produção.",
-  },
-]
-
-export const metadata: Metadata = createPageMetadata({
-  title: "Etiquetas Adesivas em Florianópolis",
-  description:
-    "Etiquetas adesivas personalizadas em Florianópolis para produtos, embalagens e negócios locais. Atendimento pelo WhatsApp e entrega combinada.",
-  path: "/etiquetas-adesivas",
-  keywords: [
-    "etiquetas adesivas florianópolis",
-    "etiqueta personalizada floripa",
-    "rótulos adesivos florianópolis",
-    "adesivos personalizados floripa",
-  ],
-})
-
-const pageSchema = createServicePageSchema({
-  path: "/etiquetas-adesivas",
-  name: "Etiquetas adesivas em Florianópolis",
-  description:
-    "Etiquetas adesivas personalizadas em Florianópolis para produtos, rótulos, embalagens e negócios locais.",
-  serviceType: "Impressão de etiquetas adesivas",
-  faqs,
-  relatedProducts: products.map((product) => ({
-    name: product.name,
-    description: product.description,
-    url: product.landingPage,
-  })),
-})
+export const metadata: Metadata = createPageMetadata({ title: "Etiquetas Adesivas em Florianópolis", description: "Etiquetas adesivas e rótulos personalizados em Florianópolis para produtos e embalagens. Atendimento pelo WhatsApp.", path: "/etiquetas-adesivas", keywords: ["etiquetas adesivas florianópolis", "rótulos personalizados floripa", "adesivos florianópolis"] });
+const pageSchema = createServicePageSchema({ path: "/etiquetas-adesivas", name: "Etiquetas adesivas em Florianópolis", description: "Etiquetas e rótulos personalizados para produtos e embalagens.", serviceType: "Impressão de etiquetas adesivas", faqs, relatedProducts: products.map((product) => ({ name: product.name, description: product.description, url: product.landingPage })) });
 
 export default function EtiquetasAdesivasPage() {
-  return (
-    <>
-      <JsonLd data={pageSchema} />
-      <LpHero
-        kicker="Aplic Gráfica · Etiquetas e rótulos"
-        headline={
-          <>
-            Etiquetas adesivas para{" "}
-            <span className="relative inline-block">
-              produtos e embalagens
-              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary" viewBox="0 0 100 10" preserveAspectRatio="none">
-                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
-              </svg>
-            </span>
-            .
-          </>
-        }
-        subheadline="Rótulos e etiquetas personalizadas em Florianópolis, com orientação de material, acabamento e prazo antes da produção."
-        bullets={["Rótulos", "Corte personalizado", "Entrega combinada"]}
-        whatsappMessage={whatsappMessage}
-        analyticsSource="lp_etiquetas_hero"
-      />
-
-      <TrustedClients />
-
-      <LpBenefits
-        heading="Etiqueta certa para cada uso"
-        subheading="A ideia é entender o produto, a embalagem e o acabamento antes de produzir."
-        items={benefits}
-      />
-
-      <Section id="produtos" className="reveal">
-        <ProductGrid
-          products={products}
-          title="Opções relacionadas"
-          subtitle="Etiquetas, tags e materiais de identificação para produto e embalagem."
-        />
-      </Section>
-
-      <LpFaq
-        items={faqs}
-        whatsappMessage={whatsappMessage}
-        analyticsSource="lp_etiquetas_faq"
-      />
-
-      <CTASection
-        headline="Quer cotar etiquetas adesivas?"
-        subtitle="Envie a medida, quantidade e arte pelo WhatsApp para receber orientação."
-        buttonText="Chamar no WhatsApp"
-        buttonUrl={whatsappUrl}
-      />
-    </>
-  )
+  return <><JsonLd data={pageSchema} /><ProductLandingPage
+    eyebrow="Etiquetas e rótulos"
+    title="Sua marca presente em cada embalagem."
+    lead="Escolha tamanho e quantidade para rótulos, produtos e embalagens. A arte e o acabamento são conferidos antes da produção."
+    heroImage={{ src: "/images/campanha/produtos/etiqueta-adesiva.webp", alt: "Etiqueta adesiva da campanha Faz Propaganda aplicada em uma embalagem", position: "50% 54%" }}
+    products={products}
+    productsTitle="Da etiqueta adesiva à tag de produto."
+    productsLead="Compare tamanhos, quantidades e formas de identificação para a embalagem da sua marca."
+    highlights={[
+      { label: "01", title: "Tamanho real", description: "A medida é definida pelo espaço disponível na embalagem e pela informação que precisa aparecer." },
+      { label: "02", title: "Corte e aplicação", description: "O formato e o material são avaliados conforme superfície, uso e acabamento desejado." },
+      { label: "03", title: "Arquivo conferido", description: "Texto, margens e contorno de corte são confirmados antes de iniciar a produção." },
+    ]}
+    faqs={faqs}
+    whatsappMessage={whatsappMessage}
+    analyticsSource="lp_etiquetas"
+  /></>;
 }

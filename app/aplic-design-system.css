@@ -1,0 +1,95 @@
+[data-aplic-page] {
+  --aplic-ink: #17231f;
+  --aplic-green: #052c23;
+  --aplic-green-deep: #031f19;
+  --aplic-lime: #e6ff50;
+  --aplic-paper: #f7f5ef;
+  --aplic-surface: #ffffff;
+  --aplic-muted: #66706b;
+  --aplic-border: rgb(23 35 31 / 12%);
+  --aplic-radius-panel: 1.75rem;
+  --aplic-radius-card: 1.25rem;
+  --aplic-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --aplic-reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --aplic-shadow:
+    0 0 0 1px rgb(0 0 0 / 6%), 0 1px 2px -1px rgb(0 0 0 / 6%),
+    0 18px 48px rgb(5 44 35 / 7%);
+
+  min-height: 100vh;
+  overflow-x: clip;
+  color: var(--aplic-ink);
+  font-family: var(--font-google-sans), sans-serif;
+  background: var(--aplic-paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-aplic-page] h1,
+[data-aplic-page] h2,
+[data-aplic-page] h3 {
+  text-wrap: balance;
+}
+
+[data-aplic-page] p,
+[data-aplic-page] li {
+  text-wrap: pretty;
+}
+
+[data-aplic-page][data-motion-ready="true"] [data-aplic-reveal] {
+  transition-delay: 0ms;
+  will-change: opacity, transform, filter;
+}
+
+[data-aplic-page][data-motion-ready="true"] [data-aplic-reveal="text"] {
+  opacity: 0;
+  filter: blur(3px);
+  transform: translateY(0.75rem);
+  transition:
+    opacity 900ms var(--aplic-reveal-ease),
+    transform 900ms var(--aplic-reveal-ease),
+    filter 900ms var(--aplic-reveal-ease);
+}
+
+[data-aplic-page][data-motion-ready="true"] [data-aplic-reveal="media"] {
+  opacity: 0;
+  filter: blur(2px);
+  transform: scale(0.94);
+  transition:
+    opacity 1120ms var(--aplic-reveal-ease),
+    transform 1120ms var(--aplic-reveal-ease),
+    filter 1120ms var(--aplic-reveal-ease);
+}
+
+[data-aplic-page][data-motion-ready="true"]
+  [data-aplic-reveal][data-revealed="true"] {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+  will-change: auto;
+}
+
+[data-aplic-page][data-motion-ready="true"] [data-reveal-order="1"] {
+  transition-delay: 60ms;
+}
+
+[data-aplic-page][data-motion-ready="true"] [data-reveal-order="2"] {
+  transition-delay: 120ms;
+}
+
+[data-aplic-page][data-motion-ready="true"] [data-reveal-order="3"] {
+  transition-delay: 180ms;
+}
+
+[data-aplic-page][data-motion-ready="true"] [data-reveal-order="4"] {
+  transition-delay: 240ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-aplic-page][data-motion-ready="true"] [data-aplic-reveal] {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition-duration: 1ms;
+    transition-delay: 0ms;
+  }
+}

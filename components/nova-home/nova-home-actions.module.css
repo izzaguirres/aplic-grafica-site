@@ -1,0 +1,150 @@
+.railButton,
+.whatsappAction {
+  --action-ink: #052c23;
+  --action-lime: #e6ff50;
+  --action-ease: cubic-bezier(0.23, 1, 0.32, 1);
+
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.15rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  border: 1px solid var(--action-ink);
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  transition:
+    transform 150ms var(--action-ease),
+    background-color 180ms var(--action-ease),
+    color 180ms var(--action-ease);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.railButton {
+  position: relative;
+  min-height: 2.75rem;
+  justify-content: flex-start;
+  gap: 0.45rem;
+  padding: 0.5rem 0.125rem;
+  color: #fff;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.whatsappAction > svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.7rem;
+  flex: none;
+  color: var(--action-ink);
+  background: var(--action-lime);
+  border-radius: 50%;
+  transition: transform 180ms var(--action-ease);
+}
+
+.railButton > svg {
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  flex: none;
+  color: currentColor;
+  background: transparent;
+  border-radius: 0;
+  transition: transform 180ms var(--action-ease);
+}
+
+.whatsappAction {
+  width: min(100%, 28rem);
+  cursor: pointer;
+}
+
+.whatsappAction > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.whatsappAction > span svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.lime {
+  color: var(--action-ink);
+  background: var(--action-lime);
+}
+
+.lime > svg {
+  color: var(--action-lime);
+  background: var(--action-ink);
+}
+
+.light {
+  color: var(--action-ink);
+  background: #fff;
+  border-color: rgb(255 255 255 / 92%);
+}
+
+.railButton:focus-visible,
+.whatsappAction:focus-visible {
+  outline: 3px solid var(--action-lime);
+  outline-offset: 3px;
+}
+
+.railButton:active,
+.whatsappAction:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .railButton:hover {
+    color: rgb(255 255 255 / 72%);
+    background: transparent;
+  }
+
+  .railButton:hover > svg,
+  .whatsappAction:hover > svg {
+    transform: translate(0.0625rem, -0.0625rem);
+  }
+
+  .lime:hover {
+    background: #efff91;
+  }
+
+  .light:hover {
+    background: #f7f5ef;
+  }
+}
+
+@media (max-width: 639px) {
+  .whatsappAction {
+    gap: 0.625rem;
+    padding-left: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .railButton,
+  .whatsappAction,
+  .railButton > svg,
+  .whatsappAction > svg {
+    transition-duration: 1ms;
+  }
+
+  .railButton:hover > svg,
+  .whatsappAction:hover > svg,
+  .railButton:active,
+  .whatsappAction:active {
+    transform: none;
+  }
+}

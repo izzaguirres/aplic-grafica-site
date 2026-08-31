@@ -1,152 +1,37 @@
-import type { Metadata } from "next"
-import { Zap, Layers, MapPin } from "lucide-react"
-import { LpHero } from "@/components/LpHero"
-import { TrustedClients } from "@/components/TrustedClients"
-import { LpBenefits, type LpBenefit } from "@/components/LpBenefits"
-import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
-import { ProductGrid } from "@/components/ProductGrid"
-import { Section } from "@/components/Section"
-import { CTASection } from "@/components/CTASection"
-import { JsonLd } from "@/components/JsonLd"
-import { productsData } from "@/lib/products-data"
-import { createPageMetadata, createServicePageSchema } from "@/lib/site"
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { ProductLandingPage, type ProductLandingFaq } from "@/components/site/ProductLandingPage";
+import { productsData } from "@/lib/products-data";
+import { createPageMetadata, createServicePageSchema } from "@/lib/site";
 
-const whatsappMessage = "Olá, vim pelo site e quero um orçamento de panfleto."
-const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
+const whatsappMessage = "Olá! Quero um orçamento de panfletos ou folders. Vou enviar o formato, a quantidade e a arte.";
+const products = productsData.filter((product) => /panfleto|filipeta|folder/i.test(product.id));
+const faqs: ProductLandingFaq[] = [
+  { question: "Qual formato escolher?", answer: "O A6 é compacto e econômico para distribuição. O A5 oferece mais área de leitura. Folder e filipeta funcionam melhor quando o conteúdo precisa de organização ou mais rigidez." },
+  { question: "A impressão é frente e verso?", answer: "As opções do catálogo são impressas frente e verso. Se o pedido tiver outra configuração, confirme pelo WhatsApp." },
+  { question: "Preciso enviar a arte pronta?", answer: "O ideal é enviar a arte final. Se houver apenas uma referência, avaliamos o ajuste necessário antes da produção." },
+  { question: "Qual é o prazo?", answer: "O A6 de 1.000 unidades pode sair em até 3 dias úteis. Tiragens e formatos diferentes têm prazo confirmado no orçamento." },
+];
 
-const products = productsData.filter((p) =>
-  /panfleto|filipeta|folder/i.test(p.id),
-)
-
-const benefits: LpBenefit[] = [
-  {
-    icon: Zap,
-    title: "Pronto pra divulgação rápida",
-    description:
-      "1000 un. em até 3 dias úteis, pra delivery, evento, inauguração e academia. Tiragens maiores em 5 a 7 dias.",
-  },
-  {
-    icon: Layers,
-    title: "Frente e verso em couchê 90g",
-    description:
-      "Papel couchê brilho com cor vibrante nos dois lados. Mais espaço pra sua mensagem sem perder leveza pra distribuição.",
-  },
-  {
-    icon: MapPin,
-    title: "Entrega em toda Floripa",
-    description:
-      "Centro, Estreito, Trindade, Lagoa, Canasvieiras, Campeche, Palhoça e São José. Combinamos o melhor horário no zap.",
-  },
-]
-
-const faqs: LpFaqItem[] = [
-  {
-    question: "Qual a quantidade mínima?",
-    answer:
-      "Trabalhamos a partir de 1.000 unidades. Abaixo disso, o custo unitário não compensa e o tempo de produção fica próximo do mesmo.",
-  },
-  {
-    question: "A5 ou A6? Qual escolher?",
-    answer:
-      "A6 (10x14cm) é o formato clássico e mais econômico pra distribuição em massa, delivery, panfletagem. A5 (15x21cm) é maior, cabe mais informação e funciona bem pra cardápio, lista de serviços, folder promocional.",
-  },
-  {
-    question: "Qual o prazo real?",
-    answer:
-      "1000 unidades saem em até 3 dias úteis a partir da aprovação da arte. Tiragens maiores (2500+) levam de 5 a 7 dias úteis. O prazo exato vai no orçamento, antes de você fechar.",
-  },
-  {
-    question: "Preciso enviar a arte pronta?",
-    answer:
-      "Sim, trabalhamos com a arte que você envia. Se precisar de pequenos ajustes de layout, a gente resolve na mesma conversa.",
-  },
-  {
-    question: "Quais formas de pagamento?",
-    answer: "Pix, cartão de crédito e boleto. Combinamos junto com o orçamento.",
-  },
-]
-
-export const metadata: Metadata = createPageMetadata({
-  title: "Panfleto em Florianópolis — 3 dias úteis",
-  description:
-    "Panfleto em Florianópolis com prazo de 3 dias úteis. Couchê 90g, frente e verso, entrega em toda Grande Floripa. Atendimento direto pelo WhatsApp.",
-  path: "/panfleto",
-  keywords: [
-    "panfleto florianópolis",
-    "panfleto floripa",
-    "gráfica panfleto florianópolis",
-    "panfleto a5 florianópolis",
-    "panfleto a6 florianópolis",
-    "filipeta florianópolis",
-  ],
-})
-
-const pageSchema = createServicePageSchema({
-  path: "/panfleto",
-  name: "Panfleto em Florianópolis",
-  description:
-    "Panfleto A5, A6, folder e filipeta em Florianópolis, com atendimento pelo WhatsApp e entrega ou retirada combinada.",
-  serviceType: "Impressão de panfletos",
-  faqs,
-  relatedProducts: products.map((product) => ({
-    name: product.name,
-    description: product.description,
-    url: product.landingPage,
-  })),
-})
+export const metadata: Metadata = createPageMetadata({ title: "Panfleto em Florianópolis — 3 dias úteis", description: "Panfletos, folders e filipetas em Florianópolis, com impressão frente e verso e atendimento pelo WhatsApp.", path: "/panfleto", keywords: ["panfleto florianópolis", "panfleto a6 floripa", "folder florianópolis"] });
+const pageSchema = createServicePageSchema({ path: "/panfleto", name: "Panfletos e folders em Florianópolis", description: "Panfletos A5 e A6, folders e filipetas em Florianópolis.", serviceType: "Impressão de panfletos", faqs, relatedProducts: products.map((product) => ({ name: product.name, description: product.description, url: product.landingPage })) });
 
 export default function PanfletoPage() {
-  return (
-    <>
-      <JsonLd data={pageSchema} />
-      <LpHero
-        headline={
-          <>
-            Panfleto em{" "}
-            <span className="relative inline-block">
-              Florianópolis
-              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary" viewBox="0 0 100 10" preserveAspectRatio="none">
-                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
-              </svg>
-            </span>
-            , com prazo claro.
-          </>
-        }
-        subheadline="1000 un. em até 3 dias úteis · 2500 un. ou mais em 5 a 7 dias. Couchê 90g frente e verso, entrega em toda Grande Floripa."
-        bullets={["Couchê 90g", "Frente e verso", "A partir de 1000 un."]}
-        priceAnchor="A6 10x14cm — 1000 un. a partir de R$ 385"
-        whatsappMessage={whatsappMessage}
-        analyticsSource="lp_panfleto_hero"
-      />
-
-      <TrustedClients />
-
-      <LpBenefits
-        heading="Por que o panfleto da Aplic"
-        subheading="Volume, prazo e qualidade de cor — os três ingredientes que toda divulgação de fim de semana pede."
-        items={benefits}
-      />
-
-      <Section id="produtos" className="reveal">
-        <ProductGrid
-          products={products}
-          title="Escolha seu formato"
-          subtitle="A5 pra cardápio e apresentação. A6 pra volume e rua. Filipeta pra cardápio rígido."
-        />
-      </Section>
-
-      <LpFaq
-        items={faqs}
-        whatsappMessage={whatsappMessage}
-        analyticsSource="lp_panfleto_faq"
-      />
-
-      <CTASection
-        headline="Pronto pra divulgar?"
-        subtitle="Do arquivo à entrega, pelo WhatsApp. Prazo confirmado no orçamento."
-        buttonText="Chamar no WhatsApp"
-        buttonUrl={whatsappUrl}
-      />
-    </>
-  )
+  return <><JsonLd data={pageSchema} /><ProductLandingPage
+    eyebrow="Panfletos e folders"
+    title="Informação impressa para circular e vender."
+    lead="Compare formatos e tiragens para divulgação, cardápio, evento ou apresentação. O pedido segue direto para o WhatsApp."
+    heroImage={{ src: "/images/campanha/produtos/panfleto-a6.webp", alt: "Panfleto da campanha Faz Propaganda", position: "50% 48%" }}
+    products={products}
+    productsTitle="Do panfleto direto ao folder completo."
+    productsLead="Escolha pela quantidade de informação, pelo formato e pela tiragem que a ação precisa."
+    highlights={[
+      { label: "01", title: "Formato certo", description: "A6 para distribuição, A5 para mais conteúdo e folder quando a leitura precisa de etapas." },
+      { label: "02", title: "Frente e verso", description: "Mais espaço para organizar oferta, contato e chamada sem apertar a mensagem." },
+      { label: "03", title: "Tiragem confirmada", description: "Quantidade, valor e prazo ficam claros antes de o material entrar em produção." },
+    ]}
+    faqs={faqs}
+    whatsappMessage={whatsappMessage}
+    analyticsSource="lp_panfleto"
+  /></>;
 }

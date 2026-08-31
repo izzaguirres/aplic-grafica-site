@@ -1,126 +1,35 @@
-import type { Metadata } from "next"
-import { ClipboardList, FilePenLine, Stethoscope } from "lucide-react"
-import { LpHero } from "@/components/LpHero"
-import { TrustedClients } from "@/components/TrustedClients"
-import { LpBenefits, type LpBenefit } from "@/components/LpBenefits"
-import { LpFaq, type LpFaqItem } from "@/components/LpFaq"
-import { CTASection } from "@/components/CTASection"
-import { JsonLd } from "@/components/JsonLd"
-import { createPageMetadata, createServicePageSchema } from "@/lib/site"
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { ProductLandingPage, type ProductLandingFaq } from "@/components/site/ProductLandingPage";
+import { createPageMetadata, createServicePageSchema } from "@/lib/site";
 
-const whatsappMessage = "Olá, vim pelo Google e quero um orçamento de blocos ou receituário."
-const whatsappUrl = `https://wa.me/5548999128310?text=${encodeURIComponent(whatsappMessage)}`
+const whatsappMessage = "Olá! Quero um orçamento de blocos ou receituários. Vou enviar o formato, a quantidade e um modelo ou referência.";
+const faqs: ProductLandingFaq[] = [
+  { question: "Vocês fazem receituário personalizado?", answer: "Sim. Produzimos conforme o arquivo e as informações enviadas pelo profissional ou pela clínica." },
+  { question: "Que tipos de bloco posso pedir?", answer: "Blocos de pedido, orçamento, recibo, checklist, ordem de serviço, atendimento e outros formatos sob orçamento." },
+  { question: "Preciso enviar a arte pronta?", answer: "Se tiver arte final, envie. Um modelo antigo ou uma referência também ajuda a avaliarmos o arquivo necessário." },
+  { question: "Qual é o prazo?", answer: "O prazo depende do formato e da quantidade. Ele é confirmado com o valor antes de iniciar a produção." },
+];
 
-const benefits: LpBenefit[] = [
-  {
-    icon: ClipboardList,
-    title: "Blocos personalizados",
-    description:
-      "Blocos de pedido, orçamento, atendimento, checklist, recibo e controle interno com a identidade da empresa.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Receituário médico",
-    description:
-      "Receituários para clínicas e profissionais de saúde, com dados do profissional e layout conforme a necessidade.",
-  },
-  {
-    icon: FilePenLine,
-    title: "Papelaria de rotina",
-    description:
-      "Materiais impressos para escritórios, consultórios e empresas que ainda precisam registrar processos no papel.",
-  },
-]
-
-const faqs: LpFaqItem[] = [
-  {
-    question: "Vocês fazem receituário médico personalizado?",
-    answer:
-      "Sim. Produzimos receituários para clínicas e profissionais de saúde conforme o arquivo e as informações enviadas pelo cliente.",
-  },
-  {
-    question: "Que tipos de bloco posso pedir?",
-    answer:
-      "Bloco de pedido, orçamento, recibo, checklist, ordem de serviço, atendimento, controle interno e outros formatos sob orçamento.",
-  },
-  {
-    question: "Preciso mandar a arte pronta?",
-    answer:
-      "Se tiver arte final, envie pelo WhatsApp. Se tiver apenas modelo antigo ou referência, a Aplic avalia o ajuste necessário antes da produção.",
-  },
-  {
-    question: "Qual o prazo?",
-    answer:
-      "O prazo depende da quantidade, formato e acabamento. Ele é confirmado no orçamento antes de iniciar a produção.",
-  },
-]
-
-export const metadata: Metadata = createPageMetadata({
-  title: "Blocos e Receituário Médico em Florianópolis",
-  description:
-    "Blocos personalizados, receituários médicos e materiais de escritório em Florianópolis. Atendimento pelo WhatsApp e produção sob orçamento.",
-  path: "/blocos-receituario",
-  keywords: [
-    "blocos personalizados florianópolis",
-    "receituário médico florianópolis",
-    "receituarios médicos floripa",
-    "bloco de pedido florianópolis",
-  ],
-})
-
-const pageSchema = createServicePageSchema({
-  path: "/blocos-receituario",
-  name: "Blocos e receituário médico em Florianópolis",
-  description:
-    "Blocos personalizados, receituários médicos e materiais de escritório em Florianópolis, com atendimento pelo WhatsApp.",
-  serviceType: "Impressão de blocos e receituários",
-  faqs,
-})
+export const metadata: Metadata = createPageMetadata({ title: "Blocos e Receituário Médico em Florianópolis", description: "Blocos personalizados e receituários em Florianópolis para clínicas, consultórios e empresas. Atendimento pelo WhatsApp.", path: "/blocos-receituario", keywords: ["blocos personalizados florianópolis", "receituário médico florianópolis", "bloco de pedido floripa"] });
+const pageSchema = createServicePageSchema({ path: "/blocos-receituario", name: "Blocos e receituários em Florianópolis", description: "Blocos personalizados e receituários para clínicas, consultórios e empresas.", serviceType: "Impressão de blocos e receituários", faqs });
 
 export default function BlocosReceituarioPage() {
-  return (
-    <>
-      <JsonLd data={pageSchema} />
-      <LpHero
-        kicker="Aplic Gráfica · Blocos e receituários"
-        headline={
-          <>
-            Blocos e receituários para{" "}
-            <span className="relative inline-block">
-              empresas e consultórios
-              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary" viewBox="0 0 100 10" preserveAspectRatio="none">
-                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
-              </svg>
-            </span>
-            .
-          </>
-        }
-        subheadline="Blocos personalizados, receituários médicos e papelaria de rotina em Florianópolis, com atendimento pelo WhatsApp e prazo combinado."
-        bullets={["Blocos", "Receituários", "Sob orçamento"]}
-        whatsappMessage={whatsappMessage}
-        analyticsSource="lp_blocos_receituario_hero"
-      />
-
-      <TrustedClients />
-
-      <LpBenefits
-        heading="Papelaria que organiza a operação"
-        subheading="Para empresas, clínicas e consultórios que precisam de materiais impressos para o dia a dia."
-        items={benefits}
-      />
-
-      <LpFaq
-        items={faqs}
-        whatsappMessage={whatsappMessage}
-        analyticsSource="lp_blocos_receituario_faq"
-      />
-
-      <CTASection
-        headline="Quer cotar blocos ou receituário?"
-        subtitle="Envie o modelo, quantidade e formato desejado. A Aplic orienta o próximo passo."
-        buttonText="Chamar no WhatsApp"
-        buttonUrl={whatsappUrl}
-      />
-    </>
-  )
+  return <><JsonLd data={pageSchema} /><ProductLandingPage
+    eyebrow="Blocos e receituários"
+    title="Papelaria feita para a rotina funcionar."
+    lead="Receituários, blocos de pedido e materiais personalizados para clínicas, consultórios e empresas."
+    placeholderLabel="Foto de campanha dos blocos em produção"
+    products={[]}
+    productsTitle=""
+    productsLead=""
+    highlights={[
+      { label: "01", title: "Formato definido", description: "Tamanho, número de folhas e uso do bloco são combinados conforme sua rotina." },
+      { label: "02", title: "Informações conferidas", description: "Dados profissionais, campos e organização do layout passam por aprovação." },
+      { label: "03", title: "Produção sob medida", description: "Quantidade, valor e prazo são confirmados antes de começar." },
+    ]}
+    faqs={faqs}
+    whatsappMessage={whatsappMessage}
+    analyticsSource="lp_blocos"
+  /></>;
 }

@@ -6,10 +6,16 @@ import { MessageCircle, Mail, Clock, MapPin, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 import { getYearsInBusiness } from "@/lib/site"
+import { getWhatsAppTrackingAttributes } from "@/lib/whatsapp-conversion"
 
 export function Footer() {
   const { handleWhatsAppClick } = useWhatsAppConversion()
   const years = getYearsInBusiness()
+  const footerConversion = {
+    source: "footer",
+    scope: "general_quote" as const,
+    context: "site_footer",
+  }
 
   return (
     <footer className="bg-foreground text-background relative overflow-hidden">
@@ -36,7 +42,14 @@ export function Footer() {
               Orçamento pelo WhatsApp, produção combinada e entrega no seu endereço.
             </p>
             <Button 
-              onClick={() => handleWhatsAppClick(undefined, 'footer')}
+              data-footer-whatsapp
+              {...getWhatsAppTrackingAttributes(footerConversion)}
+              onClick={() =>
+                handleWhatsAppClick(undefined, footerConversion.source, undefined, {
+                  scope: footerConversion.scope,
+                  context: footerConversion.context,
+                })
+              }
               variant="secondary" 
               className="font-medium"
             >

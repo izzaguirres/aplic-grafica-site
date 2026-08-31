@@ -1,3 +1,6 @@
+import { getConversionAttribution } from "@/lib/attribution"
+import type { WhatsAppConversionDetails } from "@/lib/whatsapp-conversion"
+
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[]
@@ -8,6 +11,13 @@ const push = (payload: Record<string, unknown>) => {
   if (typeof window === 'undefined') return
   window.dataLayer = window.dataLayer ?? []
   window.dataLayer.push(payload)
+
+  if (process.env.NODE_ENV === 'development') {
+    const root = document.documentElement
+    const eventCount = Number(root.dataset.analyticsEventCount ?? '0') + 1
+    root.dataset.analyticsEventCount = String(eventCount)
+    root.dataset.analyticsLastEvent = JSON.stringify(payload)
+  }
 }
 
 export const useAnalytics = () => {
@@ -19,16 +29,32 @@ export const useAnalytics = () => {
     push({ event: 'page_view', page_path: url })
   }
 
-  const trackWhatsAppClick = (source: string, product?: string, whatsappUrl?: string) => {
+  const trackWhatsAppClick = (
+    source: string,
+    product?: string,
+    whatsappUrl?: string,
+    details: WhatsAppConversionDetails = {},
+  ) => {
+    const attribution = getConversionAttribution()
+
     push({
       event: 'whatsapp_click',
       event_category: 'engagement',
       event_label: source,
-      product,
+      conversion_source: source,
+      conversion_scope: details.scope ?? 'general_quote',
+      conversion_context: details.context ?? null,
+      product: product ?? null,
+      product_id: details.productId ?? null,
+      product_variant: details.variant ?? null,
+      product_quantity: details.quantity ?? null,
+      product_price: details.price ?? null,
+      product_currency: typeof details.price === 'number' ? 'BRL' : null,
       whatsapp_url: whatsappUrl,
       page_location: typeof window !== 'undefined' ? window.location.href : undefined,
       page_path: typeof window !== 'undefined' ? window.location.pathname : undefined,
       page_title: typeof document !== 'undefined' ? document.title : undefined,
+      ...attribution,
     })
   }
 

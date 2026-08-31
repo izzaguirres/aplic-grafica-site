@@ -5,11 +5,22 @@ import { MessageCircle, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
 import { cn } from "@/lib/utils"
+import { getWhatsAppTrackingAttributes } from "@/lib/whatsapp-conversion"
 
 export function FloatingWhatsApp() {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(true) // Começa aberto o balãozinho se quiser
   const { handleWhatsAppClick } = useWhatsAppConversion()
+  const bubbleConversion = {
+    source: "floating_bubble",
+    scope: "general_quote" as const,
+    context: "floating_prompt",
+  }
+  const buttonConversion = {
+    source: "floating_button",
+    scope: "general_quote" as const,
+    context: "floating_button",
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +39,7 @@ export function FloatingWhatsApp() {
   if (!isVisible) return null
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 hidden flex-col items-end gap-4 animate-in fade-in slide-in-from-bottom-10 duration-500 md:flex">
+    <div data-floating-whatsapp className="fixed bottom-6 right-6 z-50 hidden flex-col items-end gap-4 animate-in fade-in slide-in-from-bottom-10 duration-500 md:flex">
       
       {/* Balão de CTA (Opcional - aumenta conversão) */}
       {isOpen && (
@@ -47,7 +58,13 @@ export function FloatingWhatsApp() {
                 size="sm" 
                 variant="link" 
                 className="p-0 h-auto text-green-600 font-bold"
-                onClick={() => handleWhatsAppClick(undefined, 'floating_bubble')}
+                {...getWhatsAppTrackingAttributes(bubbleConversion)}
+                onClick={() =>
+                  handleWhatsAppClick(undefined, bubbleConversion.source, undefined, {
+                    scope: bubbleConversion.scope,
+                    context: bubbleConversion.context,
+                  })
+                }
             >
                 Falar com atendente &rarr;
             </Button>
@@ -58,7 +75,13 @@ export function FloatingWhatsApp() {
 
       {/* Botão Principal */}
       <Button
-        onClick={() => handleWhatsAppClick(undefined, 'floating_button')}
+        {...getWhatsAppTrackingAttributes(buttonConversion)}
+        onClick={() =>
+          handleWhatsAppClick(undefined, buttonConversion.source, undefined, {
+            scope: buttonConversion.scope,
+            context: buttonConversion.context,
+          })
+        }
         size="icon"
         className={cn(
           "h-16 w-16 rounded-full shadow-2xl transition-transform transition-colors duration-300 hover:scale-110",

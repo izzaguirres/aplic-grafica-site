@@ -1,165 +1,368 @@
 "use client"
 
-import { useState, useMemo } from "react"
-import { ProductGrid } from "@/components/ProductGrid"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { useMemo, useState } from "react"
+import { ArrowUpRight, PackageSearch, Search, X } from "lucide-react"
+import { EditorialReveal } from "@/components/site/EditorialReveal"
+import { ProductCard } from "@/components/site/ProductCard"
+import { useWhatsAppConversion } from "@/hooks/use-whatsapp-conversion"
+import { productCampaignMedia } from "@/lib/product-campaign-media"
 import { productsData } from "@/lib/products-data"
-import { Search, X, PackageX } from "lucide-react"
+import { getWhatsAppTrackingAttributes } from "@/lib/whatsapp-conversion"
+import styles from "./produtos.module.css"
 
-const categories = [
-  { value: "all", label: "Todos" },
-  { value: "Promocional", label: "Promocional" },
-  { value: "Empresa", label: "Empresarial" },
-  { value: "Sinalização", label: "Sinalização" },
-  { value: "Adesivos", label: "Adesivos" },
-  { value: "Hotelaria", label: "Hotelaria" },
+const catalogSections = [
+  {
+    id: "cartoes-de-visita",
+    label: "Cartões de visita",
+    productIds: [
+      "cartao-brilho-frente",
+      "cartao-fosco-localizado",
+      "cartao-mini-brilho",
+    ],
+  },
+  {
+    id: "panfletos-e-folders",
+    label: "Panfletos e impressos",
+    productIds: [
+      "panfleto-a6",
+      "panfleto-a5",
+      "folder-2-dobras",
+      "filipeta-10x20",
+      "marca-pagina",
+    ],
+  },
+  {
+    id: "adesivos-e-embalagens",
+    label: "Adesivos e embalagens",
+    productIds: ["etiqueta-adesiva", "tag-furo-9x5"],
+  },
+  {
+    id: "comunicacao-visual",
+    label: "Comunicação visual",
+    productIds: ["banner-lona", "cavalete-madeira", "cavalete-ferro"],
+  },
+  {
+    id: "materiais-para-empresas",
+    label: "Materiais para empresas",
+    productIds: ["cracha-empresarial", "pasta-bolso", "nao-perturbe"],
+  },
 ]
 
-export default function ProdutosPageClient() {
-  const [selectedCategory, setSelectedCategory] = useState("all")
-  const [searchQuery, setSearchQuery] = useState("")
+const catalogCardCopy: Record<
+  string,
+  { displayName?: string; description: string }
+> = {
+  "cartao-brilho-frente": {
+    description: "9x5cm · Couchê 300g · Laminação verniz brilho total.",
+  },
+  "cartao-fosco-localizado": {
+    displayName: "Cartão com Verniz",
+    description: "9x5cm · Couchê 300g · Fosco com verniz localizado.",
+  },
+  "cartao-mini-brilho": {
+    description: "4x5cm · Couchê 250g · Laminação brilho.",
+  },
+  "panfleto-a6": {
+    description: "10x14cm · Couchê 90g · Frente e verso.",
+  },
+  "panfleto-a5": {
+    description: "15x21cm · Couchê 90g · Frente e verso.",
+  },
+  "folder-2-dobras": {
+    description: "A4 aberto · Couchê 90g · Frente e verso, duas dobras.",
+  },
+  "filipeta-10x20": {
+    description: "10x20cm · Couchê 300g · Frente e verso.",
+  },
+  "marca-pagina": {
+    description: "5x18cm · Couchê 300g · Frente e verso.",
+  },
+  "etiqueta-adesiva": {
+    description: "Até 10x10cm · Impressão digital para rótulos e embalagens.",
+  },
+  "tag-furo-9x5": {
+    description: "9x5cm · Couchê 300g · Furo para cordão.",
+  },
+  "banner-lona": {
+    description: "Lona fosca · Impressão digital · Acabamento sob medida.",
+  },
+  "cavalete-madeira": {
+    description: "50x100cm · PVC adesivado · Estrutura em madeira.",
+  },
+  "cavalete-ferro": {
+    description: "50x100cm · PVC adesivado · Estrutura em ferro.",
+  },
+  "cracha-empresarial": {
+    description: "9x5cm · PVC couchê 300g · Cordão preto incluso.",
+  },
+  "pasta-bolso": {
+    description: "A4 · Supremo 300g · Capa colorida e bolso interno.",
+  },
+  "nao-perturbe": {
+    displayName: "Aviso de Porta",
+    description: "5x18cm · Couchê 300g · Gancho para maçaneta.",
+  },
+}
 
-  // Filter Logic
+const normalizeSearch = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+
+export default function ProdutosPageClient() {
+  const [searchQuery, setSearchQuery] = useState("")
+  const { handleWhatsAppClick } = useWhatsAppConversion()
+
   const filteredProducts = useMemo(() => {
+    const normalizedQuery = normalizeSearch(searchQuery)
+
     return productsData.filter((product) => {
-      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            product.description.toLowerCase().includes(searchQuery.toLowerCase())
-      return matchesCategory && matchesSearch
+      const searchableText = normalizeSearch(
+        `${product.name} ${product.description} ${product.category ?? ""}`,
+      )
+      const matchesSearch = searchableText.includes(normalizedQuery)
+      return matchesSearch
     })
-  }, [selectedCategory, searchQuery])
+  }, [searchQuery])
+
+  const visibleSections = useMemo(
+    () =>
+      catalogSections
+        .map((section) => ({
+          ...section,
+          products: section.productIds
+            .map((productId) =>
+              filteredProducts.find((product) => product.id === productId),
+            )
+            .filter((product): product is (typeof productsData)[number] => Boolean(product)),
+        }))
+        .filter((section) => section.products.length > 0),
+    [filteredProducts],
+  )
 
   const clearFilters = () => {
-    setSelectedCategory("all")
     setSearchQuery("")
   }
 
-  const hasActiveFilter = selectedCategory !== "all" || searchQuery !== ""
+  const hasActiveFilter = searchQuery !== ""
+  const customProjectMessage =
+    "Olá! Preciso de um orçamento personalizado. Vou enviar a referência, as medidas e a quantidade."
+  const customProjectConversion = {
+    message: customProjectMessage,
+    source: "catalog_custom_project",
+    scope: "custom_order" as const,
+    context: "catalog_special_format",
+  }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header Compacto & Funcional */}
-      <section className="pt-32 pb-12 px-4 border-b border-[#CDD2D7]/30 bg-[#F5F5F7]/50">
-        <div className="container max-w-6xl mx-auto space-y-8">
-          <div className="text-center space-y-3">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#28282D]">
-              Catálogo Completo
-            </h1>
-            <p className="text-lg text-[#28282D]/60 max-w-2xl mx-auto font-medium">
-              Explore nossa linha de produtos gráficos. Digite o que procura ou navegue pelas categorias.
-            </p>
-          </div>
+    <div
+      data-aplic-page
+      data-aplic-shell
+      data-motion-ready="true"
+      className={styles.page}
+    >
+      <noscript>
+        <style>{`
+          [data-aplic-page] [data-aplic-reveal] {
+            opacity: 1 !important;
+            filter: none !important;
+            transform: none !important;
+          }
+        `}</style>
+      </noscript>
+      <EditorialReveal />
 
-          {/* Search & Filter Bar */}
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between max-w-4xl mx-auto">
-            {/* Search Input */}
-            <div className="relative w-full md:w-96 group">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#28282D]/50 group-focus-within:text-[#28282D] transition-colors" aria-hidden="true" />
-              <Input
-                type="search"
-                placeholder="Buscar produto (ex: cartão, banner)..."
-                aria-label="Buscar produtos"
-                className="pl-10 h-12 rounded-xl border-[#CDD2D7] bg-white focus:ring-2 focus:ring-[#E6FF50] focus:border-transparent text-base"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  aria-label="Limpar busca"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full text-[#28282D]/50 transition-colors"
-                >
-                  <X className="h-3 w-3" aria-hidden="true" />
-                </button>
-              )}
-            </div>
-
-            {/* Category Pills (Desktop) */}
-            <div className="hidden md:flex flex-wrap gap-2 justify-center" role="radiogroup" aria-label="Filtrar por categoria">
-              {categories.map((category) => (
-                <button
-                  key={category.value}
-                  role="radio"
-                  aria-checked={selectedCategory === category.value}
-                  onClick={() => setSelectedCategory(category.value)}
-                  className={`px-4 py-2 rounded-full text-sm font-bold transition-colors transition-transform duration-300 border ${
-                    selectedCategory === category.value
-                      ? "bg-[#28282D] text-[#E6FF50] border-[#28282D] shadow-lg shadow-[#28282D]/20 scale-105"
-                      : "bg-white text-[#28282D]/70 border-[#CDD2D7] hover:border-[#28282D] hover:text-[#28282D]"
-                  }`}
-                >
-                  {category.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile Category Scroll */}
-          <div className="md:hidden w-full overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
-            <div className="flex gap-2 w-max" role="radiogroup" aria-label="Filtrar por categoria">
-              {categories.map((category) => (
-                <button
-                  key={category.value}
-                  role="radio"
-                  aria-checked={selectedCategory === category.value}
-                  onClick={() => setSelectedCategory(category.value)}
-                  className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-colors border ${
-                     selectedCategory === category.value
-                      ? "bg-[#28282D] text-[#E6FF50] border-[#28282D]"
-                      : "bg-white text-[#28282D]/70 border-[#CDD2D7]"
-                  }`}
-                >
-                  {category.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          {/* Active Filter Summary */}
-          <div className="flex items-center justify-between text-sm text-[#28282D]/60 pt-2 border-t border-[#CDD2D7]/30">
-            <span>
-              Mostrando <strong>{filteredProducts.length}</strong> produtos
+      <section className={styles.hero} aria-labelledby="catalog-title">
+        <div className={styles.heroHeading}>
+          <p className={styles.eyebrow} data-aplic-reveal="text">
+            Catálogo de produtos
+          </p>
+          <h1 id="catalog-title">
+            <span data-aplic-reveal="text" data-reveal-order="1">
+              Escolha seu impresso.
             </span>
-            {hasActiveFilter && (
-              <Button
-                variant="ghost"
-                onClick={clearFilters}
-                className="h-8 px-3 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg text-xs font-bold uppercase"
+            <span data-aplic-reveal="text" data-reveal-order="2">
+              Veja o preço na hora.
+            </span>
+          </h1>
+          <p
+            className={styles.heroLead}
+            data-aplic-reveal="text"
+            data-reveal-order="3"
+          >
+            Escolha o produto e a quantidade. Seu pedido abre pronto no
+            WhatsApp.
+          </p>
+        </div>
+
+        <div
+          className={styles.filterPanel}
+          data-aplic-reveal="text"
+          data-reveal-order="4"
+        >
+          <div className={styles.searchField}>
+            <Search aria-hidden="true" />
+            <input
+              type="search"
+              placeholder="Buscar cartão, banner, adesivo..."
+              aria-label="Buscar produtos"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                aria-label="Limpar busca"
+                className={styles.clearSearch}
               >
-                Limpar Filtros
-                <X className="ml-2 h-3 w-3" />
-              </Button>
+                <X aria-hidden="true" />
+              </button>
+            )}
+          </div>
+
+          <div
+            className={styles.categories}
+            aria-label="Navegar pelas categorias"
+          >
+            {visibleSections.map((section) => (
+              <a key={section.id} href={`#${section.id}`}>
+                {section.label}
+              </a>
+            ))}
+          </div>
+
+          <div className={styles.resultSummary} aria-live="polite">
+            <p>
+              <strong>{filteredProducts.length}</strong>{" "}
+              {filteredProducts.length === 1 ? "produto encontrado" : "produtos encontrados"}
+            </p>
+            {hasActiveFilter && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className={styles.clearFilters}
+              >
+                Limpar filtros
+                <X aria-hidden="true" />
+              </button>
             )}
           </div>
         </div>
       </section>
 
-      {/* Grid Results */}
-      <section className="container max-w-7xl mx-auto px-4 py-12">
-        {filteredProducts.length > 0 ? (
-          <ProductGrid products={filteredProducts} />
+      <section className={styles.catalog} aria-label="Produtos do catálogo">
+        {visibleSections.length > 0 ? (
+          <div className={styles.groupedCatalog}>
+            {visibleSections.map((section, sectionIndex) => (
+              <section
+                key={section.id}
+                id={section.id}
+                className={styles.categorySection}
+                aria-labelledby={`${section.id}-title`}
+              >
+                <header className={styles.categoryHeader} data-aplic-reveal="text">
+                  <div>
+                    <span>{String(sectionIndex + 1).padStart(2, "0")}</span>
+                    <h2 id={`${section.id}-title`}>{section.label}</h2>
+                  </div>
+                  <p>
+                    {section.products.length}{" "}
+                    {section.products.length === 1 ? "produto" : "produtos"}
+                    {section.products.length > 1 && (
+                      <span aria-hidden="true">→</span>
+                    )}
+                  </p>
+                </header>
+
+                <div
+                  className={`${styles.productRail} ${
+                    section.products.length <= 4
+                      ? styles.productRailCentered
+                      : ""
+                  }`}
+                  role="list"
+                  aria-label={section.label}
+                >
+                  {section.products.map((product, productIndex) => {
+                    const media = productCampaignMedia[product.id]
+                    const copy = catalogCardCopy[product.id]
+
+                    return (
+                      <div
+                        key={product.id}
+                        className={styles.railItem}
+                        role="listitem"
+                      >
+                        <ProductCard
+                          product={product}
+                          displayName={copy?.displayName}
+                          displayDescription={copy?.description}
+                          imageSrc={media?.src}
+                          imagePosition={media?.position}
+                          eagerImage={sectionIndex === 0 && productIndex < 3}
+                          headingLevel="h3"
+                          revealIndex={productIndex}
+                        />
+                      </div>
+                    )
+                  })}
+                </div>
+              </section>
+            ))}
+          </div>
         ) : (
-          /* Empty State */
-          <div className="flex flex-col items-center justify-center py-24 text-center space-y-6 animate-fade-in">
-            <div className="h-24 w-24 rounded-full bg-[#F5F5F7] flex items-center justify-center">
-              <PackageX className="h-10 w-10 text-[#28282D]/30" />
+          <div className={styles.emptyState} data-aplic-reveal="text">
+            <div className={styles.emptyIcon}>
+              <PackageSearch aria-hidden="true" />
             </div>
-            <div className="space-y-2 max-w-md">
-              <h3 className="text-xl font-bold text-[#28282D]">Nenhum produto encontrado</h3>
-              <p className="text-[#28282D]/60">
-                Não encontramos nada com esses termos. Tente buscar por categorias como &quot;Cartão&quot; ou &quot;Banner&quot;.
-              </p>
-            </div>
-            <Button 
-              onClick={clearFilters}
-              variant="outline"
-              className="border-[#CDD2D7] text-[#28282D] hover:bg-[#F5F5F7]"
-            >
+            <h2>Não encontramos esse produto.</h2>
+            <p>
+              Tente outro termo ou fale com a equipe para pedir uma medida,
+              formato ou acabamento personalizado.
+            </p>
+            <button type="button" onClick={clearFilters}>
               Limpar busca
-            </Button>
+            </button>
           </div>
         )}
+      </section>
+
+      <section
+        className={styles.customProject}
+        aria-labelledby="custom-catalog-title"
+      >
+        <div className={styles.customProjectCopy} data-aplic-reveal="text">
+          <p className={styles.eyebrow}>Pedido personalizado</p>
+          <h2 id="custom-catalog-title">Não encontrou o formato que precisa?</h2>
+          <p>
+            Envie a referência, as medidas e a quantidade. Avaliamos formatos
+            maiores, cortes e acabamentos fora do catálogo.
+          </p>
+        </div>
+        <button
+          type="button"
+          className={styles.customProjectCta}
+          data-aplic-reveal="text"
+          data-reveal-order="1"
+          {...getWhatsAppTrackingAttributes(customProjectConversion)}
+          onClick={() =>
+            handleWhatsAppClick(
+              customProjectMessage,
+              customProjectConversion.source,
+              undefined,
+              {
+                scope: customProjectConversion.scope,
+                context: customProjectConversion.context,
+              },
+            )
+          }
+        >
+          <span>Descrever meu pedido</span>
+          <ArrowUpRight aria-hidden="true" />
+        </button>
       </section>
     </div>
   )

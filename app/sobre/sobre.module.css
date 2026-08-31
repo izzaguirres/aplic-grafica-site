@@ -1,0 +1,205 @@
+.page { padding-bottom: clamp(4rem, 8vw, 7rem); }
+
+.hero, .story, .values, .finalCta {
+  width: min(calc(100% - 2rem), 88rem);
+  margin-inline: auto;
+}
+
+.hero {
+  display: grid;
+  min-height: clamp(44rem, 84vh, 56rem);
+  grid-template-columns: minmax(0, 0.95fr) minmax(24rem, 0.85fr);
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 8rem);
+  padding-top: clamp(9rem, 12vw, 11rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.heroCopy { max-width: 48rem; }
+
+.eyebrow {
+  display: inline-flex;
+  min-height: 1.8rem;
+  align-items: center;
+  width: fit-content;
+  margin: 0 0 1.25rem;
+  padding: 0.38rem 0.75rem 0.32rem;
+  color: var(--aplic-ink);
+  font-size: 0.68rem;
+  font-weight: 760;
+  line-height: 1;
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
+  background: var(--aplic-lime);
+  border-radius: 999px;
+}
+
+.hero h1, .story h2, .values h2, .finalCta h2 {
+  margin: 0;
+  font-weight: 550;
+  line-height: 0.96;
+  letter-spacing: -0.058em;
+}
+
+.hero h1 { max-width: 13ch; font-size: clamp(3.2rem, 5.8vw, 6rem); }
+
+.heroCopy > p:not(.eyebrow) {
+  max-width: 40rem;
+  margin: 1.5rem 0 0;
+  color: var(--aplic-muted);
+  font-size: clamp(1rem, 1.45vw, 1.16rem);
+  line-height: 1.65;
+}
+
+.heroActions { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.75rem; }
+
+.heroActions > a {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.85rem;
+  color: var(--aplic-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: background-color 170ms var(--aplic-ease-out), transform 140ms var(--aplic-ease-out);
+}
+
+.heroActions > a svg { width: 0.95rem; height: 0.95rem; }
+.heroActions > a:active { transform: scale(0.97); }
+
+.heroMedia {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--aplic-green);
+  border-radius: var(--aplic-radius-panel);
+  box-shadow: var(--aplic-shadow);
+}
+
+.heroMedia img { object-fit: cover; }
+
+.story {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(22rem, 0.85fr);
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 8rem);
+  padding: clamp(1rem, 3vw, 2rem);
+  color: #fff;
+  background: var(--aplic-green);
+  border-radius: var(--aplic-radius-panel);
+  box-shadow: var(--aplic-shadow);
+}
+
+.storyMedia {
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+  background: #021f19;
+  border-radius: calc(var(--aplic-radius-panel) - 0.6rem);
+}
+
+.storyMedia video { width: 100%; height: 100%; object-fit: cover; }
+.storyCopy { padding: clamp(1rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.5rem) clamp(1rem, 4vw, 3.5rem) 0; }
+.story h2, .values h2, .finalCta h2 { max-width: 13ch; font-size: clamp(2.6rem, 4.5vw, 4.8rem); }
+
+.storyCopy > p:not(.eyebrow) {
+  max-width: 38rem;
+  margin: 1.35rem 0 0;
+  color: rgb(255 255 255 / 70%);
+  line-height: 1.65;
+}
+
+.location { display: flex; gap: 0.6rem; padding-top: 1.4rem; border-top: 1px solid rgb(255 255 255 / 12%); }
+.location svg { width: 1rem; height: 1rem; flex: none; color: var(--aplic-lime); }
+.values { padding-block: clamp(6rem, 10vw, 10rem); }
+
+.values > header {
+  display: grid;
+  max-width: 46rem;
+  justify-items: center;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.values ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.values li {
+  min-height: 21rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: #fff;
+  border: 1px solid var(--aplic-border);
+  border-radius: var(--aplic-radius-card);
+  box-shadow: 0 14px 34px rgb(5 44 35 / 5%);
+}
+
+.values li:nth-child(2) { color: #fff; background: var(--aplic-green); }
+.values li > span { color: #6c7d74; font-size: 0.7rem; font-weight: 760; letter-spacing: 0.08em; }
+.values li:nth-child(2) > span { color: var(--aplic-lime); }
+
+.values h3 {
+  max-width: 12ch;
+  margin: 8rem 0 0.8rem;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  font-weight: 620;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.values li p { margin: 0; color: var(--aplic-muted); line-height: 1.6; }
+.values li:nth-child(2) p { color: rgb(255 255 255 / 68%); }
+
+.finalCta {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.7fr);
+  align-items: end;
+  gap: clamp(2.5rem, 7vw, 8rem);
+  padding: clamp(2.5rem, 6vw, 5.5rem);
+  color: #fff;
+  background: radial-gradient(circle at 85% 20%, rgb(230 255 80 / 12%), transparent 28%), var(--aplic-green);
+  border-radius: var(--aplic-radius-panel);
+  box-shadow: var(--aplic-shadow);
+}
+
+.finalCta > div:last-child { display: grid; gap: 1.5rem; }
+.finalCta > div:last-child > p { margin: 0; color: rgb(255 255 255 / 68%); line-height: 1.65; }
+
+@media (hover: hover) and (pointer: fine) { .heroActions > a:hover { background: rgb(255 255 255 / 78%); } }
+
+@media (max-width: 800px) {
+  .hero, .story, .finalCta { grid-template-columns: 1fr; }
+  .hero { min-height: 0; }
+  .heroMedia { width: min(100%, 31rem); justify-self: center; }
+  .storyCopy { padding: 1rem 0.75rem 2rem; }
+  .values ol { grid-template-columns: 1fr; }
+  .values li { min-height: auto; }
+  .values h3 { margin-top: 3.5rem; }
+}
+
+@media (max-width: 639px) {
+  .hero, .story, .values, .finalCta { width: calc(100% - 1.5rem); }
+  .hero { gap: 2.5rem; padding-top: 7rem; padding-bottom: 4rem; }
+  .heroCopy { text-align: center; }
+  .hero h1 { max-width: none; font-size: clamp(2.8rem, 13vw, 4rem); }
+  .heroCopy > .eyebrow { margin-inline: auto; }
+  .heroActions { flex-direction: column; }
+  .heroActions > button, .heroActions > a { width: min(100%, 20rem); justify-content: center; }
+  .story { padding: 0.75rem; border-radius: 1.35rem; }
+  .storyMedia { border-radius: 0.95rem; }
+  .story h2, .values h2, .finalCta h2 { font-size: clamp(2.35rem, 11vw, 3.2rem); }
+  .values { padding-block: 5rem; }
+  .finalCta { padding: 1.5rem; border-radius: 1.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroActions > a { transition-duration: 1ms; }
+  .heroActions > a:active { transform: none; }
+}

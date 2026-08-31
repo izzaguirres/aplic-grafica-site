@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
+import "./aplic-design-system.css"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -9,6 +10,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { ScrollReveal } from "@/components/ScrollReveal"
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp"
 import { GoogleTagManager } from "@/components/google-tag-manager"
+import { AttributionCapture } from "@/components/AttributionCapture"
 import { absoluteUrl, siteConfig } from "@/lib/site"
 
 const gtmContainerId = process.env.NEXT_PUBLIC_GTM_ID
@@ -103,6 +105,7 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${googleSans.variable} font-sans antialiased`}>
         <GoogleTagManager containerId={gtmContainerId} />
+        <AttributionCapture />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollReveal />
           <Header />
