@@ -17,6 +17,7 @@
   height: 100%;
   grid-template-rows: auto 1fr;
   align-self: stretch;
+  scroll-margin-top: 7rem;
   overflow: hidden;
   color: var(--card-ink);
   background: var(--card-paper);
@@ -94,7 +95,7 @@
   min-height: 3.1em;
   margin: 0;
   color: var(--card-muted);
-  font-size: 0.76rem;
+  font-size: 0.8125rem;
   line-height: 1.55;
   text-wrap: pretty;
 }
@@ -136,6 +137,14 @@
 .commerce {
   display: grid;
   gap: 1rem;
+  margin-top: auto;
+}
+
+.conditions {
+  margin: 0;
+  color: #58625d;
+  font-size: 0.75rem;
+  line-height: 1.5;
 }
 
 .selectorGroup {
@@ -146,7 +155,7 @@
 .selectorLabel,
 .priceContext {
   color: #68726d;
-  font-size: 0.62rem;
+  font-size: 0.6875rem;
   font-weight: 720;
   line-height: 1;
   letter-spacing: 0.08em;
@@ -286,5 +295,87 @@
   .cta:hover > svg,
   .cta:active {
     transform: none;
+  }
+}
+
+.detail {
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+  grid-template-rows: 1fr;
+  border-radius: var(--aplic-radius-panel, 1.75rem);
+}
+
+.detail .media {
+  aspect-ratio: 1.1;
+  min-height: 100%;
+}
+
+.detail .body {
+  justify-content: center;
+  gap: 1.75rem;
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+}
+
+.detail .title {
+  font-size: clamp(1.6rem, 2.3vw, 2.25rem);
+}
+
+.detail .description {
+  min-height: 0;
+  font-size: 0.9375rem;
+}
+
+.detail .commerce {
+  margin-top: 0;
+}
+
+.detail .price {
+  font-size: clamp(2rem, 3vw, 2.6rem);
+}
+
+.detail .cta {
+  min-height: 3.25rem;
+}
+
+@media (max-width: 720px) {
+  .detail {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .detail .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .detail .body {
+    padding: 1.25rem;
+    gap: 1.5rem;
+  }
+}
+
+.detailLink {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 0.2rem;
+}
+
+.detailLink svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.detailLink:focus-visible {
+  outline: 3px solid var(--card-green);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .detailLink:hover span {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
 }

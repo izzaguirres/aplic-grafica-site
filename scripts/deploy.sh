@@ -50,7 +50,8 @@ fi
 # Executar linting
 log "🔍 Executando linting..."
 if ! npm run lint; then
-    warn "Avisos de linting encontrados, mas continuando..."
+    error "Erro no linting. Corrija antes de publicar."
+    exit 1
 fi
 
 # Build de produção
@@ -84,4 +85,4 @@ case "${1:-vercel}" in
         ;;
 esac
 
-log "�� Deploy concluído!" 
+log "Deploy concluído!"

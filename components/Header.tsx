@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import Link from "next/link"
 import Image from "next/image"
@@ -24,6 +24,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const { handleWhatsAppClick } = useWhatsAppConversion()
   const [isOpen, setIsOpen] = useState(false)
+  const desktopNavigationRef = useRef<HTMLElement>(null)
   const isHome = pathname === "/" || pathname === "/nova-home"
   const headerConversion = {
     source: "header",
@@ -60,17 +61,27 @@ export function Header() {
     }
   }, [isHome, pathname])
 
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 768px)")
+    const closeOnDesktop = () => {
+      if (desktop.matches) setIsOpen(false)
+    }
+
+    desktop.addEventListener("change", closeOnDesktop)
+    return () => desktop.removeEventListener("change", closeOnDesktop)
+  }, [])
+
   return (
     <header
       data-site-header
       data-over-hero={isHome && !isScrolled ? "true" : undefined}
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors transition-shadow transition-[padding] duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,padding] duration-300 ${
         isScrolled ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-[#CDD2D7]/50 py-3" : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2 group" aria-label="Aplic Gráfica">
-          <div data-site-brand-icon className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110 flex-shrink-0">
+          <div data-site-brand-icon className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-110 flex-shrink-0">
             <Image
               src="/images/favicon.png"
               alt="Aplic Gráfica Ícone"
@@ -80,7 +91,7 @@ export function Header() {
               sizes="40px"
             />
           </div>
-          <div data-site-wordmark className="relative h-6 w-24 md:h-8 md:w-32 transition-opacity duration-300 group-hover:opacity-80">
+          <div data-site-wordmark className="relative h-6 w-24 md:h-8 md:w-32 transition-opacity duration-300 [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-80">
             <Image
               src="/images/logo.png"
               alt="Aplic Gráfica"
@@ -93,15 +104,16 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-2">
+        <nav ref={desktopNavigationRef} className="hidden md:flex items-center space-x-2" aria-label="Navegação principal">
           {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
+              aria-current={pathname === item.href || (item.href === "/" && isHome) ? "page" : undefined}
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#052c23] ${
                 isScrolled
-                ? "text-zinc-800 hover:bg-zinc-100 hover:text-black"
-                : "text-zinc-800 hover:bg-white/50 hover:text-black"
+                ? "text-zinc-800 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-zinc-100 [@media(hover:hover)_and_(pointer:fine)]:hover:text-black"
+                : "text-zinc-800 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-white/50 [@media(hover:hover)_and_(pointer:fine)]:hover:text-black"
               }`}
             >
               {item.name}
@@ -116,7 +128,7 @@ export function Header() {
               })
             }
             data-header-cta
-            className="ml-4 bg-[#18181b] text-[#E6FF50] hover:bg-[#18181b]/90 font-bold rounded-xl shadow-md hover:shadow-lg transition-colors transition-shadow"
+            className="ml-4 bg-[#18181b] text-[#E6FF50] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-[#18181b]/90 font-bold rounded-xl shadow-md [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg transition-[background-color,box-shadow]"
           >
             <span>Fazer orçamento</span>
             <span data-header-cta-icon aria-hidden="true">
@@ -136,12 +148,20 @@ export function Header() {
             </DialogPrimitive.Trigger>
             <DialogPrimitive.Portal>
               <DialogPrimitive.Overlay
-                forceMount
                 className={mobileMenuStyles.overlay}
               />
               <DialogPrimitive.Content
-                forceMount
                 className={mobileMenuStyles.content}
+                onCloseAutoFocus={(event) => {
+                  if (!window.matchMedia("(min-width: 768px)").matches) return
+
+                  event.preventDefault()
+                  const navigation = desktopNavigationRef.current
+                  const target = navigation?.querySelector<HTMLAnchorElement>(
+                    'a[aria-current="page"]',
+                  ) ?? navigation?.querySelector<HTMLAnchorElement>("a")
+                  target?.focus({ preventScroll: true })
+                }}
               >
                 <div className={mobileMenuStyles.header}>
                   <DialogPrimitive.Title className={mobileMenuStyles.title}>

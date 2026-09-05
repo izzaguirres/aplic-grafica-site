@@ -54,8 +54,34 @@ export function ProductLandingPage({
   analyticsSource,
   proof = "Produção em Florianópolis · entrega ou retirada combinada",
 }: ProductLandingPageProps) {
+  const singleProduct = products.length === 1 ? products[0] : undefined;
+
   return (
     <AplicPageShell className={styles.page}>
+      {singleProduct ? (
+        <section className={styles.singleProduct} aria-labelledby="product-page-title">
+          <header className={styles.singleHeading}>
+            <p className={styles.eyebrow} data-aplic-reveal="text">{eyebrow}</p>
+            <h1 id="product-page-title" data-aplic-reveal="text">{title}</h1>
+            <p className={styles.heroLead} data-aplic-reveal="text">{lead}</p>
+          </header>
+          <div id="opcoes" className={styles.singleOptions}>
+            <ProductCard
+              product={singleProduct}
+              imageSrc={heroImage?.src ?? productCampaignMedia[singleProduct.id]?.src}
+              imagePosition={heroImage?.position ?? productCampaignMedia[singleProduct.id]?.position}
+              eagerImage
+              layout="detail"
+              conversionSource={`${analyticsSource}_product_card`}
+            />
+          </div>
+          <p className={styles.proof}>
+            <MapPin aria-hidden="true" />
+            {proof}
+          </p>
+        </section>
+      ) : (
+        <>
       <section className={styles.hero} aria-labelledby="product-page-title">
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow} data-aplic-reveal="text">
@@ -126,9 +152,11 @@ export function ProductLandingPage({
             </p>
           </header>
 
-          <p className={styles.mobileHint} aria-hidden="true">
-            Deslize para comparar <span>→</span>
-          </p>
+          {products.length > 1 && (
+            <p className={styles.mobileHint} aria-hidden="true">
+              Deslize para comparar <span>→</span>
+            </p>
+          )}
           <div className={styles.productRail}>
             {products.map((product, index) => {
               const media = productCampaignMedia[product.id];
@@ -137,6 +165,7 @@ export function ProductLandingPage({
                 <div className={styles.productItem} key={product.id}>
                   <ProductCard
                     product={product}
+                    showDetailsLink={false}
                     imageSrc={media?.src}
                     imagePosition={media?.position}
                     eagerImage={index < 3}
@@ -170,6 +199,9 @@ export function ProductLandingPage({
             />
           </div>
         </section>
+      )}
+
+        </>
       )}
 
       <section className={styles.highlights} aria-labelledby="highlights-title">

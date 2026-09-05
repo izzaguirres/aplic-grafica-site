@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ProductionVideo } from "@/components/site/ProductionVideo";
 import Link from "next/link";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { WhatsAppAction } from "@/components/nova-home/NovaHomeActions";
@@ -65,16 +66,7 @@ export default function SobrePageClient() {
 
       <section className={styles.story} aria-labelledby="story-title">
         <div className={styles.storyMedia} data-aplic-reveal="media">
-          <video
-            src="/images/siteaplic2.mp4"
-            poster="/images/13.png"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-label="Materiais produzidos pela Aplic Gráfica"
-          />
+          <ProductionVideo label="Materiais produzidos pela Aplic Gráfica" />
         </div>
         <div className={styles.storyCopy}>
           <p className={styles.eyebrow} data-aplic-reveal="text">

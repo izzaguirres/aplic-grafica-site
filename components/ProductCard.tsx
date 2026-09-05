@@ -60,7 +60,7 @@ export function ProductCard({ product }: ProductCardProps) {
       )}
 
       {/* Express Delivery Badge (top-left) */}
-      {product.expressDelivery && (
+      {(currentPriceItem.productionDays ?? product.productionDays) === 3 && (
         <div className="absolute top-3 left-3 z-10">
           <Badge className="bg-[#28282D] text-[#E6FF50] hover:bg-black font-bold border-0 rounded-md px-2.5 py-1 text-[10px] uppercase tracking-wide shadow-sm flex items-center gap-1">
             <Zap className="w-3 h-3 fill-[#E6FF50]" />

@@ -2,6 +2,7 @@ export interface PriceTableItem {
   quantidade: number
   valor: number
   label?: string
+  productionDays?: 3 | 5
 }
 
 export interface Product {
@@ -14,8 +15,7 @@ export interface Product {
   isFeatured?: boolean
   badge?: string
   featuredOrder?: number
-  /** Mostra o badge pequeno "Até 3 dias" no card quando true. */
-  expressDelivery?: boolean
+  productionDays?: 3 | 5
   /** Texto personalizado exibido no label do select. Default: "Quantidade". */
   selectorLabel?: string
   /** Unidade exibida após o número ("un.", "cm", "", etc). Default: "un." */
@@ -35,7 +35,7 @@ export const productsData: Product[] = [
     isFeatured: true,
     badge: "ALTA VISIBILIDADE",
     featuredOrder: 3,
-    expressDelivery: true,
+    productionDays: 3,
     landingPage: "/banner",
     selectorLabel: "Tamanho",
     itemUnit: "",
@@ -58,7 +58,7 @@ export const productsData: Product[] = [
     description: "5x18cm com gancho. Couchê 300g com laminação brilho. Pra pousada, hotel e quarto de hóspede.",
     image: "/images/produtos/2026/aviso-porta-humanizado.webp",
     category: "Hotelaria",
-    expressDelivery: true,
+    productionDays: 3,
     priceTable: [
       { quantidade: 100, valor: 475.00 },
       { quantidade: 250, valor: 545.00 },
@@ -96,10 +96,11 @@ export const productsData: Product[] = [
   {
     id: "cracha-empresarial",
     name: "Crachá Empresarial",
-    description: "9x5cm · PVC couchê 300g colorido · Cordão preto incluso.",
+    description: "9x5cm · Impressão colorida · Cordão incluso.",
     image: "/images/produtos/2026/cracha-cordao.webp",
     category: "Empresa",
     landingPage: "/cracha",
+    productionDays: 5,
     priceTable: [
       { quantidade: 5, valor: 235.00 },
       { quantidade: 10, valor: 325.00 },
@@ -132,7 +133,7 @@ export const productsData: Product[] = [
     isFeatured: true,
     badge: "MAIS VENDIDO",
     featuredOrder: 1,
-    expressDelivery: true,
+    productionDays: 3,
     landingPage: "/cartao-de-visita",
     priceTable: [
       { quantidade: 100, valor: 185.00 },
@@ -149,10 +150,9 @@ export const productsData: Product[] = [
     isFeatured: true,
     badge: "MELHOR CUSTO",
     featuredOrder: 2,
-    expressDelivery: true,
     landingPage: "/panfleto",
     priceTable: [
-      { quantidade: 1000, valor: 385.00 },
+      { quantidade: 1000, valor: 385.00, productionDays: 3 },
       { quantidade: 2500, valor: 495.00 },
       { quantidade: 5000, valor: 710.00 },
       { quantidade: 10000, valor: 1290.00 },
@@ -167,7 +167,7 @@ export const productsData: Product[] = [
     isFeatured: true,
     badge: "IDEAL PRA RÓTULO",
     featuredOrder: 4,
-    expressDelivery: true,
+    productionDays: 3,
     landingPage: "/etiquetas-adesivas",
     selectorLabel: "Tamanho e quantidade",
     priceTable: [
@@ -190,6 +190,7 @@ export const productsData: Product[] = [
     image: "/images/produtos/2026/pasta-com-bolso-interior-branco-v4.webp",
     category: "Empresa",
     landingPage: "/pasta-com-bolso",
+    productionDays: 5,
     priceTable: [
       { quantidade: 5, valor: 365.00 },
       { quantidade: 25, valor: 545.00 },

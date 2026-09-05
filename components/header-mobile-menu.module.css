@@ -7,9 +7,6 @@
   background: rgb(5 44 35 / 18%);
   backdrop-filter: blur(2px);
   opacity: 1;
-  transition-property: opacity, visibility;
-  transition-duration: 180ms;
-  transition-timing-function: var(--menu-ease-out);
 }
 
 .content {
@@ -29,25 +26,48 @@
   opacity: 1;
   transform: translateY(0) scale(1);
   transform-origin: top right;
-  transition-property: opacity, transform, visibility;
-  transition-duration: 200ms;
-  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Radix Presence retains closed surfaces until their exit keyframes finish. */
+.overlay[data-state="open"] {
+  animation: overlayIn 200ms var(--menu-ease-out) both;
+}
+
+.content[data-state="open"] {
+  animation: menuIn 200ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 .overlay[data-state="closed"],
 .content[data-state="closed"] {
-  visibility: hidden;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.content[data-state="closed"] {
-  transform: translateY(-0.5rem) scale(0.97);
-  transition-duration: 150ms;
+  pointer-events: none !important;
 }
 
 .overlay[data-state="closed"] {
-  transition-duration: 150ms;
+  animation: overlayOut 150ms var(--menu-ease-out) both;
+}
+
+.content[data-state="closed"] {
+  animation: menuOut 150ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes overlayOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(-0.5rem) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes menuOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-0.5rem) scale(0.97); }
 }
 
 .header {
@@ -172,6 +192,7 @@
   .overlay,
   .content {
     display: none;
+    animation: none !important;
   }
 }
 
@@ -181,6 +202,13 @@
   .closeButton,
   .link,
   .cta {
-    transition-duration: 1ms;
+    transition: none;
+    animation: none !important;
+  }
+
+  .closeButton:active,
+  .link:active,
+  .cta:active {
+    transform: none;
   }
 }

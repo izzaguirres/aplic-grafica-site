@@ -92,9 +92,6 @@ const catalogCardCopy: Record<
   "cavalete-ferro": {
     description: "50x100cm · PVC adesivado · Estrutura em ferro.",
   },
-  "cracha-empresarial": {
-    description: "9x5cm · PVC couchê 300g · Cordão preto incluso.",
-  },
   "pasta-bolso": {
     description: "A4 · Supremo 300g · Capa colorida e bolso interno.",
   },
@@ -113,6 +110,7 @@ const normalizeSearch = (value: string) =>
 
 export default function ProdutosPageClient() {
   const [searchQuery, setSearchQuery] = useState("")
+  const [hasSearched, setHasSearched] = useState(false)
   const { handleWhatsAppClick } = useWhatsAppConversion()
 
   const filteredProducts = useMemo(() => {
@@ -192,8 +190,8 @@ export default function ProdutosPageClient() {
             data-aplic-reveal="text"
             data-reveal-order="3"
           >
-            Escolha o produto e a quantidade. Seu pedido abre pronto no
-            WhatsApp.
+            Escolha o produto e a quantidade. Os detalhes seguem para o orçamento
+            no WhatsApp.
           </p>
         </div>
 
@@ -209,7 +207,10 @@ export default function ProdutosPageClient() {
               placeholder="Buscar cartão, banner, adesivo..."
               aria-label="Buscar produtos"
               value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
+              onChange={(event) => {
+                setHasSearched(true)
+                setSearchQuery(event.target.value)
+              }}
             />
             {searchQuery && (
               <button
@@ -305,6 +306,7 @@ export default function ProdutosPageClient() {
                           eagerImage={sectionIndex === 0 && productIndex < 3}
                           headingLevel="h3"
                           revealIndex={productIndex}
+                          revealScope={hasSearched ? "none" : "aplic"}
                         />
                       </div>
                     )
@@ -314,7 +316,7 @@ export default function ProdutosPageClient() {
             ))}
           </div>
         ) : (
-          <div className={styles.emptyState} data-aplic-reveal="text">
+          <div className={styles.emptyState}>
             <div className={styles.emptyIcon}>
               <PackageSearch aria-hidden="true" />
             </div>
@@ -323,9 +325,23 @@ export default function ProdutosPageClient() {
               Tente outro termo ou fale com a equipe para pedir uma medida,
               formato ou acabamento personalizado.
             </p>
-            <button type="button" onClick={clearFilters}>
-              Limpar busca
-            </button>
+            <div className={styles.emptyActions}>
+              <button
+                type="button"
+                {...getWhatsAppTrackingAttributes(customProjectConversion)}
+                onClick={() => handleWhatsAppClick(
+                  customProjectMessage,
+                  customProjectConversion.source,
+                  undefined,
+                  { scope: customProjectConversion.scope, context: customProjectConversion.context },
+                )}
+              >
+                Pedir orçamento personalizado
+              </button>
+              <button type="button" className={styles.clearEmptySearch} onClick={clearFilters}>
+                Limpar busca
+              </button>
+            </div>
           </div>
         )}
       </section>

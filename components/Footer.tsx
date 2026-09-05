@@ -66,36 +66,36 @@ export function Footer() {
               <li>
                 <Link
                   href="/"
-                  className="text-background/80 hover:text-primary transition-colors flex items-center group"
+                  className="text-background/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-primary transition-colors motion-reduce:transition-none flex items-center group"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 mr-2 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-1 transition-transform motion-reduce:transition-none" aria-hidden="true" />
                   Início
                 </Link>
               </li>
               <li>
                 <Link
                   href="/produtos"
-                  className="text-background/80 hover:text-primary transition-colors flex items-center group"
+                  className="text-background/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-primary transition-colors motion-reduce:transition-none flex items-center group"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 mr-2 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-1 transition-transform motion-reduce:transition-none" aria-hidden="true" />
                   Produtos
                 </Link>
               </li>
               <li>
                 <Link
                   href="/sobre"
-                  className="text-background/80 hover:text-primary transition-colors flex items-center group"
+                  className="text-background/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-primary transition-colors motion-reduce:transition-none flex items-center group"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 mr-2 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-1 transition-transform motion-reduce:transition-none" aria-hidden="true" />
                   Sobre
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contato"
-                  className="text-background/80 hover:text-primary transition-colors flex items-center group"
+                  className="text-background/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-primary transition-colors motion-reduce:transition-none flex items-center group"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 mr-2 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-1 transition-transform motion-reduce:transition-none" aria-hidden="true" />
                   Contato
                 </Link>
               </li>
@@ -118,9 +118,9 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-background/80 hover:text-primary transition-colors flex items-center group"
+                    className="text-background/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-primary transition-colors motion-reduce:transition-none flex items-center group"
                   >
-                    <ArrowRight className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                    <ArrowRight className="h-4 w-4 mr-2 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-1 transition-transform motion-reduce:transition-none" aria-hidden="true" />
                     {item.label}
                   </Link>
                 </li>
@@ -159,7 +159,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Aplic Gráfica. Todos os direitos reservados.
           </p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
-            Desenvolvido por <a href="https://izaguirres.vercel.app" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E6FF50] hover:underline">Izaguirres</a>
+            Desenvolvido por <a href="https://izaguirres.vercel.app" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E6FF50] [@media(hover:hover)_and_(pointer:fine)]:hover:underline">Izaguirres</a>
           </p>
         </div>
       </div>

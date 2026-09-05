@@ -46,44 +46,23 @@ export default function ContatoPageClient() {
             Fale com a Aplic
           </p>
           <h1 id="contact-title" data-aplic-reveal="text" data-reveal-order="1">
-            Seu orçamento começa numa conversa simples.
+            Como podemos ajudar?
           </h1>
           <p data-aplic-reveal="text" data-reveal-order="2">
-            Sem formulário e sem cadastro. Conte o que você precisa pelo WhatsApp e nossa equipe confirma o próximo passo.
+            Orçamento, envio de arte ou acompanhamento: escolha o assunto e fale com a equipe pelo WhatsApp.
           </p>
-          <div data-aplic-reveal="text" data-reveal-order="3">
-            <WhatsAppAction
-              label="Iniciar conversa"
-              message="Olá! Vim pelo site e quero conversar sobre um material gráfico."
-              source="contact_main"
-              scope="general_quote"
-              context="contact_page_main"
-              tone="lime"
-            />
-          </div>
           <div className={styles.serviceFacts} data-aplic-reveal="text" data-reveal-order="4">
             <span><Clock3 aria-hidden="true" />Segunda a sexta, 9h às 18h</span>
             <span><MapPin aria-hidden="true" />Florianópolis e região</span>
           </div>
         </div>
-        <div className={styles.heroMedia} data-aplic-reveal="media">
-          <Image
-            src="/images/campanha/hero-adesivo-faz-propaganda.webp"
-            alt="Adesivo da campanha Faz Propaganda sendo aplicado"
-            fill
-            priority
-            sizes="(max-width: 760px) 100vw, 43vw"
-          />
-        </div>
+
       </section>
 
       <section className={styles.options} aria-labelledby="contact-options-title">
-        <header>
-          <p className={styles.eyebrow} data-aplic-reveal="text">
-            Como podemos ajudar
-          </p>
+        <header className="sr-only">
           <h2 id="contact-options-title" data-aplic-reveal="text" data-reveal-order="1">
-            Escolha o assunto e já comece do ponto certo.
+            Escolha o assunto
           </h2>
         </header>
         <div className={styles.optionGrid}>
@@ -105,6 +84,16 @@ export default function ContatoPageClient() {
           ))}
         </div>
       </section>
+
+        <div className={styles.heroMedia} data-aplic-reveal="media">
+          <Image
+            src="/images/campanha/hero-adesivo-faz-propaganda.webp"
+            alt="Adesivo da campanha Faz Propaganda sendo aplicado"
+            fill
+            priority
+            sizes="(max-width: 760px) 100vw, 43vw"
+          />
+        </div>
 
       <section className={styles.info} aria-label="Informações de atendimento">
         <div data-aplic-reveal="text">

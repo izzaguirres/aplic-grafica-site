@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { ProductionVideo } from "@/components/site/ProductionVideo";
 import Link from "next/link";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { TrustedClients } from "@/components/TrustedClients";
@@ -33,8 +34,6 @@ const homeProductDescriptions: Record<string, string> = {
     "Lona fosca impressa, com acabamento para fachada, evento ou ponto de venda.",
   "etiqueta-adesiva":
     "Adesivo com corte em até 5x5cm ou 10x10cm, para rótulos e embalagens.",
-  "cracha-empresarial":
-    "9x5cm · PVC couchê 300g colorido · Cordão preto incluso.",
   "folder-2-dobras":
     "A4 aberto 28x20cm · Couchê 90g · Frente e verso com duas dobras.",
   "pasta-bolso":
@@ -294,16 +293,7 @@ export default function NovaHomePage() {
           </div>
         </div>
         <div className={styles.trustMedia} data-nova-reveal="media">
-          <video
-            src="/images/siteaplic2.mp4"
-            poster="/images/13.png"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-label="Produção gráfica real da Aplic em Florianópolis"
-          />
+          <ProductionVideo label="Produção gráfica real da Aplic em Florianópolis" />
         </div>
       </section>
 

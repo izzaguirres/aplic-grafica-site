@@ -1,0 +1,57 @@
+.control {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  min-width: 10.5rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  color: #fff;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  background: #052c23;
+  border: 1px solid rgb(255 255 255 / 32%);
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+  transition:
+    background-color 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 150ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.control svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex: none;
+}
+
+.control:focus-visible {
+  outline: 2px solid #e6ff50;
+  outline-offset: 3px;
+}
+
+.control:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .control:hover {
+    background: #134b3d;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control {
+    transition: none;
+  }
+
+  .control:active {
+    transform: none;
+  }
+}

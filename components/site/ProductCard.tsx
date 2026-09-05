@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, Clock3, Zap } from "lucide-react";
 import {
   Select,
@@ -33,6 +34,8 @@ export interface ProductCardProps {
   revealIndex?: number;
   revealScope?: RevealScope;
   conversionSource?: string;
+  layout?: "card" | "detail";
+  showDetailsLink?: boolean;
 }
 
 function getRevealProps(
@@ -64,6 +67,8 @@ export function ProductCard({
   revealIndex = 0,
   revealScope = "aplic",
   conversionSource = "product_catalog_card",
+  layout = "card",
+  showDetailsLink = true,
 }: ProductCardProps) {
   const { handleWhatsAppClick } = useWhatsAppConversion();
   const selectorId = useId();
@@ -80,10 +85,11 @@ export function ProductCard({
 
   const currentItemLabel = renderItemLabel(currentPriceItem);
   const formattedPrice = currencyFormatter.format(currentPriceItem.valor);
+  const productionDays = currentPriceItem.productionDays ?? product.productionDays;
   const quantityPhrase = currentPriceItem.label
     ? `*${product.name} ${currentPriceItem.label}*`
     : `*${currentPriceItem.quantidade} unidades* de *${product.name}*`;
-  const message = `Olá! Gostaria de encomendar ${quantityPhrase} por *${formattedPrice}*. Como prosseguir?`;
+  const message = `Olá! Gostaria de um orçamento para ${quantityPhrase}. Vi o valor de *${formattedPrice}* no site. Podemos confirmar a arte, o prazo e a entrega?`;
   const quantity = currentPriceItem.label
     ? currentItemLabel
     : `${currentPriceItem.quantidade} ${itemUnit}`.trim();
@@ -101,7 +107,8 @@ export function ProductCard({
 
   return (
     <article
-      className={styles.card}
+      className={`${styles.card} ${layout === "detail" ? styles.detail : ""}`}
+      id={product.id}
       data-product-card={product.id}
       data-card-scope={revealScope}
     >
@@ -139,24 +146,31 @@ export function ProductCard({
         {...getRevealProps(revealScope, "text", (revealIndex % 4) + 1)}
       >
         <div className={styles.productInfo}>
-          <Title className={styles.title}>{displayName ?? product.name}</Title>
+          <Title className={styles.title}>
+            {showDetailsLink && layout === "card" && product.landingPage ? (
+              <Link className={styles.detailLink} href={`${product.landingPage}#${product.id}`}>
+                <span>{displayName ?? product.name}</span>
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
+            ) : displayName ?? product.name}
+          </Title>
           <p className={styles.description}>
             {displayDescription ?? product.description}
           </p>
 
           <p
             className={`${styles.fulfillment} ${
-              product.expressDelivery ? "" : styles.fulfillmentStandard
+              productionDays === 3 ? "" : styles.fulfillmentStandard
             }`}
           >
-            {product.expressDelivery ? (
+            {productionDays === 3 ? (
               <Zap aria-hidden="true" />
             ) : (
               <Clock3 aria-hidden="true" />
             )}
-            {product.expressDelivery
-              ? "Produção em até 3 dias úteis"
-              : "Produção em até 5 dias úteis"}
+            {productionDays
+              ? `Produção em até ${productionDays} dias úteis`
+              : "Prazo a confirmar no orçamento"}
           </p>
         </div>
 
@@ -193,6 +207,10 @@ export function ProductCard({
             <span className={styles.priceContext}>Valor</span>
             <strong className={styles.price}>{formattedPrice}</strong>
           </div>
+
+          <p className={styles.conditions}>
+            Frete, serviços de arte e prazo final confirmados no orçamento.
+          </p>
 
           <button
             type="button"

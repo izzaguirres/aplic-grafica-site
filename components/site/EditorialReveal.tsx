@@ -15,7 +15,8 @@ export function EditorialReveal() {
     );
     let shouldReduceMotion = reducedMotion.matches;
 
-    const reveal = (element: HTMLElement) => {
+    const reveal = (element: HTMLElement, immediate = false) => {
+      if (immediate) element.dataset.revealInstant = "true";
       element.dataset.revealed = "true";
     };
 
@@ -27,9 +28,13 @@ export function EditorialReveal() {
 
     root.dataset.motionReady = "true";
 
-    if (!("IntersectionObserver" in window) || shouldReduceMotion) {
+    if (!("IntersectionObserver" in window)) {
       revealAll();
+      delete root.dataset.motionReady;
+      return;
     }
+
+    if (shouldReduceMotion) revealAll();
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -70,10 +75,10 @@ export function EditorialReveal() {
         record.addedNodes.forEach((node) => {
           if (!(node instanceof HTMLElement)) return;
 
-          if (node.matches(revealSelector)) observe(node);
+          if (node.matches(revealSelector)) reveal(node, true);
           node
             .querySelectorAll<HTMLElement>(revealSelector)
-            .forEach((element) => observe(element));
+            .forEach((element) => reveal(element, true));
         });
       });
     });

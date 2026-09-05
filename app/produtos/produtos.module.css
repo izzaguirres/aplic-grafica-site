@@ -590,3 +590,27 @@
     transform: none;
   }
 }
+
+.emptyActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.emptyState .clearEmptySearch {
+  color: var(--aplic-green);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--aplic-border);
+}
+
+.emptyActions button:focus-visible {
+  outline: 3px solid var(--aplic-green);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .emptyState .clearEmptySearch:hover {
+    background: #edf1ec;
+  }
+}

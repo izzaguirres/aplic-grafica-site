@@ -5,10 +5,10 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "next lint",
+    "lint": "eslint .",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "lint:fix": "next lint --fix",
+    "lint:fix": "eslint . --fix",
     "clean": "rm -rf .next out",
     "analyze": "ANALYZE=true npm run build"
   },

@@ -64,6 +64,13 @@ html {
   scroll-behavior: smooth;
 }
 
+[data-aplic-page][data-motion-ready="true"] [data-aplic-reveal][data-reveal-instant="true"] {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  transition: none;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -245,6 +252,15 @@ body:has([data-aplic-shell]) [data-footer-whatsapp]:active {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-aplic-select-content] {
+    animation: none !important;
+    transition: none !important;
+  }
+
   body:has([data-aplic-shell]) [data-site-header],
   body:has([data-aplic-shell]) [data-site-header] *,
   body:has([data-aplic-shell]) [data-footer-whatsapp],

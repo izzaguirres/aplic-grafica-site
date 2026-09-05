@@ -106,7 +106,7 @@
   align-items: center;
   gap: 0.45rem;
   margin: 1.2rem 0 0;
-  color: #78817c;
+  color: #59645e;
   font-size: 0.72rem;
   line-height: 1.4;
 }
@@ -569,5 +569,67 @@
   .secondaryAction:active,
   .finalCtaAction > a:active {
     transform: none;
+  }
+}
+
+.singleProduct {
+  width: min(calc(100% - 3rem), 76rem);
+  margin-inline: auto;
+  padding-top: clamp(8rem, 10vw, 9rem);
+  padding-bottom: clamp(2rem, 4vw, 4rem);
+}
+
+.singleHeading {
+  max-width: 54rem;
+  margin-bottom: 2.5rem;
+}
+
+.singleHeading .eyebrow {
+  margin-bottom: 1rem;
+}
+
+.singleHeading h1 {
+  margin: 0;
+  max-width: 23ch;
+  font-size: clamp(2.6rem, 4.5vw, 4.5rem);
+  font-weight: 550;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.singleHeading .heroLead {
+  max-width: 57ch;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.singleOptions {
+  scroll-margin-top: 7rem;
+}
+
+.singleProduct .proof {
+  max-width: none;
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 720px) {
+  .singleProduct {
+    width: calc(100% - 1.5rem);
+    padding-top: 7rem;
+  }
+
+  .singleHeading {
+    padding-inline: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .singleHeading h1 {
+    font-size: clamp(2.35rem, 9.5vw, 3.5rem);
+  }
+
+  .singleHeading .heroLead {
+    font-size: 0.9375rem;
+    line-height: 1.5;
   }
 }
