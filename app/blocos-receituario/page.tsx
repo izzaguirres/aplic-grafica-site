@@ -8,6 +8,8 @@ const faqs: ProductLandingFaq[] = [
   { question: "Vocês fazem receituário personalizado?", answer: "Sim. Produzimos conforme o arquivo e as informações enviadas pelo profissional ou pela clínica." },
   { question: "Que tipos de bloco posso pedir?", answer: "Blocos de pedido, orçamento, recibo, checklist, ordem de serviço, atendimento e outros formatos sob orçamento." },
   { question: "Preciso enviar a arte pronta?", answer: "Se tiver arte final, envie. Um modelo antigo ou uma referência também ajuda a avaliarmos o arquivo necessário." },
+  { question: "O que enviar para pedir um orçamento de blocos?", answer: "Envie o uso do bloco, o tamanho desejado, a quantidade e o número de folhas. Uma arte pronta, um modelo antigo ou uma referência ajuda a conferir os campos e as informações antes da produção." },
+  { question: "O que é conferido no layout antes da impressão?", answer: "Os dados profissionais, os campos e a organização do layout passam por aprovação. Envie as informações que precisam aparecer para conferirmos o arquivo antes da produção." },
   { question: "Qual é o prazo?", answer: "O prazo depende do formato e da quantidade. Ele é confirmado com o valor antes de iniciar a produção." },
 ];
 

@@ -10,6 +10,8 @@ const faqs: ProductLandingFaq[] = [
   { question: "Que tipo de etiqueta vocês fazem?", answer: "Produzimos etiquetas e rótulos para produtos, embalagens e identificação. O material e o corte são confirmados conforme o uso." },
   { question: "Vocês fazem corte personalizado?", answer: "Sim. Envie a medida e o formato desejado para avaliarmos o corte e o melhor aproveitamento." },
   { question: "Preciso enviar a arte pronta?", answer: "O ideal é enviar a arte final. Ajustes simples podem ser avaliados antes de confirmar o pedido." },
+  { question: "Como escolher o tamanho e a quantidade das etiquetas?", answer: "Confira as opções no seletor do card de etiquetas adesivas. Para outra medida ou formato, envie a referência pelo WhatsApp para avaliarmos o pedido." },
+  { question: "O que preciso informar sobre a embalagem?", answer: "Envie a medida disponível, o formato desejado, a quantidade e a arte ou referência. Informe também a superfície e o uso da embalagem para avaliarmos o material e o acabamento antes da produção." },
   { question: "Qual é o prazo?", answer: "As etiquetas do catálogo podem sair em até 3 dias úteis. Formatos especiais têm prazo confirmado no orçamento." },
 ];
 

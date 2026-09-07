@@ -83,6 +83,15 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  href="/grafica-em-floripa"
+                  className="text-background/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-primary transition-colors motion-reduce:transition-none flex items-center group"
+                >
+                  <ArrowRight className="h-4 w-4 mr-2 motion-safe:[@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-1 transition-transform motion-reduce:transition-none" aria-hidden="true" />
+                  Gráfica em Florianópolis
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/sobre"
                   className="text-background/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-primary transition-colors motion-reduce:transition-none flex items-center group"
                 >
