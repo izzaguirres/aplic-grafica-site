@@ -19,23 +19,30 @@ export function middleware(request: NextRequest) {
     "script-src 'self' 'unsafe-eval' 'unsafe-inline' " +
       "https://vercel.live " +
       "https://www.googletagmanager.com " +
+      "https://tagmanager.google.com " +
       "https://www.google-analytics.com " +
       "https://ssl.google-analytics.com " +
       "https://www.googleadservices.com " +
+      "https://pagead2.googlesyndication.com " +
       "https://googleads.g.doubleclick.net " +
       "https://www.google.com " +
       "https://www.clarity.ms; " +
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.googletagmanager.com https://tagmanager.google.com; " +
     "img-src 'self' data: https:; " +
     "font-src 'self' data: https://fonts.gstatic.com; " +
     "connect-src 'self' " +
       "https://api.vercel.com " +
-      "https://www.google-analytics.com " +
+      "https://*.google-analytics.com " +
+      "https://*.analytics.google.com " +
       "https://stats.g.doubleclick.net " +
       "https://www.googletagmanager.com " +
       "https://www.googleadservices.com " +
       "https://googleads.g.doubleclick.net " +
+      "https://ad.doubleclick.net " +
+      "https://pagead2.googlesyndication.com " +
       "https://www.google.com " +
+      "https://google.com " +
+      "https://www.google.com.br " +
       "https://*.clarity.ms " +
       "https://c.bing.com; " +
     "frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net; " +

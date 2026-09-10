@@ -200,6 +200,14 @@
   letter-spacing: -0.04em;
 }
 
+.quotePrice {
+  color: var(--card-ink);
+  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
 .cta {
   display: flex;
   min-height: 2.75rem;

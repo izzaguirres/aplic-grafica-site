@@ -63,6 +63,14 @@
   line-height: 1.6;
 }
 
+.heroQualification {
+  max-width: 40rem;
+  margin: 0.85rem 0 0;
+  color: var(--aplic-ink);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
 .heroActions {
   display: flex;
   align-items: center;

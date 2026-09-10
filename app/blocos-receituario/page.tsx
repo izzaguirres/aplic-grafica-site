@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { ProductLandingPage, type ProductLandingFaq } from "@/components/site/ProductLandingPage";
+import { blocosReceituarioProduct } from "@/lib/quote-products-data";
 import { createPageMetadata, createServicePageSchema } from "@/lib/site";
 
 const whatsappMessage = "Olá! Quero um orçamento de blocos ou receituários. Vou enviar o formato, a quantidade e um modelo ou referência.";
@@ -21,7 +22,7 @@ export default function BlocosReceituarioPage() {
     eyebrow="Blocos e receituários"
     title="Papelaria feita para a rotina funcionar."
     lead="Receituários, blocos de pedido e materiais personalizados para clínicas, consultórios e empresas."
-    placeholderLabel="Foto de campanha dos blocos em produção"
+    heroImage={{ src: blocosReceituarioProduct.image, alt: "Mockup ilustrativo de um bloco personalizado", position: "50% 50%" }}
     products={[]}
     productsTitle=""
     productsLead=""

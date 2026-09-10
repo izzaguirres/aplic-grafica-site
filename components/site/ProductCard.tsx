@@ -83,26 +83,36 @@ export function ProductCard({
     item.label ??
     (itemUnit ? `${item.quantidade} ${itemUnit}` : String(item.quantidade));
 
-  const currentItemLabel = renderItemLabel(currentPriceItem);
-  const formattedPrice = currencyFormatter.format(currentPriceItem.valor);
-  const productionDays = currentPriceItem.productionDays ?? product.productionDays;
-  const quantityPhrase = currentPriceItem.label
-    ? `*${product.name} ${currentPriceItem.label}*`
-    : `*${currentPriceItem.quantidade} unidades* de *${product.name}*`;
-  const message = `Olá! Gostaria de um orçamento para ${quantityPhrase}. Vi o valor de *${formattedPrice}* no site. Podemos confirmar a arte, o prazo e a entrega?`;
-  const quantity = currentPriceItem.label
-    ? currentItemLabel
-    : `${currentPriceItem.quantidade} ${itemUnit}`.trim();
+  const currentItemLabel = currentPriceItem
+    ? renderItemLabel(currentPriceItem)
+    : undefined;
+  const formattedPrice = currentPriceItem
+    ? currencyFormatter.format(currentPriceItem.valor)
+    : undefined;
+  const productionDays = currentPriceItem?.productionDays ?? product.productionDays;
+  const quantityPhrase = currentPriceItem
+    ? currentPriceItem.label
+      ? `*${product.name} ${currentPriceItem.label}*`
+      : `*${currentPriceItem.quantidade} unidades* de *${product.name}*`
+    : `*${product.name}*`;
+  const message = currentPriceItem
+    ? `Olá! Gostaria de um orçamento para ${quantityPhrase}. Vi o valor de *${formattedPrice}* no site. Podemos confirmar a arte, o prazo e a entrega?`
+    : `Olá! Gostaria de um orçamento para ${quantityPhrase}. Vou enviar o formato, a quantidade e uma arte ou referência para confirmar o valor e o prazo.`;
+  const quantity = currentPriceItem
+    ? currentPriceItem.label
+      ? currentItemLabel
+      : `${currentPriceItem.quantidade} ${itemUnit}`.trim()
+    : undefined;
   const conversion = {
     message,
     source: conversionSource,
     product: product.name,
     productId: product.id,
-    scope: "catalog_product" as const,
+    scope: currentPriceItem ? ("catalog_product" as const) : ("custom_order" as const),
     context: product.landingPage ?? "/produtos",
     variant: currentItemLabel,
     quantity,
-    price: currentPriceItem.valor,
+    price: currentPriceItem?.valor,
   };
 
   return (
@@ -148,7 +158,10 @@ export function ProductCard({
         <div className={styles.productInfo}>
           <Title className={styles.title}>
             {showDetailsLink && layout === "card" && product.landingPage ? (
-              <Link className={styles.detailLink} href={`${product.landingPage}#${product.id}`}>
+              <Link
+                className={styles.detailLink}
+                href={`${product.landingPage}${currentPriceItem ? `#${product.id}` : ""}`}
+              >
                 <span>{displayName ?? product.name}</span>
                 <ArrowUpRight aria-hidden="true" />
               </Link>
@@ -175,37 +188,48 @@ export function ProductCard({
         </div>
 
         <div className={styles.commerce}>
-          <div className={styles.selectorGroup}>
-            <label className={styles.selectorLabel} htmlFor={selectorId}>
-              {selectorLabel}
-            </label>
-            <Select
-              value={selectedPriceIndex.toString()}
-              onValueChange={(value) => setSelectedPriceIndex(Number(value))}
-            >
-              <SelectTrigger id={selectorId} className={styles.selectTrigger}>
-                <SelectValue
-                  placeholder={`Selecione: ${selectorLabel.toLowerCase()}`}
-                >
-                  {currentItemLabel}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {product.priceTable.map((item, index) => (
-                  <SelectItem
-                    key={`${item.label ?? item.quantidade}-${index}`}
-                    value={index.toString()}
+          {currentPriceItem ? (
+            <div className={styles.selectorGroup}>
+              <label className={styles.selectorLabel} htmlFor={selectorId}>
+                {selectorLabel}
+              </label>
+              <Select
+                value={selectedPriceIndex.toString()}
+                onValueChange={(value) => setSelectedPriceIndex(Number(value))}
+              >
+                <SelectTrigger id={selectorId} className={styles.selectTrigger}>
+                  <SelectValue
+                    placeholder={`Selecione: ${selectorLabel.toLowerCase()}`}
                   >
-                    {renderItemLabel(item)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+                    {currentItemLabel}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {product.priceTable.map((item, index) => (
+                    <SelectItem
+                      key={`${item.label ?? item.quantidade}-${index}`}
+                      value={index.toString()}
+                    >
+                      {renderItemLabel(item)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          ) : (
+            <div className={styles.selectorGroup}>
+              <span className={styles.selectorLabel}>Pedido personalizado</span>
+              <p className={styles.conditions}>
+                Envie o formato, a quantidade e uma referência.
+              </p>
+            </div>
+          )}
 
           <div className={styles.priceRow} aria-live="polite">
             <span className={styles.priceContext}>Valor</span>
-            <strong className={styles.price}>{formattedPrice}</strong>
+            <strong className={currentPriceItem ? styles.price : styles.quotePrice}>
+              {formattedPrice ?? "Sob orçamento"}
+            </strong>
           </div>
 
           <p className={styles.conditions}>

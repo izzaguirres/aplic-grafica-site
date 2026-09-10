@@ -23,6 +23,7 @@ interface ProductLandingPageProps {
   eyebrow: string;
   title: string;
   lead: string;
+  qualification?: string;
   heroImage?: {
     src: string;
     alt: string;
@@ -43,6 +44,7 @@ export function ProductLandingPage({
   eyebrow,
   title,
   lead,
+  qualification,
   heroImage,
   placeholderLabel = "Imagem da campanha em produção",
   products,
@@ -93,6 +95,9 @@ export function ProductLandingPage({
           <p className={styles.heroLead} data-aplic-reveal="text" data-reveal-order="2">
             {lead}
           </p>
+          {qualification && <p className={styles.heroQualification} data-aplic-reveal="text" data-reveal-order="2">
+            {qualification}
+          </p>}
           <div className={styles.heroActions} data-aplic-reveal="text" data-reveal-order="3">
             <WhatsAppAction
               label="Pedir orçamento"
@@ -165,7 +170,7 @@ export function ProductLandingPage({
                 <div className={styles.productItem} key={product.id}>
                   <ProductCard
                     product={product}
-                    showDetailsLink={false}
+                    showDetailsLink={product.priceTable.length === 0}
                     imageSrc={media?.src}
                     imagePosition={media?.position}
                     eagerImage={index < 3}
