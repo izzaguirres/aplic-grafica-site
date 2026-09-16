@@ -1,5 +1,13 @@
 # Tracking de conversão
 
+## Atlas / Pixerun
+
+A tag `site_821pr6lli54jv4` é carregada uma única vez pelo `next/script` no layout raiz, com estratégia `afterInteractive`. O script do fornecedor acompanha navegações internas e cliques em links de WhatsApp; não adicionamos um disparo manual duplicado.
+
+A CSP permite os scripts de `cdn-pixel.pixerun.com` e `cdn-widgets.pixerun.com`, o coletor `api.pixerun.com` e a configuração de widgets no bucket público `pixerun-web-widget-public-data.s3.us-east-1.amazonaws.com`. Configurações de widgets continuam sob controle da conta Atlas.
+
+O GTM e seus eventos existentes permanecem independentes. Eventos automáticos do Atlas, inclusive cliques de contato, também não comprovam conversa ou venda.
+
 ## Evento técnico
 
 O site emite um único evento `whatsapp_click` por ativação de CTA. Esse evento registra a intenção de abrir o WhatsApp; não representa conversa iniciada, lead, orçamento, pedido ou venda.

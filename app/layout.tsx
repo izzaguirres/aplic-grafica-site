@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import Script from "next/script"
 import "./globals.css"
 import "./aplic-design-system.css"
 import { Header } from "@/components/Header"
@@ -105,6 +106,11 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${googleSans.variable} font-sans antialiased`}>
         <GoogleTagManager containerId={gtmContainerId} />
+        <Script
+          id="atlas-pixel"
+          src="https://cdn-pixel.pixerun.com/pixel/site_821pr6lli54jv4/pixel.js"
+          strategy="afterInteractive"
+        />
         <AttributionCapture />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollReveal />

@@ -12,12 +12,14 @@ export function middleware(request: NextRequest) {
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
 
   // Content Security Policy — allowlist para GTM, Google Ads conversion tracking,
-  // Google Analytics, Microsoft Clarity e Vercel. Sem isso o browser bloqueia
+  // Google Analytics, Microsoft Clarity, Atlas/Pixerun e Vercel. Sem isso o browser bloqueia
   // silenciosamente scripts/coletores e nenhuma sessão ou conversão é registrada.
   response.headers.set('Content-Security-Policy',
     "default-src 'self' https://*.clarity.ms https://c.bing.com; " +
     "script-src 'self' 'unsafe-eval' 'unsafe-inline' " +
       "https://vercel.live " +
+      "https://cdn-pixel.pixerun.com " +
+      "https://cdn-widgets.pixerun.com " +
       "https://www.googletagmanager.com " +
       "https://tagmanager.google.com " +
       "https://www.google-analytics.com " +
@@ -32,6 +34,8 @@ export function middleware(request: NextRequest) {
     "font-src 'self' data: https://fonts.gstatic.com; " +
     "connect-src 'self' " +
       "https://api.vercel.com " +
+      "https://api.pixerun.com " +
+      "https://pixerun-web-widget-public-data.s3.us-east-1.amazonaws.com " +
       "https://*.google-analytics.com " +
       "https://*.analytics.google.com " +
       "https://stats.g.doubleclick.net " +
