@@ -13,7 +13,7 @@ const faqs: ProductLandingFaq[] = [
   { question: "Qual é o prazo?", answer: "O banner do catálogo pode sair em até 3 dias úteis. Medidas especiais e cavaletes têm prazo confirmado no orçamento." },
 ];
 
-export const metadata: Metadata = createPageMetadata({ title: "Banner em Lona em Florianópolis — 3 dias úteis", description: "Banner em lona e cavaletes em Florianópolis para fachada, evento e ponto de venda. Atendimento pelo WhatsApp.", path: "/banner", keywords: ["banner florianópolis", "banner lona floripa", "cavalete florianópolis"] });
+export const metadata: Metadata = createPageMetadata({ title: "Banner em Lona e Cavaletes em Florianópolis", description: "Banner em lona e cavaletes em Florianópolis para fachada, evento e ponto de venda. Atendimento pelo WhatsApp.", path: "/banner", keywords: ["banner florianópolis", "banner lona floripa", "cavalete florianópolis"] });
 const pageSchema = createServicePageSchema({ path: "/banner", name: "Banner em lona em Florianópolis", description: "Banner em lona e cavaletes para comunicação visual em Florianópolis.", serviceType: "Impressão de banner em lona", faqs, relatedProducts: products.map((product) => ({ name: product.name, description: product.description, url: product.landingPage })) });
 
 export default function BannerPage() {

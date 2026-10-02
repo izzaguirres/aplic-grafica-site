@@ -14,7 +14,7 @@ const faqs: ProductLandingFaq[] = [
 ];
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Cartão de Visita em Florianópolis — 3 dias úteis",
+  title: "Cartão de Visita em Florianópolis",
   description: "Cartão de visita em Florianópolis em couchê 300g, com brilho total, fosco e verniz localizado. Atendimento pelo WhatsApp.",
   path: "/cartao-de-visita",
   keywords: ["cartão de visita florianópolis", "cartão de visita floripa", "cartão brilho localizado florianópolis"],
