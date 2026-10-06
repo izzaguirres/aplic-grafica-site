@@ -17,6 +17,7 @@ export function middleware(request: NextRequest) {
   response.headers.set('Content-Security-Policy',
     "default-src 'self' https://*.clarity.ms https://c.bing.com; " +
     "script-src 'self' 'unsafe-eval' 'unsafe-inline' " +
+      "https://mrkr.app " +
       "https://vercel.live " +
       "https://cdn-pixel.pixerun.com " +
       "https://cdn-widgets.pixerun.com " +
@@ -33,6 +34,7 @@ export function middleware(request: NextRequest) {
     "img-src 'self' data: https:; " +
     "font-src 'self' data: https://fonts.gstatic.com; " +
     "connect-src 'self' " +
+      "https://mrkr.app " +
       "https://api.vercel.com " +
       "https://api.pixerun.com " +
       "https://pixerun-web-widget-public-data.s3.us-east-1.amazonaws.com " +
