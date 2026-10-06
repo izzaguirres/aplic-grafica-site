@@ -120,6 +120,13 @@ export default function RootLayout({
           <Footer />
           <Analytics />
         </ThemeProvider>
+        {process.env.VERCEL_ENV === "production" && (
+          <Script
+            src="https://mrkr.app/tracker.js"
+            data-site="site_c38b0cf2cf3e792e"
+            data-mask-input="1"
+          />
+        )}
       </body>
     </html>
   )
