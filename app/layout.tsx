@@ -124,6 +124,7 @@ export default function RootLayout({
           <Script
             src="https://mrkr.app/tracker.js"
             data-site="site_c38b0cf2cf3e792e"
+            data-debug="1"
             data-mask-input="1"
           />
         )}
